@@ -1,0 +1,1 @@
+- [User Profile](user_profile.md) — GitHub: Koschi7, Hetzner deployment, interactive SVGs, CLAUDE.md gitignored
