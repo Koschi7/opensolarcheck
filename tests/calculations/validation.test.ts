@@ -55,22 +55,20 @@ describe("validation", () => {
   describe("validateSystem", () => {
     it("should reject NaN modulePower", () => {
       const errors = validateSystem({
-        moduleType: "mono",
+        moduleType: "monocrystalline",
         modulePower: NaN,
         moduleCount: 20,
         peakPower: 8.4,
-        efficiency: 0.21,
       });
       expect(errors.some((e) => e.field === "modulePower")).toBe(true);
     });
 
     it("should reject NaN moduleCount", () => {
       const errors = validateSystem({
-        moduleType: "mono",
+        moduleType: "monocrystalline",
         modulePower: 420,
         moduleCount: NaN,
         peakPower: 8.4,
-        efficiency: 0.21,
       });
       expect(errors.some((e) => e.field === "moduleCount")).toBe(true);
     });
