@@ -82,7 +82,7 @@ export default function ErgebnisPage() {
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [trackEvent]);
 
   if (loading) {
     return (

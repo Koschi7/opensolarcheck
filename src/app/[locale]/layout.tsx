@@ -29,7 +29,6 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
-  const altLocale = locale === "de" ? "en" : "de";
   const messages = messagesMap[locale] ?? messagesMap.de;
   const meta = messages.meta as Record<string, string>;
 

@@ -5,7 +5,6 @@ import { useTranslations } from "next-intl";
 import { useRouter } from "@/lib/i18n/navigation";
 import { useConfigurator } from "@/hooks/useConfigurator";
 import { usePVGIS } from "@/hooks/usePVGIS";
-import { useCalculations } from "@/hooks/useCalculations";
 import { Card, CardContent } from "@/components/ui/card";
 import { StepIndicator } from "@/components/configurator/StepIndicator";
 import { StepNavigation } from "@/components/configurator/StepNavigation";

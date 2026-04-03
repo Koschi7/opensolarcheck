@@ -2,7 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { Card, CardContent } from "@/components/ui/card";
-import { Info, Mail, MapPin, User } from "lucide-react";
+import { Info, Mail, User } from "lucide-react";
 import { GitHubIcon } from "@/components/icons/GitHubIcon";
 
 const IMPRINT_NAME = process.env.NEXT_PUBLIC_IMPRINT_NAME ?? "";

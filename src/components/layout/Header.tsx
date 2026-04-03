@@ -1,12 +1,11 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { Sun, Menu, X } from "lucide-react";
+import { Sun, Menu } from "lucide-react";
 import { GitHubIcon } from "@/components/icons/GitHubIcon";
 import { useState } from "react";
 import { Link } from "@/lib/i18n/navigation";
 import { LanguageSwitcher } from "./LanguageSwitcher";
-import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
 
 export function Header() {

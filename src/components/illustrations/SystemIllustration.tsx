@@ -7,7 +7,6 @@ interface Props {
 export function SystemIllustration({ moduleCount }: Props) {
   const displayCount = Math.min(moduleCount, 24);
   const cols = Math.min(6, Math.ceil(Math.sqrt(displayCount * 1.5)));
-  const rows = Math.ceil(displayCount / cols);
 
   const panelW = 36;
   const panelH = 22;
