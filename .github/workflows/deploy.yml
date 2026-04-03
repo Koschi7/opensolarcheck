@@ -1,0 +1,48 @@
+name: Deploy
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build
+        env:
+          NEXT_PUBLIC_IMPRINT_NAME: ${{ secrets.IMPRINT_NAME }}
+          NEXT_PUBLIC_IMPRINT_STREET: ${{ secrets.IMPRINT_STREET }}
+          NEXT_PUBLIC_IMPRINT_CITY: ${{ secrets.IMPRINT_CITY }}
+          NEXT_PUBLIC_IMPRINT_EMAIL: ${{ secrets.IMPRINT_EMAIL }}
+          NEXT_PUBLIC_UMAMI_ENABLED: ${{ secrets.UMAMI_ENABLED }}
+          NEXT_PUBLIC_UMAMI_WEBSITE_ID: ${{ secrets.UMAMI_WEBSITE_ID }}
+          NEXT_PUBLIC_UMAMI_URL: ${{ secrets.UMAMI_URL }}
+        run: pnpm build
+
+      - name: Deploy to server
+        env:
+          SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+        run: |
+          mkdir -p ~/.ssh
+          echo "$SSH_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -H "$(echo $DEPLOY_HOST | cut -d@ -f2)" >> ~/.ssh/known_hosts 2>/dev/null
+
+          ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=accept-new "$DEPLOY_HOST" "mkdir -p /var/www/opensolarcheck"
+          rsync -avz --delete -e "ssh -i ~/.ssh/deploy_key" out/ "$DEPLOY_HOST:/var/www/opensolarcheck/"
+          ssh -i ~/.ssh/deploy_key "$DEPLOY_HOST" "chown -R www-data:www-data /var/www/opensolarcheck && nginx -t && systemctl reload nginx"
