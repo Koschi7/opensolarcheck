@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://opensolarcheck.de/de</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://opensolarcheck.de/de"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://opensolarcheck.de/en"/>
+    <priority>1.0</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://opensolarcheck.de/en</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://opensolarcheck.de/de"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://opensolarcheck.de/en"/>
+    <priority>0.9</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://opensolarcheck.de/de/konfigurator</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://opensolarcheck.de/de/konfigurator"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://opensolarcheck.de/en/konfigurator"/>
+    <priority>0.9</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://opensolarcheck.de/en/konfigurator</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://opensolarcheck.de/de/konfigurator"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://opensolarcheck.de/en/konfigurator"/>
+    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://opensolarcheck.de/de/methodik</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://opensolarcheck.de/de/methodik"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://opensolarcheck.de/en/methodik"/>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://opensolarcheck.de/en/methodik</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://opensolarcheck.de/de/methodik"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://opensolarcheck.de/en/methodik"/>
+    <priority>0.6</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://opensolarcheck.de/de/datenschutz</loc>
+    <priority>0.3</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+  <url>
+    <loc>https://opensolarcheck.de/de/impressum</loc>
+    <priority>0.3</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+</urlset>

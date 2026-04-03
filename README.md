@@ -1,36 +1,110 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# OpenSolarCheck – Dein unabhängiger PV-Rechner
 
-## Getting Started
+[English version](README.en.md)
 
-First, run the development server:
+> Berechne Ertrag, Kosten und Amortisation deiner Solaranlage – kostenlos, ohne Anmeldung, ohne Datenabgabe.
+
+**[opensolarcheck.de](https://opensolarcheck.de)**
+
+## Features
+
+- Mehrstufiger PV-Konfigurator (5 Schritte: Standort, Dach, Anlage, Verbrauch, Speicher)
+- Ertragsberechnung auf Basis von PVGIS-Satellitendaten (EU Joint Research Centre)
+- Eigenverbrauchs- und Autarkiegrad-Berechnung (HTW Berlin Modell)
+- Wirtschaftlichkeitsanalyse über 25 Jahre (NPV, ROI, Amortisation)
+- CO2-Einsparungsberechnung
+- Interaktive Dach-Illustration mit Neigung und Ausrichtung
+- PDF-Export der Ergebnisse
+- Komplett clientseitig – keine Daten verlassen deinen Browser
+- Deutsch und Englisch (i18n)
+- Datenschutzfreundliches Analytics (Umami, optional)
+- SEO-optimiert mit strukturierten Daten (JSON-LD)
+- Impressum und Datenschutzerklärung nach deutschem Recht (DDG/DSGVO)
+
+## Tech-Stack
+
+- Next.js 16 (App Router, Static Export)
+- TypeScript (strict)
+- Tailwind CSS 4 + shadcn/ui
+- Recharts (Diagramme)
+- next-intl (i18n)
+- @react-pdf/renderer (PDF-Export)
+- satori + resvg (OG-Image-Generierung)
+- Vitest + React Testing Library
+
+## Schnellstart
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+git clone https://github.com/Koschi7/opensolarcheck.git
+cd opensolarcheck
+pnpm install
+cp .env.example .env  # Impressum-Daten anpassen!
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Öffne [http://localhost:3000](http://localhost:3000) im Browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Umgebungsvariablen
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Variable | Pflicht | Beschreibung |
+|---|---|---|
+| `NEXT_PUBLIC_IMPRINT_NAME` | Ja | Name für Impressum (§ 5 DDG) |
+| `NEXT_PUBLIC_IMPRINT_STREET` | Ja | Straße für Impressum |
+| `NEXT_PUBLIC_IMPRINT_CITY` | Ja | PLZ + Ort für Impressum |
+| `NEXT_PUBLIC_IMPRINT_EMAIL` | Ja | E-Mail für Impressum |
+| `NEXT_PUBLIC_UMAMI_ENABLED` | Nein | Analytics aktivieren (`true`/`false`) |
+| `NEXT_PUBLIC_UMAMI_WEBSITE_ID` | Nein | Umami Website-ID |
+| `NEXT_PUBLIC_UMAMI_URL` | Nein | Umami Server-URL |
+| `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` | Nein | Google Search Console |
 
-## Learn More
+### Build
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+pnpm build
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Erzeugt statische Dateien im `out/`-Verzeichnis. OG-Images werden automatisch vor dem Build generiert.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Tests
 
-## Deploy on Vercel
+```bash
+pnpm test:run
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Berechnungsmethodik
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Die Berechnungen basieren auf:
+
+- **PVGIS** (EU Joint Research Centre) – Sonneneinstrahlung und PV-Ertrag
+- **HTW Berlin Modell** (Quaschning/Weniger) – Eigenverbrauchsquote
+- **BDEW H0 Standardlastprofil** – Verbrauchsverteilung
+- **EEG Einspeisevergütung** – Aktuelle Tarife
+- **Fraunhofer ISE** – Investitionskosten (€/kWp)
+- **Umweltbundesamt** – CO2-Emissionsfaktoren
+
+Details unter [/methodik](https://opensolarcheck.de/de/methodik) in der App.
+
+## Deployment
+
+Die App ist ein statischer Export und kann auf jedem Webserver gehostet werden (Nginx, Apache, Caddy, etc.).
+
+```bash
+pnpm build
+# out/ Verzeichnis auf den Server kopieren
+```
+
+### Umami Analytics (optional)
+
+Für self-hosted Analytics siehe `docker-compose.umami.yml`.
+
+## Mithelfen
+
+Beiträge sind willkommen! Siehe [CONTRIBUTING.md](.github/CONTRIBUTING.md).
+
+## Lizenz
+
+MIT – siehe [LICENSE](LICENSE)
+
+## Haftungsausschluss
+
+Diese Berechnung liefert grobe Richtwerte auf Basis öffentlich verfügbarer Wetterdaten (PVGIS). Sie ersetzt keine professionelle Planung vor Ort. Faktoren wie lokale Verschattung, Dachstatik, Netzanschlussbedingungen und regionale Förderprogramme werden nicht berücksichtigt.

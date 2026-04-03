@@ -1,0 +1,383 @@
+{
+  "meta": {
+    "title": "Free Solar Calculator | PV System Cost & Yield – OpenSolarCheck",
+    "description": "Free photovoltaic calculator: Calculate yield, costs, and payback period for your solar system – no registration, no data collection. Instant results in your browser.",
+    "pages": {
+      "configurator": {
+        "title": "PV Configurator – Calculate Your Solar System Online | OpenSolarCheck",
+        "description": "Configure your photovoltaic system step by step: location, roof, modules, battery. See yield and costs instantly – free and without registration."
+      },
+      "methodology": {
+        "title": "Calculation Methodology – How OpenSolarCheck Calculates PV Yield",
+        "description": "Transparent methodology: PVGIS satellite data, HTW Berlin model, current feed-in tariffs. All assumptions and sources disclosed."
+      },
+      "privacy": {
+        "title": "Privacy Policy | OpenSolarCheck",
+        "description": "Privacy policy in accordance with GDPR. No cookies, no tracking, no registration. All calculations run locally in your browser."
+      },
+      "imprint": {
+        "title": "Legal Notice | OpenSolarCheck",
+        "description": "Legal notice for OpenSolarCheck – the free open-source solar calculator."
+      },
+      "results": {
+        "title": "PV Analysis – Your Results | OpenSolarCheck",
+        "description": "Your personal PV results: annual yield, self-consumption, payback period, CO2 savings, and financial analysis."
+      }
+    }
+  },
+  "nav": {
+    "configurator": "Configurator",
+    "methodology": "Methodology",
+    "about": "About",
+    "privacy": "Privacy",
+    "imprint": "Imprint"
+  },
+  "hero": {
+    "title": "Your Independent Solar Calculator",
+    "subtitle": "Calculate yield, costs, and payback period for your solar system \u2013 free, no registration, no data collection.",
+    "cta": "Calculate now",
+    "features": {
+      "free": "100% free",
+      "noData": "No data collection",
+      "openSource": "Open Source",
+      "clientSide": "Runs in browser"
+    },
+    "highlights": {
+      "yield": {
+        "title": "Calculate PV Yield",
+        "description": "Based on EU PVGIS satellite data \u2013 for your exact location in Germany"
+      },
+      "economics": {
+        "title": "Costs & Payback",
+        "description": "25-year analysis with current electricity prices and feed-in tariffs"
+      },
+      "co2": {
+        "title": "CO\u2082 Savings",
+        "description": "Calculate the environmental impact of your photovoltaic system"
+      }
+    }
+  },
+  "faq": {
+    "title": "Frequently Asked Questions About Solar Energy",
+    "items": {
+      "cost": {
+        "question": "How much does a solar system cost?",
+        "answer": "A typical PV system for a single-family home (5\u201310 kWp) costs between \u20ac7,000 and \u20ac20,000 including installation and inverter. A battery storage system adds \u20ac5,000\u2013\u20ac15,000. Use our calculator for a more precise estimate based on your roof area."
+      },
+      "worthIt": {
+        "question": "Is a solar system worth it?",
+        "answer": "In most cases, yes. With current electricity prices of approx. \u20ac0.34/kWh and a feed-in tariff of 8.03 ct/kWh, a PV system typically pays for itself in 8\u201313 years. Over 25 years, the return is often 5\u20138%."
+      },
+      "howMuchPower": {
+        "question": "How much electricity does a solar system produce?",
+        "answer": "In Germany, a solar system produces approx. 850\u20131,050 kWh per kWp per year depending on location and orientation. A typical 10 kWp system delivers 8,500\u201310,500 kWh annually \u2013 enough for a 4-person household."
+      },
+      "noRegistration": {
+        "question": "Why don't I need to register?",
+        "answer": "OpenSolarCheck calculates everything directly in your browser. Your data never leaves your computer \u2013 there is no server storing it. That's why we don't need your email or phone number."
+      },
+      "accuracy": {
+        "question": "How accurate is the calculator?",
+        "answer": "The calculation is based on EU PVGIS satellite data and the HTW Berlin model. The results are good estimates but do not replace professional on-site planning that considers local shading and roof statics."
+      }
+    }
+  },
+  "configurator": {
+    "title": "PV Configurator",
+    "step": "Step",
+    "of": "of",
+    "back": "Back",
+    "next": "Next",
+    "calculate": "Calculate",
+    "calculating": "Calculating…",
+    "step1": {
+      "title": "Location",
+      "description": "Where should the PV system be installed?",
+      "postalCode": "Postal code",
+      "postalCodePlaceholder": "e.g. 80331",
+      "city": "City",
+      "lat": "Latitude",
+      "lon": "Longitude",
+      "manualEntry": "Enter coordinates manually",
+      "searching": "Searching...",
+      "found": "Found",
+      "notFound": "Postal code not found"
+    },
+    "step2": {
+      "title": "Roof",
+      "description": "What are your roof conditions?",
+      "tilt": "Roof tilt",
+      "tiltUnit": "degrees",
+      "tiltFlat": "flat",
+      "tiltSteep": "steep",
+      "azimuth": "Orientation",
+      "azimuthHelp": "Which direction does your roof face?",
+      "azimuthSouth": "South",
+      "azimuthSouthWest": "South-West",
+      "azimuthWest": "West",
+      "azimuthSouthEast": "South-East",
+      "azimuthEast": "East",
+      "area": "Available roof area",
+      "areaUnit": "m²",
+      "areaHelp": "Base area × correction factor by tilt",
+      "shading": "Shading",
+      "shadingNone": "None",
+      "shadingLow": "Low",
+      "shadingMedium": "Medium",
+      "shadingHigh": "Heavy",
+      "south": "S",
+      "north": "N",
+      "east": "E",
+      "west": "W"
+    },
+    "step3": {
+      "title": "PV System",
+      "description": "We recommend the right configuration for you",
+      "moduleType": "Module type",
+      "monocrystalline": "Monocrystalline",
+      "monocrystallineDesc": "Highest efficiency (21%), ideal for limited roof space. Standard for new installations.",
+      "polycrystalline": "Polycrystalline",
+      "polycrystallineDesc": "Good efficiency (17%), lower upfront cost.",
+      "thinfilm": "Thin-film",
+      "thinfilmDesc": "Lowest efficiency (13%), flexible, performs well in diffuse light.",
+      "recommended": "Recommended",
+      "efficiency": "Efficiency",
+      "modulePower": "Module power",
+      "modulePowerUnit": "Wp",
+      "moduleCount": "Number of modules",
+      "moduleCountInfo": "Based on your roof area of {area} m², max. {max} modules fit",
+      "peakPower": "System power",
+      "peakPowerUnit": "kWp"
+    },
+    "step4": {
+      "title": "Electricity consumption",
+      "description": "How much electricity do you consume?",
+      "annualConsumption": "Annual electricity consumption",
+      "annualConsumptionUnit": "kWh/year",
+      "quickSelect": "Quick select",
+      "persons1": "1 person (~1,500 kWh)",
+      "persons2": "2 persons (~2,500 kWh)",
+      "persons3": "3 persons (~3,500 kWh)",
+      "persons4": "4+ persons (~4,500 kWh)",
+      "heatPump": "Heat pump?",
+      "heatPumpInfo": "Adds approx. 3,000–5,000 kWh",
+      "ev": "Electric vehicle?",
+      "evInfo": "Adds approx. 2,000–3,000 kWh",
+      "totalConsumption": "Total consumption"
+    },
+    "step5": {
+      "title": "Battery storage",
+      "description": "Would you like to add battery storage?",
+      "hasBattery": "Battery storage desired?",
+      "capacity": "Storage capacity",
+      "capacityUnit": "kWh",
+      "recommendation": "Recommendation: approx. 1 kWh per kWp",
+      "recommendedCapacity": "Recommended capacity"
+    },
+    "disclaimer": "This calculation provides estimates. It does not replace professional planning."
+  },
+  "results": {
+    "title": "Your PV Analysis",
+    "subtitle": "Results based on your inputs and PVGIS data",
+    "loading": "Calculating...",
+    "summary": {
+      "annualYield": "Annual yield",
+      "selfConsumption": "Self-consumption",
+      "autarky": "Self-sufficiency",
+      "payback": "Payback period",
+      "annualSavings": "Annual savings",
+      "years": "years"
+    },
+    "charts": {
+      "monthlyYield": "Monthly yield & consumption",
+      "yield": "PV yield",
+      "consumption": "Consumption",
+      "selfConsumption": "Self-consumption & self-sufficiency",
+      "selfConsumptionLabel": "Self-consumption",
+      "feedIn": "Feed-in",
+      "gridConsumption": "Grid consumption",
+      "selfSupply": "Self-supply",
+      "financial": "Financial analysis over 25 years",
+      "cumulativeSavings": "Cumulative savings",
+      "breakEven": "Break-even",
+      "pvYieldLabel": "PV yield",
+      "consumptionLabel": "Consumption",
+      "yearsAxis": "Years",
+      "yearLabel": "Year {label}"
+    },
+    "co2": {
+      "title": "CO2 savings",
+      "annual": "Annual savings",
+      "lifetime": "Over lifetime",
+      "flights": "Equivalent to {count} flights Munich–Berlin",
+      "trees": "Equivalent to {count} planted trees"
+    },
+    "economics": {
+      "title": "Financial analysis",
+      "investment": "Estimated investment",
+      "investmentRange": "Range: {min} – {max} €",
+      "investmentNote": "Estimate based on avg. {costPerKwp} €/kWp (Source: Fraunhofer ISE, incl. installation & inverter). Actual costs vary by provider, region, and roof conditions.",
+      "npv": "Net present value (NPV)",
+      "roi": "Return on investment (ROI)",
+      "totalSavings": "Total savings (25 yrs)"
+    },
+    "export": "Export results as PDF",
+    "exportError": "PDF export failed. Please try again.",
+    "newCalculation": "New calculation",
+    "disclaimer": "This calculation provides rough estimates based on your inputs and publicly available weather data (PVGIS). It does not replace professional on-site planning. Factors such as local shading, roof statics, grid connection conditions, and regional subsidy programs are not considered."
+  },
+  "methodology": {
+    "title": "Calculation methodology",
+    "intro": "Transparency is important to us. Here we explain all calculations and their foundations.",
+    "radiation": {
+      "title": "Solar radiation data",
+      "text": "Solar irradiation is based on data from the PVGIS system (Photovoltaic Geographical Information System) of the European Commission's Joint Research Centre. PVGIS uses satellite data and meteorological models for accurate site assessment."
+    },
+    "yield": {
+      "title": "Yield calculation",
+      "text": "PV yield is calculated directly from PVGIS data, which already accounts for location, tilt, orientation, and system losses (14%). An additional shading factor is applied."
+    },
+    "selfConsumption": {
+      "title": "Self-consumption",
+      "text": "The self-consumption ratio is estimated using the HTW Berlin model (Quaschning/Weniger). It is based on the BDEW H0 standard load profile for household electricity. For battery storage, the additional self-consumption increase is calculated with a battery efficiency of 90%."
+    },
+    "economics": {
+      "title": "Financial analysis",
+      "text": "The financial analysis is based on the following assumptions:",
+      "assumptions": {
+        "electricityPrice": "Electricity price: {price} €/kWh (increase: 3% p.a.)",
+        "feedIn": "Feed-in tariff: per EEG (fixed for 20 years)",
+        "degradation": "Module degradation: 0.5% per year",
+        "maintenance": "Maintenance costs: 1.5% of investment per year",
+        "discount": "Discount rate: 3% (for NPV calculation)"
+      }
+    },
+    "limitations": {
+      "title": "Limitations",
+      "text": "This tool does not consider: local shading from objects, roof statics and load capacity, grid connection conditions, regional/municipal subsidy programs, tax aspects."
+    },
+    "sources": {
+      "title": "Sources",
+      "pvgis": "PVGIS – EU Joint Research Centre",
+      "htw": "HTW Berlin – Independence Calculator",
+      "bdew": "BDEW – Standard Load Profiles",
+      "eeg": "EEG – Feed-in Tariff Rates",
+      "uba": "German Environment Agency – Emission Balance"
+    }
+  },
+  "privacy": {
+    "title": "Privacy Policy",
+    "intro": "We take the protection of your personal data very seriously. Below we inform you about the collection and use of personal data when using our website.",
+    "controller": {
+      "title": "1. Controller",
+      "text": "The controller within the meaning of the GDPR is the person named in the legal notice.",
+      "link": "To the legal notice"
+    },
+    "overview": {
+      "title": "2. Overview",
+      "noData": "No personal data is collected, stored, or processed beyond what is technically necessary.",
+      "noTracking": "There are no cookies, no user-level tracking, and no registration.",
+      "local": "All inputs in the PV calculator remain local in your browser (sessionStorage). No data is sent to our servers."
+    },
+    "hosting": {
+      "title": "3. Hosting",
+      "text": "This website is hosted by Hetzner Online GmbH, Industriestr. 25, 91710 Gunzenhausen, Germany. When you visit our website, the hosting provider automatically collects the following data in server log files:",
+      "items": {
+        "ip": "Truncated IP address",
+        "date": "Date and time of the request",
+        "page": "Page accessed",
+        "browser": "Browser type and version",
+        "os": "Operating system",
+        "referrer": "Referrer URL"
+      },
+      "legal": "Legal basis: Art. 6(1)(f) GDPR (legitimate interest in the secure provision of the website). Log files are automatically deleted after 14 days.",
+      "hetznerLink": "Hetzner privacy policy"
+    },
+    "ssl": {
+      "title": "4. SSL/TLS Encryption",
+      "text": "This website uses SSL/TLS encryption for security reasons. You can recognize an encrypted connection by the lock icon in your browser's address bar and the \"https://\" prefix."
+    },
+    "pvgis": {
+      "title": "5. PVGIS API",
+      "text": "To calculate solar irradiation, your browser directly calls the PVGIS API of the European Commission's Joint Research Centre. Your IP address is transmitted to the EU Commission's server.",
+      "legal": "Legal basis: Art. 6(1)(b) GDPR (contract fulfillment \u2013 the calculation is the main purpose of the service).",
+      "pvgisLink": "PVGIS privacy notice"
+    },
+    "analytics": {
+      "title": "6. Website Analytics (Umami)",
+      "intro": "We use Umami, a privacy-friendly open-source analytics tool, to anonymously evaluate website usage. Umami:",
+      "noCookies": "does not set any cookies",
+      "noIp": "does not store IP addresses",
+      "noProfiles": "does not create user profiles",
+      "noPersonalData": "does not collect personal data",
+      "dnt": "respects your browser's \"Do Not Track\" setting",
+      "note": "Only anonymous, aggregated data is collected (page views, referrers, browser type, country). No cookie banner is required as no cookies or similar technologies are used.",
+      "legal": "Legal basis: Art. 6(1)(f) GDPR (legitimate interest in improving the service).",
+      "link": "Umami is open source"
+    },
+    "rights": {
+      "title": "7. Your Rights",
+      "intro": "You have the following rights regarding your personal data:",
+      "access": "Right of access (Art. 15 GDPR)",
+      "rectification": "Right to rectification (Art. 16 GDPR)",
+      "erasure": "Right to erasure (Art. 17 GDPR)",
+      "restriction": "Right to restriction of processing (Art. 18 GDPR)",
+      "portability": "Right to data portability (Art. 20 GDPR)",
+      "objection": "Right to object to processing (Art. 21 GDPR)",
+      "contact": "To exercise your rights, please contact us via the email address provided in the legal notice."
+    },
+    "complaint": {
+      "title": "8. Right to Lodge a Complaint",
+      "text": "You have the right to lodge a complaint with a data protection supervisory authority regarding the processing of your personal data. A list of supervisory authorities can be found at:",
+      "link": "BfDI \u2013 State Supervisory Authorities"
+    },
+    "changes": {
+      "title": "9. Changes",
+      "text": "We reserve the right to update this privacy policy to reflect changes in the legal situation or changes to the service. The current version is always available on this page."
+    }
+  },
+  "imprint": {
+    "title": "Legal Notice",
+    "subtitle": "Information pursuant to § 5 DDG (German Digital Services Act)",
+    "responsible": "Responsible",
+    "contact": "Contact",
+    "email": "Email",
+    "disclaimer": {
+      "title": "Disclaimer",
+      "content": "The contents of this website have been created with the utmost care. However, we cannot guarantee the accuracy, completeness, or timeliness of the content. As a service provider, we are responsible for our own content on these pages in accordance with general legislation pursuant to § 7 (1) DDG. According to §§ 8–10 DDG, however, we are not obligated to monitor transmitted or stored third-party information."
+    },
+    "links": {
+      "title": "Liability for Links",
+      "content": "Our website contains links to external third-party websites over whose content we have no influence. The respective provider or operator is always responsible for the content of the linked pages."
+    },
+    "openSource": "This project is open source.",
+    "github": "GitHub Repository"
+  },
+  "footer": {
+    "tagline": "Open Source Solar Calculator",
+    "madeWith": "Made with {sun} and Open Source",
+    "github": "GitHub"
+  },
+  "common": {
+    "kWh": "kWh",
+    "kWp": "kWp",
+    "euro": "€",
+    "percent": "%",
+    "year": "year",
+    "years": "years",
+    "kg": "kg",
+    "tons": "t",
+    "sqm": "m²"
+  },
+  "validation": {
+    "lat": "Latitude must be between -90° and 90°",
+    "lon": "Longitude must be between -180° and 180°",
+    "tilt": "Roof tilt must be between 0° and 60°",
+    "azimuth": "Orientation must be between -180° and 180°",
+    "area": "Roof area must be between 1 and 500 m²",
+    "modulePower": "Module power must be between 100 and 800 Wp",
+    "moduleCount": "Module count must be between 1 and 200",
+    "annualConsumption": "Consumption must be between 0 and 100,000 kWh",
+    "capacity": "Storage capacity must be between 1 and 50 kWh"
+  }
+}

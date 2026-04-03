@@ -1,0 +1,383 @@
+{
+  "meta": {
+    "title": "PV-Rechner kostenlos | Solaranlage Kosten & Ertrag berechnen – OpenSolarCheck",
+    "description": "Kostenloser Photovoltaik-Rechner: Berechne Ertrag, Kosten und Amortisation deiner Solaranlage – ohne Anmeldung, ohne Datenabgabe. Sofort Ergebnis im Browser.",
+    "pages": {
+      "configurator": {
+        "title": "PV-Konfigurator – Solaranlage online berechnen | OpenSolarCheck",
+        "description": "Konfiguriere deine Photovoltaik-Anlage Schritt für Schritt: Standort, Dachfläche, Module, Speicher. Sofort Ertrag und Kosten sehen – kostenlos und ohne Anmeldung."
+      },
+      "methodology": {
+        "title": "Berechnungsmethodik – So berechnet OpenSolarCheck den PV-Ertrag",
+        "description": "Transparente Methodik: PVGIS-Satellitendaten, HTW-Berlin-Modell, aktuelle EEG-Vergütung. Alle Annahmen und Quellen offengelegt."
+      },
+      "privacy": {
+        "title": "Datenschutzerkl\u00e4rung | OpenSolarCheck",
+        "description": "Datenschutzerkl\u00e4rung gem\u00e4\u00df DSGVO. Keine Cookies, kein Tracking, keine Anmeldung. Alle Berechnungen laufen lokal in Ihrem Browser."
+      },
+      "imprint": {
+        "title": "Impressum | OpenSolarCheck",
+        "description": "Impressum gem\u00e4\u00df \u00a7 5 DDG f\u00fcr OpenSolarCheck – den kostenlosen Open-Source PV-Rechner."
+      },
+      "results": {
+        "title": "PV-Analyse – Deine Ergebnisse | OpenSolarCheck",
+        "description": "Dein pers\u00f6nliches PV-Ergebnis: Jahresertrag, Eigenverbrauch, Amortisation, CO2-Einsparung und Wirtschaftlichkeitsanalyse."
+      }
+    }
+  },
+  "nav": {
+    "configurator": "Konfigurator",
+    "methodology": "Methodik",
+    "about": "Über",
+    "privacy": "Datenschutz",
+    "imprint": "Impressum"
+  },
+  "hero": {
+    "title": "Dein unabh\u00e4ngiger PV-Rechner",
+    "subtitle": "Berechne Ertrag, Kosten und Amortisation deiner Solaranlage \u2013 kostenlos, ohne Anmeldung, ohne Datenabgabe.",
+    "cta": "Jetzt berechnen",
+    "features": {
+      "free": "100% kostenlos",
+      "noData": "Keine Datenabgabe",
+      "openSource": "Open Source",
+      "clientSide": "L\u00e4uft im Browser"
+    },
+    "highlights": {
+      "yield": {
+        "title": "PV-Ertrag berechnen",
+        "description": "Basierend auf PVGIS-Satellitendaten der EU \u2013 f\u00fcr deinen exakten Standort in Deutschland"
+      },
+      "economics": {
+        "title": "Kosten & Amortisation",
+        "description": "25-Jahres-Analyse mit aktuellen Strompreisen und EEG-Einspeisung"
+      },
+      "co2": {
+        "title": "CO\u2082-Einsparung",
+        "description": "Berechnung der Umweltwirkung deiner Photovoltaik-Anlage"
+      }
+    }
+  },
+  "faq": {
+    "title": "H\u00e4ufige Fragen zu Photovoltaik",
+    "items": {
+      "cost": {
+        "question": "Was kostet eine Photovoltaik-Anlage?",
+        "answer": "Eine typische PV-Anlage f\u00fcr ein Einfamilienhaus (5\u201310 kWp) kostet zwischen 7.000 und 20.000 \u20ac inkl. Montage und Wechselrichter. Mit Batteriespeicher kommen 5.000\u201315.000 \u20ac hinzu. Nutze unseren Rechner f\u00fcr eine genauere Sch\u00e4tzung basierend auf deiner Dachfl\u00e4che."
+      },
+      "worthIt": {
+        "question": "Lohnt sich eine Solaranlage?",
+        "answer": "In den meisten F\u00e4llen ja. Bei aktuellen Strompreisen von ca. 0,34 \u20ac/kWh und einer EEG-Einspeisung von 8,03 Ct/kWh amortisiert sich eine PV-Anlage typischerweise nach 8\u201313 Jahren. \u00dcber 25 Jahre ergibt sich oft eine Rendite von 5\u20138 %."
+      },
+      "howMuchPower": {
+        "question": "Wie viel Strom erzeugt eine Solaranlage?",
+        "answer": "In Deutschland erzeugt eine Solaranlage je nach Standort und Ausrichtung ca. 850\u20131.050 kWh pro kWp und Jahr. Eine typische 10-kWp-Anlage liefert also 8.500\u201310.500 kWh j\u00e4hrlich \u2013 genug f\u00fcr einen 4-Personen-Haushalt."
+      },
+      "noRegistration": {
+        "question": "Warum brauche ich keine Anmeldung?",
+        "answer": "OpenSolarCheck berechnet alles direkt in deinem Browser. Deine Daten verlassen nie deinen Computer \u2013 es gibt keinen Server, der sie speichert. Deshalb brauchen wir weder E-Mail noch Telefonnummer."
+      },
+      "accuracy": {
+        "question": "Wie genau ist der Rechner?",
+        "answer": "Die Berechnung basiert auf PVGIS-Satellitendaten der EU und dem Modell der HTW Berlin. Die Ergebnisse sind gute Richtwerte, ersetzen aber keine professionelle Vor-Ort-Planung, die lokale Verschattung und Dachstatik ber\u00fccksichtigt."
+      }
+    }
+  },
+  "configurator": {
+    "title": "PV-Konfigurator",
+    "step": "Schritt",
+    "of": "von",
+    "back": "Zurück",
+    "next": "Weiter",
+    "calculate": "Berechnen",
+    "calculating": "Berechnung läuft…",
+    "step1": {
+      "title": "Standort",
+      "description": "Wo soll die PV-Anlage installiert werden?",
+      "postalCode": "Postleitzahl",
+      "postalCodePlaceholder": "z.B. 80331",
+      "city": "Ort",
+      "lat": "Breitengrad",
+      "lon": "Längengrad",
+      "manualEntry": "Koordinaten manuell eingeben",
+      "searching": "Suche...",
+      "found": "Gefunden",
+      "notFound": "PLZ nicht gefunden"
+    },
+    "step2": {
+      "title": "Dach",
+      "description": "Wie ist Ihr Dach beschaffen?",
+      "tilt": "Dachneigung",
+      "tiltUnit": "Grad",
+      "tiltFlat": "flach",
+      "tiltSteep": "steil",
+      "azimuth": "Ausrichtung",
+      "azimuthHelp": "In welche Himmelsrichtung zeigt Ihre Dachfläche?",
+      "azimuthSouth": "Süd",
+      "azimuthSouthWest": "Süd-West",
+      "azimuthWest": "West",
+      "azimuthSouthEast": "Süd-Ost",
+      "azimuthEast": "Ost",
+      "area": "Verfügbare Dachfläche",
+      "areaUnit": "m²",
+      "areaHelp": "Grundfläche × Korrekturfaktor nach Neigung",
+      "shading": "Verschattung",
+      "shadingNone": "Keine",
+      "shadingLow": "Gering",
+      "shadingMedium": "Mittel",
+      "shadingHigh": "Stark",
+      "south": "S",
+      "north": "N",
+      "east": "O",
+      "west": "W"
+    },
+    "step3": {
+      "title": "PV-Anlage",
+      "description": "Wir empfehlen Ihnen die passende Konfiguration",
+      "moduleType": "Modultyp",
+      "monocrystalline": "Monokristallin",
+      "monocrystallineDesc": "Höchste Effizienz (21%), ideal bei begrenzter Dachfläche. Standard bei Neuanlagen.",
+      "polycrystalline": "Polykristallin",
+      "polycrystallineDesc": "Gute Effizienz (17%), günstiger in der Anschaffung.",
+      "thinfilm": "Dünnschicht",
+      "thinfilmDesc": "Niedrigste Effizienz (13%), flexibel einsetzbar, gut bei diffusem Licht.",
+      "recommended": "Empfohlen",
+      "efficiency": "Wirkungsgrad",
+      "modulePower": "Modulleistung",
+      "modulePowerUnit": "Wp",
+      "moduleCount": "Anzahl Module",
+      "moduleCountInfo": "Basierend auf Ihrer Dachfläche von {area} m² passen max. {max} Module",
+      "peakPower": "Anlagenleistung",
+      "peakPowerUnit": "kWp"
+    },
+    "step4": {
+      "title": "Stromverbrauch",
+      "description": "Wie viel Strom verbrauchen Sie?",
+      "annualConsumption": "Jährlicher Stromverbrauch",
+      "annualConsumptionUnit": "kWh/Jahr",
+      "quickSelect": "Schnellauswahl",
+      "persons1": "1 Person (~1.500 kWh)",
+      "persons2": "2 Personen (~2.500 kWh)",
+      "persons3": "3 Personen (~3.500 kWh)",
+      "persons4": "4+ Personen (~4.500 kWh)",
+      "heatPump": "Wärmepumpe vorhanden?",
+      "heatPumpInfo": "Addiert ca. 3.000–5.000 kWh",
+      "ev": "E-Auto vorhanden?",
+      "evInfo": "Addiert ca. 2.000–3.000 kWh",
+      "totalConsumption": "Gesamtverbrauch"
+    },
+    "step5": {
+      "title": "Batteriespeicher",
+      "description": "Möchten Sie einen Batteriespeicher nutzen?",
+      "hasBattery": "Speicher gewünscht?",
+      "capacity": "Speicherkapazität",
+      "capacityUnit": "kWh",
+      "recommendation": "Empfehlung: ca. 1 kWh pro kWp",
+      "recommendedCapacity": "Empfohlene Kapazität"
+    },
+    "disclaimer": "Diese Berechnung liefert Richtwerte. Sie ersetzt keine professionelle Planung."
+  },
+  "results": {
+    "title": "Ihre PV-Analyse",
+    "subtitle": "Ergebnisse basierend auf Ihren Eingaben und PVGIS-Daten",
+    "loading": "Berechnung läuft...",
+    "summary": {
+      "annualYield": "Jährlicher Ertrag",
+      "selfConsumption": "Eigenverbrauch",
+      "autarky": "Autarkiegrad",
+      "payback": "Amortisation",
+      "annualSavings": "Jährliche Ersparnis",
+      "years": "Jahre"
+    },
+    "charts": {
+      "monthlyYield": "Monatlicher Ertrag & Verbrauch",
+      "yield": "PV-Ertrag",
+      "consumption": "Verbrauch",
+      "selfConsumption": "Eigenverbrauch & Autarkie",
+      "selfConsumptionLabel": "Eigenverbrauch",
+      "feedIn": "Einspeisung",
+      "gridConsumption": "Netzbezug",
+      "selfSupply": "Eigenversorgung",
+      "financial": "Wirtschaftlichkeit über 25 Jahre",
+      "cumulativeSavings": "Kumulative Ersparnisse",
+      "breakEven": "Break-Even",
+      "pvYieldLabel": "PV-Ertrag",
+      "consumptionLabel": "Verbrauch",
+      "yearsAxis": "Jahre",
+      "yearLabel": "Jahr {label}"
+    },
+    "co2": {
+      "title": "CO2-Einsparung",
+      "annual": "Jährliche Einsparung",
+      "lifetime": "Über Lebensdauer",
+      "flights": "Entspricht {count} Flügen München–Berlin",
+      "trees": "Entspricht {count} gepflanzten Bäumen"
+    },
+    "economics": {
+      "title": "Wirtschaftlichkeit",
+      "investment": "Geschätzte Investition",
+      "investmentRange": "Spanne: {min} – {max} €",
+      "investmentNote": "Richtwert auf Basis von Ø {costPerKwp} €/kWp (Quelle: Fraunhofer ISE, inkl. Montage & Wechselrichter). Reale Kosten variieren je nach Anbieter, Region und Dachbeschaffenheit.",
+      "npv": "Kapitalwert (NPV)",
+      "roi": "Rendite (ROI)",
+      "totalSavings": "Gesamtersparnis (25 J.)"
+    },
+    "export": "Ergebnis als PDF exportieren",
+    "exportError": "PDF-Export fehlgeschlagen. Bitte versuchen Sie es erneut.",
+    "newCalculation": "Neue Berechnung",
+    "disclaimer": "Diese Berechnung liefert grobe Richtwerte auf Basis Ihrer Eingaben und öffentlich verfügbarer Wetterdaten (PVGIS). Sie ersetzt keine professionelle Planung vor Ort. Faktoren wie lokale Verschattung, Dachstatik, Netzanschlussbedingungen und regionale Förderprogramme werden nicht berücksichtigt."
+  },
+  "methodology": {
+    "title": "Berechnungsmethodik",
+    "intro": "Transparenz ist uns wichtig. Hier erklären wir alle Berechnungen und deren Grundlagen.",
+    "radiation": {
+      "title": "Strahlungsdaten",
+      "text": "Die Sonneneinstrahlung basiert auf Daten des PVGIS-Systems (Photovoltaic Geographical Information System) des Joint Research Centre der Europäischen Kommission. PVGIS nutzt Satellitendaten und meteorologische Modelle für eine genaue Standortbewertung."
+    },
+    "yield": {
+      "title": "Ertragsberechnung",
+      "text": "Der PV-Ertrag wird direkt aus den PVGIS-Daten berechnet, die bereits Standort, Neigung, Ausrichtung und Systemverluste (14%) berücksichtigen. Zusätzlich wird ein Verschattungsfaktor angewendet."
+    },
+    "selfConsumption": {
+      "title": "Eigenverbrauch",
+      "text": "Die Eigenverbrauchsquote wird nach dem Modell der HTW Berlin (Quaschning/Weniger) geschätzt. Grundlage ist das BDEW H0 Standardlastprofil für Haushaltsstrom. Bei Speichern wird die zusätzliche Eigenverbrauchserhöhung mit einer Batterie-Effizienz von 90% berechnet."
+    },
+    "economics": {
+      "title": "Wirtschaftlichkeit",
+      "text": "Die Wirtschaftlichkeitsberechnung basiert auf folgenden Annahmen:",
+      "assumptions": {
+        "electricityPrice": "Strompreis: {price} €/kWh (Steigerung: 3% p.a.)",
+        "feedIn": "Einspeisevergütung: gemäß EEG (fix für 20 Jahre)",
+        "degradation": "Modul-Degradation: 0,5% pro Jahr",
+        "maintenance": "Wartungskosten: 1,5% der Investition pro Jahr",
+        "discount": "Diskontrate: 3% (für Kapitalwertberechnung)"
+      }
+    },
+    "limitations": {
+      "title": "Einschränkungen",
+      "text": "Dieses Tool berücksichtigt nicht: lokale Verschattung durch Objekte, Dachstatik und Tragfähigkeit, Netzanschlussbedingungen, regionale/kommunale Förderprogramme, steuerliche Aspekte."
+    },
+    "sources": {
+      "title": "Quellen",
+      "pvgis": "PVGIS – EU Joint Research Centre",
+      "htw": "HTW Berlin – Unabhängigkeitsrechner",
+      "bdew": "BDEW – Standardlastprofile Strom",
+      "eeg": "EEG – Einspeisevergütungssätze",
+      "uba": "Umweltbundesamt – Emissionsbilanz"
+    }
+  },
+  "privacy": {
+    "title": "Datenschutzerkl\u00e4rung",
+    "intro": "Wir nehmen den Schutz Ihrer pers\u00f6nlichen Daten sehr ernst. Nachfolgend informieren wir Sie \u00fcber die Erhebung und Verwendung personenbezogener Daten bei Nutzung unserer Website.",
+    "controller": {
+      "title": "1. Verantwortlicher",
+      "text": "Verantwortlicher im Sinne der DSGVO ist die im Impressum genannte Person.",
+      "link": "Zum Impressum"
+    },
+    "overview": {
+      "title": "2. \u00dcberblick",
+      "noData": "Es werden keine personenbezogenen Daten erhoben, gespeichert oder verarbeitet, die \u00fcber das technisch notwendige Ma\u00df hinausgehen.",
+      "noTracking": "Es gibt keine Cookies, kein nutzerbezogenes Tracking und keine Registrierung.",
+      "local": "Alle Eingaben im PV-Rechner bleiben lokal in Ihrem Browser (sessionStorage). Es werden keine Daten an unsere Server gesendet."
+    },
+    "hosting": {
+      "title": "3. Hosting",
+      "text": "Diese Website wird bei der Hetzner Online GmbH, Industriestr. 25, 91710 Gunzenhausen, Deutschland gehostet. Beim Aufruf unserer Website erhebt der Hosting-Provider automatisch folgende Daten in Server-Logfiles:",
+      "items": {
+        "ip": "Gek\u00fcrzte IP-Adresse",
+        "date": "Datum und Uhrzeit der Anfrage",
+        "page": "Aufgerufene Seite",
+        "browser": "Browser-Typ und -Version",
+        "os": "Betriebssystem",
+        "referrer": "Referrer-URL"
+      },
+      "legal": "Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an der sicheren Bereitstellung der Website). Die Logfiles werden nach 14 Tagen automatisch gel\u00f6scht.",
+      "hetznerLink": "Datenschutzerkl\u00e4rung von Hetzner"
+    },
+    "ssl": {
+      "title": "4. SSL/TLS-Verschl\u00fcsselung",
+      "text": "Diese Website nutzt aus Sicherheitsgr\u00fcnden eine SSL/TLS-Verschl\u00fcsselung. Eine verschl\u00fcsselte Verbindung erkennen Sie an dem Schloss-Symbol in der Adresszeile Ihres Browsers und an der Adresszeile \u201ehttps://\u201c."
+    },
+    "pvgis": {
+      "title": "5. PVGIS-API",
+      "text": "Zur Berechnung der Sonneneinstrahlung ruft Ihr Browser direkt die PVGIS-API des Joint Research Centre der Europ\u00e4ischen Kommission auf. Dabei wird Ihre IP-Adresse an den Server der EU-Kommission \u00fcbermittelt.",
+      "legal": "Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO (Vertragserf\u00fcllung \u2013 die Berechnung ist der Hauptzweck des Dienstes).",
+      "pvgisLink": "PVGIS-Datenschutzhinweise"
+    },
+    "analytics": {
+      "title": "6. Websiteanalyse (Umami)",
+      "intro": "Wir nutzen Umami, ein datenschutzfreundliches Open-Source-Analysetool, um die Nutzung der Website anonym auszuwerten. Umami:",
+      "noCookies": "setzt keine Cookies",
+      "noIp": "speichert keine IP-Adressen",
+      "noProfiles": "erstellt keine Nutzerprofile",
+      "noPersonalData": "erhebt keine personenbezogenen Daten",
+      "dnt": "respektiert die \u201eDo Not Track\u201c-Einstellung Ihres Browsers",
+      "note": "Es werden ausschlie\u00dflich anonyme, aggregierte Daten erhoben (Seitenaufrufe, Referrer, Browsertyp, Land). Ein Cookie-Banner ist nicht erforderlich, da keine Cookies oder vergleichbare Technologien eingesetzt werden.",
+      "legal": "Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an der Verbesserung des Angebots).",
+      "link": "Umami ist Open Source"
+    },
+    "rights": {
+      "title": "7. Ihre Rechte",
+      "intro": "Sie haben gegen\u00fcber uns folgende Rechte hinsichtlich der Sie betreffenden personenbezogenen Daten:",
+      "access": "Recht auf Auskunft (Art. 15 DSGVO)",
+      "rectification": "Recht auf Berichtigung (Art. 16 DSGVO)",
+      "erasure": "Recht auf L\u00f6schung (Art. 17 DSGVO)",
+      "restriction": "Recht auf Einschr\u00e4nkung der Verarbeitung (Art. 18 DSGVO)",
+      "portability": "Recht auf Daten\u00fcbertragbarkeit (Art. 20 DSGVO)",
+      "objection": "Recht auf Widerspruch gegen die Verarbeitung (Art. 21 DSGVO)",
+      "contact": "Zur Aus\u00fcbung Ihrer Rechte wenden Sie sich bitte an die im Impressum angegebene E-Mail-Adresse."
+    },
+    "complaint": {
+      "title": "8. Beschwerderecht",
+      "text": "Sie haben das Recht, sich bei einer Datenschutz-Aufsichtsbeh\u00f6rde \u00fcber die Verarbeitung Ihrer personenbezogenen Daten zu beschweren. Eine Liste der Aufsichtsbeh\u00f6rden finden Sie unter:",
+      "link": "BfDI \u2013 Aufsichtsbeh\u00f6rden der L\u00e4nder"
+    },
+    "changes": {
+      "title": "9. \u00c4nderungen",
+      "text": "Wir behalten uns vor, diese Datenschutzerkl\u00e4rung anzupassen, um sie an ge\u00e4nderte Rechtslagen oder \u00c4nderungen des Dienstes anzupassen. Die aktuelle Fassung finden Sie stets auf dieser Seite."
+    }
+  },
+  "imprint": {
+    "title": "Impressum",
+    "subtitle": "Angaben gemäß § 5 DDG",
+    "responsible": "Verantwortlich",
+    "contact": "Kontakt",
+    "email": "E-Mail",
+    "disclaimer": {
+      "title": "Haftungsausschluss",
+      "content": "Die Inhalte dieser Website wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen. Als Diensteanbieter sind wir gemäß § 7 Abs. 1 DDG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 DDG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen."
+    },
+    "links": {
+      "title": "Haftung für Links",
+      "content": "Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber verantwortlich."
+    },
+    "openSource": "Dieses Projekt ist Open Source.",
+    "github": "GitHub Repository"
+  },
+  "footer": {
+    "tagline": "Open Source PV-Rechner",
+    "madeWith": "Made with {sun} and Open Source",
+    "github": "GitHub"
+  },
+  "common": {
+    "kWh": "kWh",
+    "kWp": "kWp",
+    "euro": "€",
+    "percent": "%",
+    "year": "Jahr",
+    "years": "Jahre",
+    "kg": "kg",
+    "tons": "t",
+    "sqm": "m²"
+  },
+  "validation": {
+    "lat": "Breitengrad muss zwischen -90° und 90° liegen",
+    "lon": "Längengrad muss zwischen -180° und 180° liegen",
+    "tilt": "Dachneigung muss zwischen 0° und 60° liegen",
+    "azimuth": "Ausrichtung muss zwischen -180° und 180° liegen",
+    "area": "Dachfläche muss zwischen 1 und 500 m² liegen",
+    "modulePower": "Modulleistung muss zwischen 100 und 800 Wp liegen",
+    "moduleCount": "Modulanzahl muss zwischen 1 und 200 liegen",
+    "annualConsumption": "Verbrauch muss zwischen 0 und 100.000 kWh liegen",
+    "capacity": "Speicherkapazität muss zwischen 1 und 50 kWh liegen"
+  }
+}
