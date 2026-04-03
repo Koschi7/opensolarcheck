@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /de/impressum
+Disallow: /en/impressum
 
 Sitemap: https://opensolarcheck.de/sitemap.xml
