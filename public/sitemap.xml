@@ -43,14 +43,4 @@
     <priority>0.6</priority>
     <changefreq>monthly</changefreq>
   </url>
-  <url>
-    <loc>https://opensolarcheck.de/de/datenschutz</loc>
-    <priority>0.3</priority>
-    <changefreq>yearly</changefreq>
-  </url>
-  <url>
-    <loc>https://opensolarcheck.de/de/impressum</loc>
-    <priority>0.3</priority>
-    <changefreq>yearly</changefreq>
-  </url>
 </urlset>
