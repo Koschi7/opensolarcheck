@@ -58,6 +58,7 @@ export function Step1Location({ location, onUpdate }: Props) {
             <div className="flex gap-2">
               <Input
                 id="postalCode"
+                inputMode="numeric"
                 value={location.postalCode}
                 onChange={(e) => {
                   if (!hasTrackedStart.current) {
@@ -127,24 +128,30 @@ export function Step1Location({ location, onUpdate }: Props) {
                 <Label htmlFor="lat">{t("lat")}</Label>
                 <Input
                   id="lat"
-                  type="number"
-                  step="0.01"
-                  value={location.lat}
-                  onChange={(e) =>
-                    onUpdate({ lat: parseFloat(e.target.value) || 0 })
-                  }
+                  type="text"
+                  inputMode="decimal"
+                  value={location.lat || ""}
+                  onChange={(e) => {
+                    const v = e.target.value;
+                    if (v === "" || /^-?\d*\.?\d*$/.test(v)) {
+                      onUpdate({ lat: v === "" ? 0 : parseFloat(v) });
+                    }
+                  }}
                 />
               </div>
               <div className="space-y-1">
                 <Label htmlFor="lon">{t("lon")}</Label>
                 <Input
                   id="lon"
-                  type="number"
-                  step="0.01"
-                  value={location.lon}
-                  onChange={(e) =>
-                    onUpdate({ lon: parseFloat(e.target.value) || 0 })
-                  }
+                  type="text"
+                  inputMode="decimal"
+                  value={location.lon || ""}
+                  onChange={(e) => {
+                    const v = e.target.value;
+                    if (v === "" || /^-?\d*\.?\d*$/.test(v)) {
+                      onUpdate({ lon: v === "" ? 0 : parseFloat(v) });
+                    }
+                  }}
                 />
               </div>
             </div>

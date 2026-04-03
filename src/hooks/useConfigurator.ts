@@ -95,11 +95,15 @@ export function useConfigurator() {
   const goNext = useCallback(() => {
     if (step < TOTAL_STEPS && canGoNext()) {
       setStep((s) => s + 1);
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
   }, [step, canGoNext]);
 
   const goBack = useCallback(() => {
-    if (step > 1) setStep((s) => s - 1);
+    if (step > 1) {
+      setStep((s) => s - 1);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
   }, [step]);
 
   const goToStep = useCallback((s: number) => {

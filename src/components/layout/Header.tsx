@@ -17,6 +17,11 @@ export function Header() {
     { href: "/methodik", label: t("methodology") },
   ];
 
+  const legalItems = [
+    { href: "/datenschutz", label: t("privacy") },
+    { href: "/impressum", label: t("imprint") },
+  ];
+
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60">
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
@@ -39,7 +44,7 @@ export function Header() {
           ))}
         </nav>
 
-        {/* Right side */}
+        {/* Desktop right side */}
         <div className="hidden md:flex items-center gap-3">
           <LanguageSwitcher />
           <a
@@ -61,32 +66,49 @@ export function Header() {
             >
               <Menu className="h-5 w-5" />
             </SheetTrigger>
-            <SheetContent side="right" className="w-64">
-              <SheetTitle className="flex items-center gap-2 mb-6">
+            <SheetContent side="right" className="w-72 p-6 pt-5">
+              <SheetTitle className="flex items-center gap-2 pr-8 pb-4 border-b">
                 <Sun className="h-6 w-6 text-amber-500" />
                 <span className="font-bold text-blue-800">OpenSolarCheck</span>
               </SheetTitle>
-              <nav className="flex flex-col gap-4">
+
+              <nav className="flex flex-col gap-1">
                 {navItems.map((item) => (
                   <Link
                     key={item.href}
                     href={item.href}
                     onClick={() => setOpen(false)}
-                    className="text-base font-medium text-gray-700 hover:text-blue-800"
+                    className="text-base font-medium text-gray-700 hover:text-blue-800 hover:bg-gray-50 rounded-lg px-3 py-2.5 -mx-1"
                   >
                     {item.label}
                   </Link>
                 ))}
+              </nav>
+
+              <div className="border-t pt-3 flex flex-col gap-1">
+                {legalItems.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    onClick={() => setOpen(false)}
+                    className="text-sm text-gray-500 hover:text-gray-700 hover:bg-gray-50 rounded-lg px-3 py-2 -mx-1"
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </div>
+
+              <div className="mt-auto border-t pt-4 flex items-center justify-between">
                 <a
                   href="https://github.com/Koschi7/opensolarcheck"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-gray-600 hover:text-gray-900"
+                  className="flex items-center gap-2 text-sm text-gray-500 hover:text-gray-700"
                 >
-                  <GitHubIcon className="h-5 w-5" />
+                  <GitHubIcon className="h-4 w-4" />
                   GitHub
                 </a>
-              </nav>
+              </div>
             </SheetContent>
           </Sheet>
         </div>

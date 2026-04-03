@@ -4,6 +4,17 @@ Alle nennenswerten Änderungen an diesem Projekt werden hier dokumentiert.
 
 Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 
+## [1.0.1] - 2026-04-04
+
+### Verbessert
+
+- Mobile UX: Numerisches Tastaturlayout für PLZ-, Flächen- und Verbrauchseingaben
+- Mobile UX: Automatischer Scroll nach oben beim Schrittwechsel im Konfigurator
+- Mobile UX: Verbessertes Burger-Menü mit Datenschutz-/Impressum-Links und besseren Abständen
+- Mobile UX: Keine führende Null mehr in leeren Eingabefeldern
+- Mobile UX: Bessere Button-Abstände bei der Personenauswahl (Schritt 4)
+- Entwicklung: `allowedDevOrigins` für lokales Testen auf Mobilgeräten
+
 ## [1.0.0] - 2026-04-03
 
 ### Hinzugefügt

@@ -52,15 +52,15 @@ export function Step4Consumption({
                   <Button
                     key={opt.key}
                     variant={isSelected ? "default" : "outline"}
-                    className={isSelected ? "bg-amber-500 hover:bg-amber-600" : ""}
+                    className={`${isSelected ? "bg-amber-500 hover:bg-amber-600" : ""} px-2 py-1 h-auto`}
                     onClick={() =>
                       onUpdate({
                         annualConsumption: CONSUMPTION_BY_PERSONS[opt.key],
                       })
                     }
                   >
-                    <opt.icon className="h-4 w-4 mr-1" />
-                    <span className="text-xs">{opt.label}</span>
+                    <opt.icon className="h-4 w-4 shrink-0" />
+                    <span className="text-xs leading-tight">{opt.label}</span>
                   </Button>
                 );
               })}
@@ -73,15 +73,18 @@ export function Step4Consumption({
             <div className="flex items-center gap-2">
               <Input
                 id="annualConsumption"
-                type="number"
-                min={0}
-                max={100000}
-                value={consumption.annualConsumption}
-                onChange={(e) =>
-                  onUpdate({
-                    annualConsumption: parseInt(e.target.value) || 0,
-                  })
-                }
+                type="text"
+                inputMode="numeric"
+                pattern="[0-9]*"
+                value={consumption.annualConsumption || ""}
+                onChange={(e) => {
+                  const v = e.target.value;
+                  if (v === "" || /^\d*$/.test(v)) {
+                    onUpdate({
+                      annualConsumption: v === "" ? 0 : parseInt(v),
+                    });
+                  }
+                }}
               />
               <span className="text-sm text-gray-500 whitespace-nowrap">
                 {t("annualConsumptionUnit")}

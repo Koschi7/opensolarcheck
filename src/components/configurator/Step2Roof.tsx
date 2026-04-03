@@ -110,11 +110,15 @@ export function Step2Roof({ roof, onUpdate }: Props) {
             <div className="flex items-center gap-2">
               <Input
                 id="area"
-                type="number"
-                value={roof.area}
-                onChange={(e) =>
-                  onUpdate({ area: parseFloat(e.target.value) || 0 })
-                }
+                type="text"
+                inputMode="decimal"
+                value={roof.area || ""}
+                onChange={(e) => {
+                  const v = e.target.value;
+                  if (v === "" || /^\d*\.?\d*$/.test(v)) {
+                    onUpdate({ area: v === "" ? 0 : parseFloat(v) });
+                  }
+                }}
                 className="flex-1"
               />
               <span className="text-sm text-gray-500">{t("areaUnit")}</span>
