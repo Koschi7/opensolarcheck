@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Inter } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
@@ -10,6 +11,11 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import deMessages from "@/lib/i18n/messages/de.json";
 import enMessages from "@/lib/i18n/messages/en.json";
 import "../globals.css";
+
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+});
 
 const DOMAIN = "https://opensolarcheck.de";
 
@@ -95,8 +101,8 @@ export default async function LocaleLayout({ children, params }: Props) {
   const messages = messagesMap[locale] ?? messagesMap.de;
 
   return (
-    <html lang={locale}>
-      <body className="min-h-screen flex flex-col bg-gray-50 font-sans antialiased">
+    <html lang={locale} className={inter.className}>
+      <body className="min-h-screen flex flex-col bg-gray-50 antialiased">
         <NextIntlClientProvider locale={locale} messages={messages}>
           <TooltipProvider>
             <Header />
