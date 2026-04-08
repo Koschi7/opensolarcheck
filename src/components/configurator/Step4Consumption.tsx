@@ -43,7 +43,7 @@ export function Step4Consumption({
           {/* Quick select */}
           <div className="space-y-2">
             <Label>{t("quickSelect")}</Label>
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               {quickOptions.map((opt) => {
                 const isSelected =
                   consumption.annualConsumption ===
@@ -52,7 +52,7 @@ export function Step4Consumption({
                   <Button
                     key={opt.key}
                     variant={isSelected ? "default" : "outline"}
-                    className={`${isSelected ? "bg-amber-500 hover:bg-amber-600" : ""} px-2 py-1 h-auto`}
+                    className={`${isSelected ? "bg-amber-500 hover:bg-amber-600" : ""} px-3 py-2 h-auto justify-start`}
                     onClick={() =>
                       onUpdate({
                         annualConsumption: CONSUMPTION_BY_PERSONS[opt.key],
@@ -60,7 +60,7 @@ export function Step4Consumption({
                     }
                   >
                     <opt.icon className="h-4 w-4 shrink-0" />
-                    <span className="text-xs leading-tight">{opt.label}</span>
+                    <span className="text-sm leading-tight truncate">{opt.label}</span>
                   </Button>
                 );
               })}
