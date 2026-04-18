@@ -4,6 +4,20 @@ Alle nennenswerten Änderungen an diesem Projekt werden hier dokumentiert.
 
 Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 
+## [1.1.0] - 2026-04-18
+
+### Geändert
+
+- **Komplettes visuelles Redesign aller drei Kernflächen** — Landing, Konfigurator, Ergebnisseite folgen jetzt einer redaktionellen Daten-Journalismus-Ästhetik (FT Climate / Vitsœ / Fraunhofer-Report).
+- Landing: Hero zeigt die Antwort als 25-Jahres-Ersparniskurve statt eines Sonnensymbols; redaktionelle 12-Spalten-Komposition mit Haar-Linien, Ledger-Notation und Break-even-Annotation.
+- Landing: Neuer "Was wir nicht sammeln"-Abschnitt (0/0/0/100 %) verwandelt Datenschutz in ein Verkaufsargument; Methodik-Sektion (§ 01–03 PVGIS · HTW Berlin · Fraunhofer ISE) und Zielgruppen-Tabelle ersetzen generische Feature-Karten.
+- Konfigurator: 12-Spalten-Layout mit Steuerung links und live aktualisiertem technischem Schema rechts. Azimut als 5-Zellen-Picker (E · SO · S · SW · W), nummerierte Schritte 01–05, Mono-Typografie für Werte.
+- Konfigurator-Illustrationen komplett neu: Dach als Querschnitt mit Neigungswinkel-Bogen, Standort als Latitude-Band mit Strahlungsgradient, Anlage als Plan-Ansicht des Moduls-Array, Verbrauch als horizontal gestapelter Balken, Speicher als kalibrierte Kapazitätsskala.
+- Ergebnisseite als umgekehrte Pyramide: erst der NPV als großes Zahlenstatement, dann Figure 01 (25 Jahre kumulierte Ersparnis mit Break-even-Punkt), Figure 02/03 (monatlicher Ertrag & Eigenverbrauchs-Flussdiagramm), Table 01 (Wirtschaftlichkeit), CO₂-Bilanz und Eingaben-Echo.
+- Charts komplett in SVG umgesetzt (keine Recharts-Defaults): eigene Skalierung, Hairline-Gitter, annotierte Break-even-Markierung, Quellenzeile in Mono.
+- Typografie: IBM Plex Mono für Werte, Labels und Display-Zahlen; Inter bleibt als Body/UI-Font. Konsistente Tabularnumerik, Small-Caps-Labels.
+- Farbsystem: reduziertes Paper/Ink-Token-Set mit einer einzigen Akzentfarbe (Solar-Orange) für datengetragene Highlights.
+
 ## [1.0.1] - 2026-04-04
 
 ### Verbessert

@@ -4,8 +4,6 @@ import { useState } from "react";
 import { useTranslations, useLocale } from "next-intl";
 import { useAnalytics } from "@/hooks/useAnalytics";
 import type { CalculationResult } from "@/lib/types";
-import { Button } from "@/components/ui/button";
-import { Download, Loader2 } from "lucide-react";
 
 interface Props {
   result: CalculationResult;
@@ -35,21 +33,17 @@ export function ExportButton({ result }: Props) {
 
   return (
     <div>
-      <Button
+      <button
         onClick={handleExport}
         disabled={loading}
-        variant="outline"
-        className="gap-2"
+        className="btn-primary disabled:opacity-60 disabled:cursor-not-allowed"
       >
-        {loading ? (
-          <Loader2 className="h-4 w-4 animate-spin" />
-        ) : (
-          <Download className="h-4 w-4" />
-        )}
-        {t("export")}
-      </Button>
+        {loading ? "…" : "↓"} {t("export")}
+      </button>
       {error && (
-        <p className="text-sm text-red-500 mt-2">{t("exportError")}</p>
+        <p className="mt-2 font-mono-ui text-[11px] text-solar">
+          {t("exportError")}
+        </p>
       )}
     </div>
   );

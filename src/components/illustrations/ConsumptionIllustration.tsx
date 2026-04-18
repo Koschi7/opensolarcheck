@@ -3,133 +3,182 @@
 interface Props {
   hasHeatPump: boolean;
   hasEV: boolean;
+  base?: number;
+  heatPump?: number;
+  ev?: number;
 }
 
-export function ConsumptionIllustration({ hasHeatPump, hasEV }: Props) {
+export function ConsumptionIllustration({
+  hasHeatPump,
+  hasEV,
+  base = 3500,
+  heatPump = 4000,
+  ev = 2500,
+}: Props) {
+  const vb = { w: 360, h: 300 };
+  const padX = 40;
+  const plotH = 140;
+  const plotY = 70;
+  const plotW = vb.w - padX * 2;
+
+  const segments = [
+    { key: "base", label: "Haushalt", value: base, color: "var(--ink)" },
+    ...(hasHeatPump
+      ? [
+          {
+            key: "heatPump",
+            label: "Wärmepumpe",
+            value: heatPump,
+            color: "var(--accent-solar)",
+          },
+        ]
+      : []),
+    ...(hasEV
+      ? [
+          {
+            key: "ev",
+            label: "E-Auto",
+            value: ev,
+            color: "var(--data-grid-consumption)",
+          },
+        ]
+      : []),
+  ];
+
+  const total = segments.reduce((acc, s) => acc + s.value, 0);
+
+  // stacked horizontal bar
+  let offset = 0;
+  const barY = plotY + 20;
+  const barH = 40;
+
+  // ticks: 0, 2500, 5000, 7500, 10000
+  const ticks = [0, 2500, 5000, 7500, 10000];
+  const maxTick = 10000;
+
   return (
-    <svg viewBox="0 0 300 260" className="w-full max-w-[300px]">
-      {/* House */}
-      <g>
-        {/* Wall */}
-        <rect x="80" y="100" width="140" height="110" rx="4" fill="#F3F4F6" stroke="#D1D5DB" strokeWidth="1.5" />
-
-        {/* Roof */}
-        <polygon points="70,100 150,50 230,100" fill="#9CA3AF" stroke="#6B7280" strokeWidth="1.5" />
-
-        {/* Door */}
-        <rect x="135" y="155" width="30" height="55" rx="3" fill="#78716C" />
-
-        {/* Windows */}
-        <rect x="92" y="120" width="30" height="25" rx="2" fill="#BFDBFE" stroke="#93C5FD" strokeWidth="1">
-          <animate
-            attributeName="fill"
-            values="#BFDBFE;#FDE68A;#BFDBFE"
-            dur="4s"
-            repeatCount="indefinite"
-          />
-        </rect>
-        <rect x="178" y="120" width="30" height="25" rx="2" fill="#BFDBFE" stroke="#93C5FD" strokeWidth="1">
-          <animate
-            attributeName="fill"
-            values="#BFDBFE;#FDE68A;#BFDBFE"
-            dur="4s"
-            begin="1s"
-            repeatCount="indefinite"
-          />
-        </rect>
-      </g>
-
-      {/* Appliances */}
-      {/* Fridge */}
-      <g transform="translate(245, 120)">
-        <rect width="22" height="35" rx="3" fill="white" stroke="#9CA3AF" strokeWidth="1" />
-        <line x1="0" y1="14" x2="22" y2="14" stroke="#9CA3AF" strokeWidth="0.5" />
-        <circle cx="16" cy="8" r="1.5" fill="#9CA3AF" />
-        <circle cx="16" cy="24" r="1.5" fill="#9CA3AF" />
-        <circle cx="11" cy="28" r="3" fill="#60A5FA" opacity="0.5">
-          <animate attributeName="opacity" values="0.3;0.6;0.3" dur="3s" repeatCount="indefinite" />
-        </circle>
-      </g>
-
-      {/* Lightbulb */}
-      <g transform="translate(148, 65)">
-        <circle cx="0" cy="0" r="8" fill="#FCD34D" opacity="0.3">
-          <animate attributeName="r" values="8;12;8" dur="2s" repeatCount="indefinite" />
-        </circle>
-        <circle cx="0" cy="0" r="5" fill="#FCD34D" />
-        <rect x="-2" y="5" width="4" height="4" fill="#A8A29E" rx="1" />
-      </g>
-
-      {/* Heat pump (conditional) */}
-      {hasHeatPump && (
-        <g transform="translate(30, 140)">
-          <rect width="40" height="50" rx="4" fill="#F9FAFB" stroke="#F97316" strokeWidth="1.5" />
-          <text x="20" y="20" textAnchor="middle" fontSize="8" fill="#F97316" fontWeight="bold">
-            WP
-          </text>
-          {/* Fan animation */}
-          <g transform="translate(20, 35)">
-            <circle cx="0" cy="0" r="8" fill="none" stroke="#F97316" strokeWidth="1" />
-            <g>
-              <animateTransform
-                attributeName="transform"
-                type="rotate"
-                values="0;360"
-                dur="2s"
-                repeatCount="indefinite"
+    <div className="w-full">
+      <svg
+        viewBox={`0 0 ${vb.w} ${vb.h}`}
+        className="w-full h-auto block"
+        role="img"
+        aria-label="Consumption breakdown"
+      >
+        {/* scale ticks */}
+        {ticks.map((t) => {
+          const x = padX + (plotW * t) / maxTick;
+          return (
+            <g key={t}>
+              <line
+                x1={x}
+                x2={x}
+                y1={barY - 6}
+                y2={barY + barH + 6}
+                stroke="var(--rule)"
+                strokeWidth="0.75"
+                strokeDasharray={t === 0 ? "0" : "2 3"}
               />
-              <line x1="-6" y1="0" x2="6" y2="0" stroke="#F97316" strokeWidth="1.5" />
-              <line x1="0" y1="-6" x2="0" y2="6" stroke="#F97316" strokeWidth="1.5" />
+              <text
+                x={x}
+                y={barY - 10}
+                textAnchor="middle"
+                className="font-mono-ui"
+                fontSize="9"
+                fill="var(--faint-ink)"
+              >
+                {(t / 1000).toFixed(0)}k
+              </text>
             </g>
-          </g>
-          {/* Energy waves */}
-          <path d="M42,20 Q52,15 42,10" fill="none" stroke="#F97316" strokeWidth="1" opacity="0.6">
-            <animate attributeName="opacity" values="0.3;0.8;0.3" dur="1.5s" repeatCount="indefinite" />
-          </path>
-        </g>
-      )}
+          );
+        })}
 
-      {/* Electric car (conditional) */}
-      {hasEV && (
-        <g transform="translate(85, 220)">
-          {/* Car body */}
-          <rect x="0" y="5" width="60" height="20" rx="3" fill="#3B82F6" />
-          <rect x="8" y="-5" width="40" height="15" rx="4" fill="#60A5FA" />
-          {/* Windows */}
-          <rect x="12" y="-2" width="14" height="10" rx="2" fill="#BFDBFE" />
-          <rect x="30" y="-2" width="14" height="10" rx="2" fill="#BFDBFE" />
-          {/* Wheels */}
-          <circle cx="14" cy="27" r="6" fill="#374151" />
-          <circle cx="14" cy="27" r="3" fill="#6B7280" />
-          <circle cx="46" cy="27" r="6" fill="#374151" />
-          <circle cx="46" cy="27" r="3" fill="#6B7280" />
-          {/* Charging bolt */}
-          <g transform="translate(65, 8)">
-            <polygon points="5,0 0,8 4,8 2,16 10,6 6,6 8,0" fill="#FCD34D" stroke="#F59E0B" strokeWidth="0.5">
-              <animate attributeName="opacity" values="0.5;1;0.5" dur="1s" repeatCount="indefinite" />
-            </polygon>
-          </g>
-        </g>
-      )}
+        {/* stacked bar */}
+        {segments.map((seg) => {
+          const w = (plotW * seg.value) / maxTick;
+          const x = padX + (plotW * offset) / maxTick;
+          offset += seg.value;
+          return (
+            <g key={seg.key}>
+              <rect
+                x={x}
+                y={barY}
+                width={w}
+                height={barH}
+                fill={seg.color}
+                fillOpacity={seg.key === "base" ? 1 : 0.9}
+              />
+              {w > 40 && (
+                <text
+                  x={x + w / 2}
+                  y={barY + barH / 2 + 4}
+                  textAnchor="middle"
+                  className="font-mono-ui"
+                  fontSize="10"
+                  fill="var(--paper)"
+                  fontWeight="500"
+                >
+                  {Math.round(seg.value / 100) / 10}k
+                </text>
+              )}
+            </g>
+          );
+        })}
 
-      {/* Energy meter */}
-      <g transform="translate(242, 170)">
-        <rect width="24" height="30" rx="2" fill="white" stroke="#374151" strokeWidth="1" />
-        <rect x="3" y="3" width="18" height="10" rx="1" fill="#1F2937" />
-        <text x="12" y="10" textAnchor="middle" fontSize="5" fill="#10B981" fontFamily="monospace">
-          kWh
+        {/* legend */}
+        {segments.map((seg, i) => (
+          <g key={`lg-${seg.key}`} transform={`translate(${padX}, ${180 + i * 22})`}>
+            <rect width="10" height="10" fill={seg.color} />
+            <text
+              x="16"
+              y="9"
+              className="font-mono-ui"
+              fontSize="11"
+              fill="var(--ink)"
+            >
+              {seg.label}
+            </text>
+            <text
+              x={vb.w - padX * 2}
+              y="9"
+              textAnchor="end"
+              className="font-mono-ui"
+              fontSize="11"
+              fill="var(--muted-ink)"
+            >
+              {seg.value.toLocaleString("de-DE")} kWh
+            </text>
+          </g>
+        ))}
+
+        {/* total */}
+        <line
+          x1={padX}
+          x2={vb.w - padX}
+          y1={vb.h - 40}
+          y2={vb.h - 40}
+          stroke="var(--ink)"
+          strokeWidth="1"
+        />
+        <text
+          x={padX}
+          y={vb.h - 18}
+          fontSize="11"
+          fill="var(--muted-ink)"
+        >
+          Gesamt
         </text>
-        <circle cx="12" cy="22" r="4" fill="none" stroke="#EF4444" strokeWidth="1">
-          <animateTransform
-            attributeName="transform"
-            type="rotate"
-            values="0 12 22;360 12 22"
-            dur="3s"
-            repeatCount="indefinite"
-          />
-        </circle>
-        <line x1="12" y1="18" x2="12" y2="22" stroke="#EF4444" strokeWidth="1" />
-      </g>
-    </svg>
+        <text
+          x={vb.w - padX}
+          y={vb.h - 18}
+          textAnchor="end"
+          className="font-num"
+          fontSize="16"
+          fill="var(--ink)"
+          fontWeight="500"
+        >
+          {total.toLocaleString("de-DE")} kWh / a
+        </text>
+      </svg>
+    </div>
   );
 }

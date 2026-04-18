@@ -4,8 +4,6 @@ import { useTranslations } from "next-intl";
 import type { ConfiguratorInput } from "@/lib/types";
 import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
-import { Switch } from "@/components/ui/switch";
-import { Battery, Info } from "lucide-react";
 import { BatteryIllustration } from "@/components/illustrations/BatteryIllustration";
 
 interface Props {
@@ -20,7 +18,6 @@ export function Step5Battery({ battery, peakPower, onUpdate }: Props) {
 
   const handleToggle = (checked: boolean) => {
     if (checked) {
-      // When enabling battery, set capacity to recommended value
       onUpdate({ hasBattery: true, capacity: recommendedCapacity });
     } else {
       onUpdate({ hasBattery: false });
@@ -28,77 +25,137 @@ export function Step5Battery({ battery, peakPower, onUpdate }: Props) {
   };
 
   return (
-    <div className="space-y-6">
-      <div className="text-center mb-8">
-        <h2 className="text-2xl font-bold text-gray-900">{t("title")}</h2>
-        <p className="text-gray-600 mt-1">{t("description")}</p>
-      </div>
+    <div className="grid md:grid-cols-12 gap-8 md:gap-12">
+      <div className="md:col-span-7 space-y-7">
+        <Field label={t("hasBattery")} hint="Typ. Mehr-Eigenverbrauch mit Speicher: +20–35 %.">
+          <div className="grid grid-cols-2 border border-rule">
+            <button
+              type="button"
+              onClick={() => handleToggle(false)}
+              className={`px-4 py-3.5 text-left transition-colors ${
+                !battery.hasBattery
+                  ? "bg-ink text-paper"
+                  : "bg-paper text-ink hover:bg-secondary/30"
+              }`}
+              aria-pressed={!battery.hasBattery}
+            >
+              <div className="font-display text-[18px] tracking-tight">
+                Kein Speicher
+              </div>
+              <div className={`text-[12px] mt-1 ${!battery.hasBattery ? "text-paper/70" : "text-muted-ink"}`}>
+                Einspeisung zum EEG-Tarif
+              </div>
+            </button>
+            <button
+              type="button"
+              onClick={() => handleToggle(true)}
+              className={`px-4 py-3.5 text-left transition-colors border-l border-rule ${
+                battery.hasBattery
+                  ? "bg-ink text-paper"
+                  : "bg-paper text-ink hover:bg-secondary/30"
+              }`}
+              aria-pressed={battery.hasBattery}
+            >
+              <div className="font-display text-[18px] tracking-tight">
+                Mit Speicher
+              </div>
+              <div className={`text-[12px] mt-1 ${battery.hasBattery ? "text-paper/70" : "text-muted-ink"}`}>
+                Mehr Eigenverbrauch, höhere Autarkie
+              </div>
+            </button>
+          </div>
+        </Field>
 
-      <div className="grid md:grid-cols-2 gap-8">
-        <div className="space-y-6">
-          {/* Toggle */}
-          <div className="flex items-center justify-between rounded-xl border-2 p-4">
-            <div className="flex items-center gap-3">
-              <Battery className="h-6 w-6 text-green-600" />
-              <Label htmlFor="hasBattery" className="text-base cursor-pointer">
-                {t("hasBattery")}
-              </Label>
+        {battery.hasBattery && (
+          <Field
+            label={t("capacity")}
+            value={`${battery.capacity.toFixed(1)} ${t("capacityUnit")}`}
+            hint={`${t("recommendation")} · ${t("recommendedCapacity")}: ${recommendedCapacity} kWh`}
+          >
+            <Slider
+              value={[battery.capacity]}
+              onValueChange={(v) => onUpdate({ capacity: Array.isArray(v) ? v[0] : v })}
+              min={5}
+              max={20}
+              step={0.5}
+              className="py-2"
+              aria-label={t("capacity")}
+            />
+            <div className="flex justify-between text-[11px] text-faint-ink mt-2">
+              <span>5 kWh</span>
+              <span className="text-solar">
+                ▾ {recommendedCapacity} empfohlen
+              </span>
+              <span>20 kWh</span>
             </div>
-            <Switch
-              id="hasBattery"
-              checked={battery.hasBattery}
-              onCheckedChange={handleToggle}
+          </Field>
+        )}
+
+        {battery.hasBattery && (
+          <div className="grid grid-cols-3 gap-6 pt-4 border-t border-rule">
+            <Metric label="Kapazität" value={battery.capacity.toFixed(1)} unit="kWh" />
+            <Metric label="PV-Leistung" value={peakPower.toFixed(1)} unit="kWp" />
+            <Metric
+              label="Verhältnis"
+              value={(battery.capacity / Math.max(peakPower, 0.1)).toFixed(2)}
+              unit="kWh/kWp"
             />
           </div>
+        )}
+      </div>
 
-          {battery.hasBattery && (
-            <>
-              {/* Capacity slider */}
-              <div className="space-y-3">
-                <div className="flex justify-between">
-                  <Label>{t("capacity")}</Label>
-                  <span className="text-sm font-medium text-green-600">
-                    {battery.capacity} {t("capacityUnit")}
-                  </span>
-                </div>
-                <Slider
-                  value={[battery.capacity]}
-                  onValueChange={(v) => onUpdate({ capacity: Array.isArray(v) ? v[0] : v })}
-                  min={5}
-                  max={20}
-                  step={0.5}
-                  className="py-2"
-                  aria-label={t("capacity")}
-                />
-                <div className="flex justify-between text-xs text-gray-400">
-                  <span>5 kWh</span>
-                  <span>20 kWh</span>
-                </div>
-              </div>
-
-              {/* Recommendation */}
-              <div className="flex items-start gap-2 rounded-lg bg-blue-50 border border-blue-200 p-3">
-                <Info className="h-4 w-4 text-blue-600 mt-0.5 shrink-0" />
-                <div className="text-sm text-blue-800">
-                  <p>{t("recommendation")}</p>
-                  <p className="font-semibold mt-1">
-                    {t("recommendedCapacity")}: {recommendedCapacity} kWh
-                  </p>
-                </div>
-              </div>
-            </>
-          )}
-        </div>
-
-        {/* Illustration */}
-        <div className="flex items-center justify-center">
+      <aside className="md:col-span-5 md:sticky md:top-24 md:self-start">
+        <div className="border border-rule p-5 md:p-6 bg-paper">
           <BatteryIllustration
             hasBattery={battery.hasBattery}
             capacity={battery.capacity}
             chargeLevel={battery.hasBattery ? 0.7 : 0}
           />
         </div>
+      </aside>
+    </div>
+  );
+}
+
+function Metric({ label, value, unit }: { label: string; value: string; unit: string }) {
+  return (
+    <div>
+      <div className="text-[12px] text-muted-ink mb-1">{label}</div>
+      <div className="font-num text-[22px] tabular text-ink leading-none">
+        {value}
+        <span className="text-[11px] text-faint-ink ml-1">{unit}</span>
       </div>
+    </div>
+  );
+}
+
+function Field({
+  label,
+  value,
+  hint,
+  children,
+}: {
+  label: string;
+  value?: string;
+  hint?: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div>
+      <div className="flex items-baseline justify-between gap-3 mb-2">
+        <Label className="text-[12.5px] text-muted-ink font-normal">{label}</Label>
+        {value !== undefined && (
+          <span className="font-num text-[13px] text-ink tabular">
+            {value}
+          </span>
+        )}
+      </div>
+      {children}
+      {hint && (
+        <p className="mt-2 text-[12px] text-faint-ink">
+          {hint}
+        </p>
+      )}
     </div>
   );
 }

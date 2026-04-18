@@ -2,193 +2,283 @@
 
 import { useTranslations } from "next-intl";
 import { Link } from "@/lib/i18n/navigation";
-import { Button } from "@/components/ui/button";
-import {
-  Sun,
-  ShieldCheck,
-  Code2,
-  Monitor,
-  ArrowRight,
-  Zap,
-  TrendingUp,
-  Leaf,
-  ChevronDown,
-} from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { HeroChart } from "@/components/landing/HeroChart";
 import { useState } from "react";
+import { Plus, Minus } from "lucide-react";
 
 export default function HomePage() {
   const t = useTranslations();
 
-  const features = [
-    { icon: Sun, label: t("hero.features.free"), color: "text-amber-500" },
-    {
-      icon: ShieldCheck,
-      label: t("hero.features.noData"),
-      color: "text-blue-600",
-    },
-    {
-      icon: Code2,
-      label: t("hero.features.openSource"),
-      color: "text-green-600",
-    },
-    {
-      icon: Monitor,
-      label: t("hero.features.clientSide"),
-      color: "text-purple-600",
-    },
-  ];
+  const faqKeys = [
+    "cost",
+    "worthIt",
+    "howMuchPower",
+    "noRegistration",
+    "accuracy",
+  ] as const;
 
-  const highlights = [
-    {
-      icon: Zap,
-      title: t("hero.highlights.yield.title"),
-      description: t("hero.highlights.yield.description"),
-    },
-    {
-      icon: TrendingUp,
-      title: t("hero.highlights.economics.title"),
-      description: t("hero.highlights.economics.description"),
-    },
-    {
-      icon: Leaf,
-      title: t("hero.highlights.co2.title"),
-      description: t("hero.highlights.co2.description"),
-    },
-  ];
-
-  const faqKeys = ["cost", "worthIt", "howMuchPower", "noRegistration", "accuracy"] as const;
+  const stepKeys = ["01", "02", "03"] as const;
+  const forWhomKeys = ["homeowner", "consultant", "researcher"] as const;
+  const privacyKeys = ["cookies", "tracker", "signup", "local"] as const;
 
   return (
-    <div>
+    <div className="bg-paper text-ink">
       <JsonLd />
 
-      {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-amber-50 via-white to-gray-50 py-20 md:py-32">
-        <div className="container mx-auto px-4 text-center">
-          <div className="mx-auto max-w-3xl">
-            <div className="mb-6 flex justify-center">
-              <div className="rounded-full bg-amber-100 p-4">
-                <Sun className="h-12 w-12 text-amber-500" />
+      {/* HERO ————————————————————————————————— */}
+      <section className="rule-b">
+        <div className="mx-auto max-w-[1400px] px-5 md:px-8 pt-8 md:pt-10 pb-10 md:pb-14">
+          <div className="grid md:grid-cols-12 gap-8 md:gap-10 items-start">
+            <div className="md:col-span-5">
+              <div className="small-caps text-[11px] text-muted-ink mb-4">
+                {t("landing.eyebrow")}
+              </div>
+              <h1 className="font-display text-[clamp(2.2rem,4.6vw,3.8rem)] leading-[1.02] tracking-tight text-ink">
+                {t("landing.headline")}
+                <br />
+                <span className="text-solar">{t("landing.headlineAccent")}</span>
+              </h1>
+              <p className="mt-5 text-[15.5px] md:text-[16.5px] leading-[1.55] text-muted-ink max-w-[46ch]">
+                {t("landing.lede")}
+              </p>
+              <div className="mt-6 flex flex-wrap items-center gap-3">
+                <Link href="/konfigurator" className="btn-primary">
+                  {t("landing.primaryCta")}
+                  <span className="font-mono-ui text-[11px] opacity-60">→</span>
+                </Link>
+                <Link href="/methodik" className="btn-ghost">
+                  {t("landing.secondaryCta")}
+                </Link>
+              </div>
+
+              <div className="mt-6 pt-5 border-t border-rule flex flex-wrap items-baseline gap-x-6 gap-y-2 text-[12.5px]">
+                <div className="flex items-baseline gap-2">
+                  <span className="small-caps text-[10.5px] text-faint-ink">
+                    {t("landing.ledger.sources")}
+                  </span>
+                  <span className="text-muted-ink font-mono-ui text-[11px]">
+                    {t("landing.ledger.sourcesList")}
+                  </span>
+                </div>
+                <Link
+                  href="/methodik"
+                  className="text-muted-ink hover:text-ink underline underline-offset-4 decoration-rule"
+                >
+                  {t("landing.ledger.methodology")} →
+                </Link>
               </div>
             </div>
-            <h1 className="mb-6 text-4xl font-bold tracking-tight text-gray-900 md:text-6xl">
-              {t("hero.title")}
-            </h1>
-            <p className="mb-8 text-lg text-gray-600 md:text-xl">
-              {t("hero.subtitle")}
+
+            <div className="md:col-span-7">
+              <div className="p-4 md:p-6 bg-paper border border-rule">
+                <HeroChart />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* PRIVACY LEDGER ————————————————————————————————— */}
+      <section className="rule-b bg-paper">
+        <div className="mx-auto max-w-[1400px] px-5 md:px-8 py-10 md:py-14">
+          <div className="flex flex-col md:flex-row md:items-baseline md:justify-between gap-4 mb-7">
+            <h2 className="font-display text-[24px] md:text-[30px] tracking-tight">
+              {t("landing.privacy.title")}
+            </h2>
+            <p className="text-[13.5px] text-muted-ink max-w-[52ch] leading-relaxed">
+              {t("landing.privacy.caption")}
             </p>
-            <Link href="/konfigurator">
-              <Button
-                size="lg"
-                className="bg-amber-500 hover:bg-amber-600 text-white text-lg px-8 py-6 rounded-xl shadow-lg hover:shadow-xl transition-all"
-              >
-                {t("hero.cta")}
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-            </Link>
           </div>
 
-          {/* Feature badges */}
-          <div className="mt-12 flex flex-wrap justify-center gap-4">
-            {features.map((f) => (
+          <div className="grid grid-cols-2 md:grid-cols-4 border border-rule">
+            {privacyKeys.map((key, i) => (
               <div
-                key={f.label}
-                className="flex items-center gap-2 rounded-full bg-white px-4 py-2 shadow-sm border"
+                key={key}
+                className={`p-5 md:p-7 ${
+                  i < privacyKeys.length - 1 ? "md:border-r" : ""
+                } ${i < 2 ? "border-b md:border-b-0" : ""} ${
+                  i === 0 ? "border-r" : ""
+                } ${i === 2 ? "border-r md:border-r" : ""} border-rule`}
               >
-                <f.icon className={`h-4 w-4 ${f.color}`} />
-                <span className="text-sm font-medium text-gray-700">
-                  {f.label}
-                </span>
+                <div className="font-num text-[52px] md:text-[64px] leading-none text-ink">
+                  {t(`landing.privacy.items.${key}.value`)}
+                </div>
+                <div className="mt-3 text-[12.5px] text-muted-ink">
+                  {t(`landing.privacy.items.${key}.label`)}
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Highlights */}
-      <section className="py-16 md:py-24">
-        <div className="container mx-auto px-4">
-          <div className="grid gap-8 md:grid-cols-3">
-            {highlights.map((h) => (
-              <Card key={h.title} className="border-0 shadow-md">
-                <CardContent className="flex flex-col items-center p-8 text-center">
-                  <div className="mb-4 rounded-xl bg-amber-50 p-3">
-                    <h.icon className="h-8 w-8 text-amber-600" />
+      {/* HOW IT WORKS ————————————————————————————————— */}
+      <section className="rule-b bg-paper">
+        <div className="mx-auto max-w-[1400px] px-5 md:px-8 py-12 md:py-16">
+          <div className="grid md:grid-cols-12 gap-10">
+            <div className="md:col-span-4">
+              <div className="small-caps text-[11px] text-faint-ink mb-3">
+                {t("landing.ledger.methodology")}
+              </div>
+              <h2 className="font-display text-[28px] md:text-[34px] leading-[1.1] tracking-tight">
+                {t("landing.how.title")}
+              </h2>
+              <p className="mt-4 text-[15.5px] text-muted-ink leading-[1.55] max-w-[38ch]">
+                {t("landing.how.intro")}
+              </p>
+            </div>
+
+            <div className="md:col-span-8 md:border-l border-rule md:pl-10">
+              {stepKeys.map((k, i) => (
+                <article
+                  key={k}
+                  className={`py-6 md:py-7 ${
+                    i < stepKeys.length - 1 ? "rule-b" : ""
+                  } ${i === 0 ? "md:pt-0" : ""}`}
+                >
+                  <div className="grid md:grid-cols-12 gap-5 items-baseline">
+                    <div className="md:col-span-2 flex items-baseline gap-3">
+                      <span className="font-num text-[13px] text-faint-ink">
+                        {k}
+                      </span>
+                      <span className="text-[12px] text-muted-ink">
+                        {t(`landing.how.steps.${k}.label`)}
+                      </span>
+                    </div>
+                    <div className="md:col-span-10">
+                      <h3 className="font-display text-[19px] md:text-[21px] tracking-tight text-ink">
+                        {t(`landing.how.steps.${k}.title`)}
+                      </h3>
+                      <p className="mt-1.5 text-[14.5px] text-muted-ink leading-[1.6] max-w-[60ch]">
+                        {t(`landing.how.steps.${k}.body`)}
+                      </p>
+                    </div>
                   </div>
-                  <h2 className="mb-2 text-lg font-semibold text-gray-900">
-                    {h.title}
-                  </h2>
-                  <p className="text-sm text-gray-600">{h.description}</p>
-                </CardContent>
-              </Card>
-            ))}
+                </article>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* FAQ Section */}
-      <section className="py-16 md:py-24 bg-gray-50">
-        <div className="container mx-auto px-4 max-w-3xl">
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 text-center mb-10">
-            {t("faq.title")}
+      {/* FOR WHOM ————————————————————————————————— */}
+      <section className="rule-b bg-paper">
+        <div className="mx-auto max-w-[1400px] px-5 md:px-8 py-12 md:py-16">
+          <h2 className="font-display text-[24px] md:text-[30px] tracking-tight mb-6">
+            {t("landing.forWhom.title")}
           </h2>
-          <div className="space-y-3">
-            {faqKeys.map((key) => (
-              <FaqItem
+          <div className="border-t border-b border-rule">
+            {forWhomKeys.map((key, i) => (
+              <div
                 key={key}
-                question={t(`faq.items.${key}.question`)}
-                answer={t(`faq.items.${key}.answer`)}
-              />
+                className={`grid md:grid-cols-12 gap-4 py-4 md:py-5 items-baseline ${
+                  i < forWhomKeys.length - 1 ? "rule-b" : ""
+                }`}
+              >
+                <div className="md:col-span-1 font-num text-[11px] text-faint-ink">
+                  {String(i + 1).padStart(2, "0")}
+                </div>
+                <div className="md:col-span-5 font-display text-[16px] md:text-[18px] text-ink">
+                  {t(`landing.forWhom.rows.${key}.who`)}
+                </div>
+                <div className="md:col-span-6 text-[14.5px] text-muted-ink leading-[1.5]">
+                  {t(`landing.forWhom.rows.${key}.use`)}
+                </div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Bottom CTA */}
-      <section className="py-16 md:py-20">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
-            {t("hero.title")}
-          </h2>
-          <p className="text-gray-600 mb-8 max-w-xl mx-auto">
-            {t("hero.subtitle")}
-          </p>
-          <Link href="/konfigurator">
-            <Button
-              size="lg"
-              className="bg-amber-500 hover:bg-amber-600 text-white text-lg px-8 py-6 rounded-xl shadow-lg hover:shadow-xl transition-all"
-            >
-              {t("hero.cta")}
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </Button>
-          </Link>
+      {/* FAQ ————————————————————————————————— */}
+      <section className="rule-b bg-paper">
+        <div className="mx-auto max-w-[1400px] px-5 md:px-8 py-12 md:py-16">
+          <div className="grid md:grid-cols-12 gap-10">
+            <div className="md:col-span-4">
+              <div className="small-caps text-[11px] text-faint-ink mb-3">
+                FAQ
+              </div>
+              <h2 className="font-display text-[28px] md:text-[34px] leading-[1.1] tracking-tight">
+                {t("landing.faqTitle")}
+              </h2>
+            </div>
+            <div className="md:col-span-8">
+              <div className="border-t border-rule">
+                {faqKeys.map((key, i) => (
+                  <FaqItem
+                    key={key}
+                    index={i + 1}
+                    question={t(`faq.items.${key}.question`)}
+                    answer={t(`faq.items.${key}.answer`)}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FINAL CTA ————————————————————————————————— */}
+      <section className="bg-ink text-paper">
+        <div className="mx-auto max-w-[1400px] px-5 md:px-8 py-14 md:py-20">
+          <div className="grid md:grid-cols-12 gap-8 items-end">
+            <div className="md:col-span-8">
+              <h2 className="font-display text-[clamp(1.9rem,4vw,3rem)] leading-[1.05] tracking-tight">
+                {t("landing.finalCta.title")}
+              </h2>
+              <p className="mt-3 text-[15.5px] md:text-[16.5px] text-[color:var(--faint-ink)] leading-[1.55] max-w-[56ch]">
+                {t("landing.finalCta.subtitle")}
+              </p>
+            </div>
+            <div className="md:col-span-4 flex md:justify-end">
+              <Link
+                href="/konfigurator"
+                className="inline-flex items-center gap-3 px-5 py-3.5 bg-paper text-ink hover:bg-[color:var(--accent-solar)] hover:text-paper transition-colors border border-paper"
+              >
+                <span className="text-[15px] font-medium">
+                  {t("landing.finalCta.action")}
+                </span>
+                <span className="font-mono-ui text-[11px] opacity-60">→</span>
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
     </div>
   );
 }
 
-function FaqItem({ question, answer }: { question: string; answer: string }) {
+function FaqItem({
+  index,
+  question,
+  answer,
+}: {
+  index: number;
+  question: string;
+  answer: string;
+}) {
   const [open, setOpen] = useState(false);
-
   return (
-    <div className="rounded-xl border bg-white shadow-sm">
+    <div className="rule-b">
       <button
         onClick={() => setOpen(!open)}
-        className="flex w-full items-center justify-between p-5 text-left"
+        aria-expanded={open}
+        className="w-full flex items-baseline gap-5 py-4 md:py-5 text-left hover:bg-secondary/40 transition-colors px-1"
       >
-        <h3 className="font-semibold text-gray-900 pr-4">{question}</h3>
-        <ChevronDown
-          className={`h-5 w-5 text-gray-400 shrink-0 transition-transform ${
-            open ? "rotate-180" : ""
-          }`}
-        />
+        <span className="font-num text-[11px] text-faint-ink w-6 shrink-0">
+          {String(index).padStart(2, "0")}
+        </span>
+        <span className="flex-1 font-display text-[16px] md:text-[18px] tracking-tight text-ink">
+          {question}
+        </span>
+        <span className="text-muted-ink shrink-0">
+          {open ? <Minus className="h-4 w-4" /> : <Plus className="h-4 w-4" />}
+        </span>
       </button>
       {open && (
-        <div className="px-5 pb-5 pt-0">
-          <p className="text-gray-600 leading-relaxed">{answer}</p>
+        <div className="pl-12 pr-2 pb-5 text-[14.5px] text-muted-ink leading-[1.6] max-w-[64ch]">
+          {answer}
         </div>
       )}
     </div>

@@ -4,6 +4,20 @@ All notable changes to this project are documented here.
 
 Format based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [1.1.0] - 2026-04-18
+
+### Changed
+
+- **Full visual redesign of all three core surfaces** — Landing, configurator, and results page now follow an editorial data-journalism aesthetic (FT Climate / Vitsœ / Fraunhofer report).
+- Landing: hero shows the answer as a 25-year cumulative savings curve instead of a sun icon; editorial 12-column composition with hairline rules, ledger notation, and break-even annotation.
+- Landing: new "What we don't collect" ledger (0/0/0/100 %) turns privacy into a selling point; methodology section (§ 01–03 PVGIS · HTW Berlin · Fraunhofer ISE) and audience table replace generic feature cards.
+- Configurator: 12-column layout with controls on the left and a live technical schematic on the right. Azimuth as a 5-cell picker (E · SE · S · SW · W), numbered steps 01–05, mono typography for values.
+- Configurator illustrations fully rebuilt: roof as a cross-section with tilt-angle arc, location as a latitude band with radiation gradient, system as a plan-view module array, consumption as a horizontal stacked bar, battery as a calibrated capacity scale.
+- Results page as inverted pyramid: NPV as the big-number headline, then Figure 01 (25-year cumulative savings with break-even marker), Figure 02/03 (monthly yield & self-consumption flow), Table 01 (economics), CO₂ panel, and inputs echo.
+- Charts reimplemented in raw SVG (no Recharts defaults): custom scales, hairline grids, annotated break-even marker, source line in mono.
+- Typography: IBM Plex Mono for values, labels, and display numbers; Inter remains body/UI. Consistent tabular numerics, small-caps labels.
+- Color system: reduced paper/ink token set with a single accent (solar orange) reserved for data-bearing highlights.
+
 ## [1.0.0] - 2026-04-03
 
 ### Added

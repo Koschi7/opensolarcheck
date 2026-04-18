@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, IBM_Plex_Mono } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
@@ -15,6 +15,14 @@ import "../globals.css";
 const inter = Inter({
   subsets: ["latin"],
   display: "swap",
+  variable: "--font-sans",
+});
+
+const plexMono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["300", "400", "500", "600"],
+  variable: "--font-plex-mono",
 });
 
 const DOMAIN = "https://opensolarcheck.de";
@@ -101,8 +109,8 @@ export default async function LocaleLayout({ children, params }: Props) {
   const messages = messagesMap[locale] ?? messagesMap.de;
 
   return (
-    <html lang={locale} className={inter.className}>
-      <body className="min-h-screen flex flex-col bg-gray-50 antialiased">
+    <html lang={locale} className={`${inter.variable} ${plexMono.variable}`}>
+      <body className="min-h-screen flex flex-col antialiased">
         <NextIntlClientProvider locale={locale} messages={messages}>
           <TooltipProvider>
             <Header />

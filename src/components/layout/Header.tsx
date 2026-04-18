@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { Sun, Menu } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { GitHubIcon } from "@/components/icons/GitHubIcon";
 import { useState } from "react";
 import { Link } from "@/lib/i18n/navigation";
@@ -23,87 +23,107 @@ export function Header() {
   ];
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60">
-      <div className="container mx-auto relative flex h-16 items-center justify-between px-4">
-        {/* Logo */}
-        <Link href="/" className="flex items-center gap-2">
-          <Sun className="h-8 w-8 text-amber-500" />
-          <span className="text-xl font-bold text-blue-800">OpenSolarCheck</span>
+    <header className="sticky top-0 z-50 bg-paper/95 backdrop-blur supports-[backdrop-filter]:bg-paper/80 rule-b">
+      <div className="mx-auto flex h-14 items-center justify-between px-5 md:px-8 max-w-[1400px]">
+        <Link
+          href="/"
+          className="flex items-baseline gap-2 group"
+          aria-label="OpenSolarCheck"
+        >
+          <span className="font-display text-[15px] font-medium tracking-tight text-ink">
+            OpenSolarCheck
+          </span>
+          <span className="hidden sm:inline font-mono-ui text-[11px] text-faint-ink">
+            v1.0
+          </span>
         </Link>
 
-        {/* Desktop Navigation – absolutely centered */}
-        <nav className="hidden md:flex items-center gap-6 absolute left-1/2 -translate-x-1/2">
+        <nav className="hidden md:flex items-center gap-8">
           {navItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className="text-sm font-medium text-gray-600 hover:text-blue-800 transition-colors"
+              className="text-[13px] text-muted-ink hover:text-ink transition-colors tracking-tight"
             >
               {item.label}
             </Link>
           ))}
         </nav>
 
-        {/* Desktop right side */}
-        <div className="hidden md:flex items-center gap-3">
+        <div className="hidden md:flex items-center gap-5">
           <LanguageSwitcher />
+          <span className="h-3 w-px bg-rule" aria-hidden="true" />
           <a
             href="https://github.com/Koschi7/opensolarcheck"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-gray-600 hover:text-gray-900 transition-colors"
+            className="text-muted-ink hover:text-ink transition-colors"
+            aria-label="GitHub"
           >
-            <GitHubIcon className="h-5 w-5" />
+            <GitHubIcon className="h-[18px] w-[18px]" />
           </a>
         </div>
 
-        {/* Mobile menu */}
         <div className="md:hidden flex items-center gap-2">
           <LanguageSwitcher />
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger
-              className="inline-flex items-center justify-center rounded-md p-2 text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+              className="inline-flex items-center justify-center p-2 text-muted-ink hover:text-ink"
+              aria-label="Menu"
             >
               <Menu className="h-5 w-5" />
             </SheetTrigger>
-            <SheetContent side="right" className="w-72 p-6 pt-5">
-              <SheetTitle className="flex items-center gap-2 pr-8 pb-4 border-b">
-                <Sun className="h-6 w-6 text-amber-500" />
-                <span className="font-bold text-blue-800">OpenSolarCheck</span>
-              </SheetTitle>
+            <SheetContent
+              side="right"
+              className="w-[min(88vw,340px)] p-0 bg-paper border-l border-rule"
+            >
+              <div className="flex items-center justify-between px-6 h-14 rule-b">
+                <SheetTitle className="font-display text-[15px] font-medium text-ink">
+                  OpenSolarCheck
+                </SheetTitle>
+                <button
+                  onClick={() => setOpen(false)}
+                  className="text-muted-ink hover:text-ink"
+                  aria-label="Close"
+                >
+                  <X className="h-5 w-5" />
+                </button>
+              </div>
 
-              <nav className="flex flex-col gap-1">
-                {navItems.map((item) => (
+              <nav className="flex flex-col">
+                {navItems.map((item, i) => (
                   <Link
                     key={item.href}
                     href={item.href}
                     onClick={() => setOpen(false)}
-                    className="text-base font-medium text-gray-700 hover:text-blue-800 hover:bg-gray-50 rounded-lg px-3 py-2.5 -mx-1"
+                    className={`flex items-baseline gap-4 px-6 py-5 rule-b text-ink hover:bg-secondary transition-colors ${
+                      i === 0 ? "rule-t" : ""
+                    }`}
                   >
-                    {item.label}
+                    <span className="font-mono-ui text-[11px] text-faint-ink w-6">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <span className="text-[17px]">{item.label}</span>
                   </Link>
                 ))}
               </nav>
 
-              <div className="border-t pt-3 flex flex-col gap-1">
+              <div className="flex flex-col px-6 pt-6 gap-3">
                 {legalItems.map((item) => (
                   <Link
                     key={item.href}
                     href={item.href}
                     onClick={() => setOpen(false)}
-                    className="text-sm text-gray-500 hover:text-gray-700 hover:bg-gray-50 rounded-lg px-3 py-2 -mx-1"
+                    className="text-[13px] text-muted-ink hover:text-ink"
                   >
                     {item.label}
                   </Link>
                 ))}
-              </div>
-
-              <div className="mt-auto border-t pt-4 flex items-center justify-between">
                 <a
                   href="https://github.com/Koschi7/opensolarcheck"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-sm text-gray-500 hover:text-gray-700"
+                  className="flex items-center gap-2 text-[13px] text-muted-ink hover:text-ink mt-2"
                 >
                   <GitHubIcon className="h-4 w-4" />
                   GitHub

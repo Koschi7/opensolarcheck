@@ -2,8 +2,6 @@
 
 import { useTranslations } from "next-intl";
 import { useAnalytics } from "@/hooks/useAnalytics";
-import { Button } from "@/components/ui/button";
-import { ArrowLeft, ArrowRight, Calculator } from "lucide-react";
 
 interface StepNavigationProps {
   step: number;
@@ -31,35 +29,34 @@ export function StepNavigation({
   };
 
   return (
-    <div className="flex justify-between pt-6">
-      <Button
-        variant="outline"
+    <div className="flex items-stretch justify-between gap-3">
+      <button
         onClick={onBack}
         disabled={step === 1}
-        className="gap-2"
+        className="btn-ghost flex-1 sm:flex-initial"
       >
-        <ArrowLeft className="h-4 w-4" />
-        {t("back")}
-      </Button>
+        <span className="opacity-60">←</span>
+        <span>{t("back")}</span>
+      </button>
 
       {step < totalSteps ? (
-        <Button
+        <button
           onClick={handleNext}
           disabled={!canGoNext}
-          className="gap-2 bg-amber-500 hover:bg-amber-600"
+          className="btn-primary flex-1 sm:flex-initial"
         >
-          {t("next")}
-          <ArrowRight className="h-4 w-4" />
-        </Button>
+          <span>{t("next")}</span>
+          <span className="opacity-60">→</span>
+        </button>
       ) : (
-        <Button
+        <button
           onClick={onCalculate}
           disabled={!canGoNext}
-          className="gap-2 bg-green-600 hover:bg-green-700"
+          className="btn-primary flex-1 sm:flex-initial"
         >
-          <Calculator className="h-4 w-4" />
-          {t("calculate")}
-        </Button>
+          <span>{t("calculate")}</span>
+          <span className="opacity-60">→</span>
+        </button>
       )}
     </div>
   );

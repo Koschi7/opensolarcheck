@@ -5,8 +5,6 @@ import type { ConfiguratorInput } from "@/lib/types";
 import { MODULE_AREA } from "@/lib/data/defaults";
 import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
-import { Badge } from "@/components/ui/badge";
-import { Zap, Info, Check } from "lucide-react";
 import { SystemIllustration } from "@/components/illustrations/SystemIllustration";
 
 interface Props {
@@ -26,123 +24,136 @@ export function Step3System({ system, roofArea, onUpdate }: Props) {
   const maxModules = Math.floor(roofArea / MODULE_AREA);
 
   return (
-    <div className="space-y-6">
-      <div className="text-center mb-8">
-        <h2 className="text-2xl font-bold text-gray-900">{t("title")}</h2>
-        <p className="text-gray-600 mt-1">{t("description")}</p>
-      </div>
-
-      <div className="grid md:grid-cols-2 gap-8">
-        <div className="space-y-5">
-          {/* Module Type - Card Selection */}
-          <div className="space-y-2">
-            <Label>{t("moduleType")}</Label>
-            <div className="space-y-2">
-              {MODULE_TYPES.map((mod) => {
-                const isSelected = system.moduleType === mod.key;
-                const isRecommended = mod.key === "monocrystalline";
-                return (
-                  <button
-                    key={mod.key}
-                    type="button"
-                    onClick={() =>
-                      onUpdate({
-                        moduleType: mod.key,
-                        modulePower: mod.power,
-                      })
-                    }
-                    className={`w-full text-left rounded-lg border-2 p-3 transition-colors ${
-                      isSelected
-                        ? "border-amber-500 bg-amber-50"
-                        : "border-gray-200 hover:border-gray-300"
-                    }`}
-                  >
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        {isSelected && (
-                          <Check className="h-4 w-4 text-amber-600 shrink-0" />
-                        )}
-                        <span className="font-medium text-sm">
-                          {t(mod.key)}
+    <div className="grid md:grid-cols-12 gap-8 md:gap-12">
+      <div className="md:col-span-7 space-y-7">
+        <Field label={t("moduleType")}>
+          <div className="border-t border-rule">
+            {MODULE_TYPES.map((mod) => {
+              const isSelected = system.moduleType === mod.key;
+              const isRecommended = mod.key === "monocrystalline";
+              return (
+                <button
+                  key={mod.key}
+                  type="button"
+                  onClick={() =>
+                    onUpdate({
+                      moduleType: mod.key,
+                      modulePower: mod.power,
+                    })
+                  }
+                  className={`w-full text-left border-b border-rule px-4 py-3.5 transition-colors ${
+                    isSelected ? "bg-ink text-paper" : "bg-paper hover:bg-secondary/30"
+                  }`}
+                >
+                  <div className="flex items-baseline justify-between gap-4">
+                    <div className="flex items-baseline gap-3">
+                      <span className="font-display text-[17px] tracking-tight">
+                        {t(mod.key)}
+                      </span>
+                      {isRecommended && (
+                        <span className="text-[11px] text-solar">
+                          · {t("recommended")}
                         </span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        {isRecommended && (
-                          <Badge variant="secondary" className="bg-green-100 text-green-700 text-xs">
-                            {t("recommended")}
-                          </Badge>
-                        )}
-                        <span className="text-xs text-gray-500">
-                          {Math.round(mod.efficiency * 100)}%
-                        </span>
-                      </div>
+                      )}
                     </div>
-                    <p className="text-xs text-gray-500 mt-1 ml-6">
-                      {t(`${mod.key}Desc`)}
-                    </p>
-                  </button>
-                );
-              })}
-            </div>
+                    <span className={`font-num text-[13px] tabular ${isSelected ? "text-paper" : "text-ink"}`}>
+                      η {Math.round(mod.efficiency * 100)}%
+                    </span>
+                  </div>
+                  <p className={`text-[12px] mt-1 ${isSelected ? "text-paper/70" : "text-muted-ink"}`}>
+                    {t(`${mod.key}Desc`)}
+                  </p>
+                </button>
+              );
+            })}
           </div>
+        </Field>
 
-          {/* Module Count - Slider with recommendation */}
-          <div className="space-y-3">
-            <div className="flex justify-between">
-              <Label>{t("moduleCount")}</Label>
-              <span className="text-sm font-medium text-amber-600">
-                {system.moduleCount}
+        <Field
+          label={t("moduleCount")}
+          value={`${system.moduleCount} × ${system.modulePower} Wp`}
+          hint={t("moduleCountInfo", { area: roofArea, max: maxModules })}
+        >
+          <Slider
+            value={[system.moduleCount]}
+            onValueChange={(v) => {
+              const count = Array.isArray(v) ? v[0] : v;
+              onUpdate({ moduleCount: count });
+            }}
+            min={1}
+            max={Math.max(maxModules, 1)}
+            step={1}
+            className="py-2"
+            aria-label={t("moduleCount")}
+          />
+          <div className="flex justify-between text-[11px] text-faint-ink mt-2">
+            <span>1</span>
+            <span>max. {Math.max(maxModules, 1)}</span>
+          </div>
+        </Field>
+
+        <div className="grid grid-cols-2 gap-6 pt-2 border-t border-rule">
+          <div className="pt-4">
+            <div className="text-[12.5px] text-muted-ink mb-1">
+              {t("modulePower")}
+            </div>
+            <div className="font-num text-[24px] md:text-[26px] tabular text-ink leading-none">
+              {system.modulePower}
+              <span className="text-[12px] text-faint-ink ml-1">
+                {t("modulePowerUnit")}
               </span>
             </div>
-            <Slider
-              value={[system.moduleCount]}
-              onValueChange={(v) => {
-                const count = Array.isArray(v) ? v[0] : v;
-                onUpdate({ moduleCount: count });
-              }}
-              min={1}
-              max={Math.max(maxModules, 1)}
-              step={1}
-              className="py-2"
-              aria-label={t("moduleCount")}
-            />
-            <div className="flex items-start gap-2 text-xs text-gray-500">
-              <Info className="h-3.5 w-3.5 mt-0.5 shrink-0" />
-              <span>
-                {t("moduleCountInfo", {
-                  area: roofArea,
-                  max: maxModules,
-                })}
-              </span>
-            </div>
           </div>
-
-          {/* Module Power (read-only info) */}
-          <div className="flex items-center justify-between rounded-lg border p-3 text-sm">
-            <span className="text-gray-600">{t("modulePower")}</span>
-            <span className="font-medium">{system.modulePower} {t("modulePowerUnit")}</span>
-          </div>
-
-          {/* Peak Power (read-only) */}
-          <div className="rounded-xl bg-amber-50 border border-amber-200 p-4">
-            <div className="flex items-center gap-2">
-              <Zap className="h-5 w-5 text-amber-600" />
-              <Label className="text-amber-800">{t("peakPower")}</Label>
+          <div className="pt-4">
+            <div className="text-[12.5px] text-muted-ink mb-1">
+              {t("peakPower")}
             </div>
-            <p className="mt-1 text-3xl font-bold text-amber-600">
-              {system.peakPower}{" "}
-              <span className="text-base font-normal">
+            <div className="font-num text-[24px] md:text-[26px] tabular text-solar leading-none">
+              {system.peakPower.toFixed(1)}
+              <span className="text-[12px] text-faint-ink ml-1">
                 {t("peakPowerUnit")}
               </span>
-            </p>
+            </div>
           </div>
         </div>
-
-        {/* Illustration */}
-        <div className="flex items-center justify-center">
-          <SystemIllustration moduleCount={system.moduleCount} />
-        </div>
       </div>
+
+      <aside className="md:col-span-5 md:sticky md:top-24 md:self-start">
+        <div className="border border-rule p-5 md:p-6 bg-paper">
+          <SystemIllustration moduleCount={system.moduleCount} peakPower={system.peakPower} />
+        </div>
+      </aside>
+    </div>
+  );
+}
+
+function Field({
+  label,
+  value,
+  hint,
+  children,
+}: {
+  label: string;
+  value?: string;
+  hint?: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div>
+      <div className="flex items-baseline justify-between gap-3 mb-2">
+        <Label className="text-[12.5px] text-muted-ink font-normal">{label}</Label>
+        {value !== undefined && (
+          <span className="font-num text-[13px] text-ink tabular">
+            {value}
+          </span>
+        )}
+      </div>
+      {children}
+      {hint && (
+        <p className="mt-2 text-[12px] text-faint-ink">
+          {hint}
+        </p>
+      )}
     </div>
   );
 }

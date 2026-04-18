@@ -13,7 +13,7 @@
 - Eigenverbrauchs- und Autarkiegrad-Berechnung (HTW Berlin Modell)
 - Wirtschaftlichkeitsanalyse über 25 Jahre (NPV, ROI, Amortisation)
 - CO2-Einsparungsberechnung
-- Interaktive Dach-Illustration mit Neigung und Ausrichtung
+- Redaktionelles Daten-Journalismus-Design: 25-Jahres-Ersparniskurve auf der Landing, technische Schemata im Konfigurator, umgekehrte-Pyramide-Ergebnisseite mit NPV-Hero, Figures und Tabelle
 - PDF-Export der Ergebnisse
 - Komplett clientseitig – keine Daten verlassen deinen Browser
 - Deutsch und Englisch (i18n)
@@ -26,7 +26,8 @@
 - Next.js 16 (App Router, Static Export)
 - TypeScript (strict)
 - Tailwind CSS 4 + shadcn/ui
-- Recharts (Diagramme)
+- Inter + IBM Plex Mono (via next/font)
+- SVG-Charts handgebaut (keine Recharts-Defaults)
 - next-intl (i18n)
 - @react-pdf/renderer (PDF-Export)
 - satori + resvg (OG-Image-Generierung)

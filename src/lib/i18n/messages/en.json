@@ -57,6 +57,93 @@
       }
     }
   },
+  "landing": {
+    "eyebrow": "Independent solar calculator",
+    "headline": "Your roof pencils out.",
+    "headlineAccent": "Or it doesn't.",
+    "lede": "Before you sign the installer's quote: a transparent second opinion, based on PVGIS satellite data, the HTW Berlin self-consumption model, and current feed-in tariffs. Runs in your browser. No signup, no data collection.",
+    "primaryCta": "Start calculation",
+    "secondaryCta": "See methodology",
+    "heroChart": {
+      "label": "Example run",
+      "subLabel": "Cumulative savings over 25 years",
+      "scenario": "Single-family · 8.4 kWp · South 30° · Munich · no battery",
+      "breakEven": "Break-even after 11.4 years",
+      "finalLabel": "Year-25 NPV",
+      "source": "Source: OpenSolarCheck · PVGIS · HTW Berlin · Fraunhofer ISE"
+    },
+    "ledger": {
+      "methodology": "Methodology",
+      "sources": "4 data sources",
+      "sourcesList": "PVGIS · HTW · Fraunhofer · BDEW"
+    },
+    "privacy": {
+      "title": "What we don't collect",
+      "items": {
+        "cookies": {
+          "value": "0",
+          "label": "Cookies"
+        },
+        "tracker": {
+          "value": "0",
+          "label": "Third-party trackers"
+        },
+        "signup": {
+          "value": "0",
+          "label": "Sign-ups"
+        },
+        "local": {
+          "value": "100\u2009%",
+          "label": "Computed in browser"
+        }
+      },
+      "caption": "Your inputs stay in your browser's session storage. Nothing leaves your device — except the PVGIS irradiance call to the EU Commission."
+    },
+    "how": {
+      "title": "How the math is built",
+      "intro": "Three established models, applied in sequence. No heuristics, no gut-feel guesswork.",
+      "steps": {
+        "01": {
+          "label": "Irradiance",
+          "title": "PVGIS satellite data",
+          "body": "The Photovoltaic Geographical Information System from the EU Joint Research Centre provides site-specific irradiance for your postal code — adjusted for tilt and azimuth."
+        },
+        "02": {
+          "label": "Self-consumption",
+          "title": "HTW Berlin model",
+          "body": "The Quaschning/Weniger polynomial on top of the BDEW H0 standard load profile. Accounts for battery efficiency and household draw over the year."
+        },
+        "03": {
+          "label": "Economics",
+          "title": "25-year NPV",
+          "body": "Investment costs per Fraunhofer ISE, EEG feed-in tariff, electricity price growth 3 %/yr, module degradation 0.5 %/yr, discount rate 3 %."
+        }
+      }
+    },
+    "forWhom": {
+      "title": "Who this is for",
+      "rows": {
+        "homeowner": {
+          "who": "Homeowner before the installer meeting",
+          "use": "Second opinion on a quote already in hand"
+        },
+        "consultant": {
+          "who": "Energy advisors & installers",
+          "use": "Credible short analysis for clients, embeddable"
+        },
+        "researcher": {
+          "who": "Students & researchers",
+          "use": "Transparent, open calculation chain"
+        }
+      }
+    },
+    "faqTitle": "Common questions",
+    "finalCta": {
+      "title": "Five steps. No signup.",
+      "subtitle": "Location, roof, system, consumption, battery. See payback, NPV, and CO\u2082 in about two minutes.",
+      "action": "Open the calculator"
+    }
+  },
   "faq": {
     "title": "Frequently Asked Questions About Solar Energy",
     "items": {

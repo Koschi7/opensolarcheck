@@ -11,188 +11,173 @@ export function BatteryIllustration({
   capacity,
   chargeLevel,
 }: Props) {
-  const fillHeight = hasBattery ? chargeLevel * 100 : 0;
+  const vb = { w: 360, h: 300 };
+
+  const maxCap = 20;
+  const fillPct = hasBattery ? capacity / maxCap : 0;
+
+  // horizontal capacity bar
+  const barX = 40;
+  const barW = vb.w - 80;
+  const barY = 100;
+  const barH = 54;
 
   return (
-    <svg viewBox="0 0 300 250" className="w-full max-w-[300px]">
-      <defs>
-        <linearGradient id="batteryFill" x1="0" y1="1" x2="0" y2="0">
-          <stop offset="0%" stopColor="#10B981" />
-          <stop offset="100%" stopColor="#34D399" />
-        </linearGradient>
-        <linearGradient id="batteryEmpty" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#F3F4F6" />
-          <stop offset="100%" stopColor="#E5E7EB" />
-        </linearGradient>
-      </defs>
+    <div className="w-full">
+      <svg
+        viewBox={`0 0 ${vb.w} ${vb.h}`}
+        className="w-full h-auto block"
+        role="img"
+        aria-label="Battery schematic"
+      >
+        {/* ticks */}
+        {[0, 5, 10, 15, 20].map((k) => {
+          const x = barX + (barW * k) / maxCap;
+          return (
+            <g key={k}>
+              <line
+                x1={x}
+                x2={x}
+                y1={barY - 8}
+                y2={barY + barH + 8}
+                stroke="var(--rule)"
+                strokeWidth="0.75"
+              />
+              <text
+                x={x}
+                y={barY - 12}
+                textAnchor="middle"
+                className="font-mono-ui"
+                fontSize="9"
+                fill="var(--faint-ink)"
+              >
+                {k}
+              </text>
+            </g>
+          );
+        })}
+        <text
+          x={barX + barW}
+          y={barY + barH + 22}
+          textAnchor="end"
+          className="font-mono-ui"
+          fontSize="9"
+          fill="var(--faint-ink)"
+        >
+          kWh
+        </text>
 
-      {/* Battery body */}
-      <g transform="translate(100, 30)">
-        {/* Terminal */}
-        <rect x="30" y="-8" width="40" height="10" rx="3" fill="#9CA3AF" />
-
-        {/* Battery outline */}
+        {/* empty bar frame */}
         <rect
-          width="100"
-          height="160"
-          rx="10"
-          fill={hasBattery ? "url(#batteryEmpty)" : "#F9FAFB"}
-          stroke={hasBattery ? "#374151" : "#D1D5DB"}
-          strokeWidth="3"
+          x={barX}
+          y={barY}
+          width={barW}
+          height={barH}
+          fill="none"
+          stroke="var(--ink)"
+          strokeWidth="1"
         />
 
-        {/* Fill level */}
+        {/* filled capacity */}
         {hasBattery && (
           <rect
-            x="6"
-            y={160 - fillHeight * 1.48 - 6}
-            width="88"
-            height={fillHeight * 1.48}
-            rx="6"
-            fill="url(#batteryFill)"
+            x={barX}
+            y={barY}
+            width={barW * fillPct}
+            height={barH}
+            fill="var(--accent-solar)"
+            fillOpacity="0.9"
           >
             <animate
-              attributeName="height"
+              attributeName="width"
               from="0"
-              to={fillHeight * 1.48}
-              dur="1s"
-              fill="freeze"
-            />
-            <animate
-              attributeName="y"
-              from="148"
-              to={160 - fillHeight * 1.48 - 6}
-              dur="1s"
+              to={barW * fillPct}
+              dur="0.4s"
               fill="freeze"
             />
           </rect>
         )}
 
-        {/* Capacity text */}
+        {/* capacity value inside bar */}
         <text
-          x="50"
-          y="90"
-          textAnchor="middle"
-          fontSize="18"
-          fontWeight="bold"
-          fill={hasBattery ? "#065F46" : "#9CA3AF"}
+          x={barX + 12}
+          y={barY + barH / 2 + 5}
+          className="font-mono-ui"
+          fontSize="22"
+          fill={hasBattery ? "var(--paper)" : "var(--faint-ink)"}
+          fontWeight="500"
         >
-          {hasBattery ? `${capacity}` : "—"}
-        </text>
-        <text
-          x="50"
-          y="110"
-          textAnchor="middle"
-          fontSize="12"
-          fill={hasBattery ? "#065F46" : "#9CA3AF"}
-        >
-          kWh
+          {hasBattery ? capacity.toFixed(1) : "—"}
         </text>
 
-        {/* Charge percentage */}
+        {/* charge level readout */}
         {hasBattery && (
-          <text
-            x="50"
-            y="140"
-            textAnchor="middle"
-            fontSize="14"
-            fontWeight="600"
-            fill="#059669"
-          >
-            {Math.round(chargeLevel * 100)}%
-          </text>
-        )}
-
-        {/* Lightning bolt when charging */}
-        {hasBattery && (
-          <g transform="translate(35, 45)" opacity="0.3">
-            <polygon
-              points="15,0 5,20 12,20 8,40 25,15 18,15 22,0"
-              fill="#FCD34D"
-              stroke="#F59E0B"
+          <>
+            <text
+              x={barX}
+              y={210}
+              fontSize="11"
+              fill="var(--muted-ink)"
+            >
+              Ladezustand
+            </text>
+            <rect
+              x={barX}
+              y={220}
+              width={barW}
+              height={12}
+              fill="none"
+              stroke="var(--rule-strong)"
               strokeWidth="1"
+            />
+            <rect
+              x={barX}
+              y={220}
+              width={barW * chargeLevel}
+              height={12}
+              fill="var(--ink)"
             >
               <animate
-                attributeName="opacity"
-                values="0.2;0.6;0.2"
-                dur="2s"
-                repeatCount="indefinite"
+                attributeName="width"
+                from="0"
+                to={barW * chargeLevel}
+                dur="0.6s"
+                fill="freeze"
               />
-            </polygon>
-          </g>
+            </rect>
+            <text
+              x={barX + barW}
+              y={248}
+              textAnchor="end"
+              className="font-mono-ui"
+              fontSize="11"
+              fill="var(--ink)"
+            >
+              {Math.round(chargeLevel * 100)}&thinsp;%
+            </text>
+          </>
         )}
-      </g>
 
-      {/* Energy flow arrows */}
-      {hasBattery && (
-        <>
-          {/* Solar to battery */}
-          <g>
-            <path
-              d="M50,60 Q70,40 95,50"
-              fill="none"
-              stroke="#F59E0B"
-              strokeWidth="2"
-              strokeDasharray="4,4"
-            >
-              <animate
-                attributeName="stroke-dashoffset"
-                values="8;0"
-                dur="1s"
-                repeatCount="indefinite"
-              />
-            </path>
-            <circle cx="50" cy="60" r="12" fill="#FEF3C7" stroke="#F59E0B" strokeWidth="1" />
-            <text x="50" y="64" textAnchor="middle" fontSize="10">
-              ☀️
-            </text>
-          </g>
-
-          {/* Battery to house */}
-          <g>
-            <path
-              d="M205,80 Q230,60 250,80"
-              fill="none"
-              stroke="#10B981"
-              strokeWidth="2"
-              strokeDasharray="4,4"
-            >
-              <animate
-                attributeName="stroke-dashoffset"
-                values="8;0"
-                dur="1s"
-                repeatCount="indefinite"
-              />
-            </path>
-            <circle cx="255" cy="80" r="12" fill="#ECFDF5" stroke="#10B981" strokeWidth="1" />
-            <text x="255" y="84" textAnchor="middle" fontSize="10">
-              🏠
-            </text>
-          </g>
-        </>
-      )}
-
-      {/* Status label */}
-      <rect
-        x="80"
-        y="210"
-        width="140"
-        height="30"
-        rx="15"
-        fill={hasBattery ? "#ECFDF5" : "#F3F4F6"}
-        stroke={hasBattery ? "#10B981" : "#D1D5DB"}
-        strokeWidth="1"
-      />
-      <text
-        x="150"
-        y="230"
-        textAnchor="middle"
-        fontSize="12"
-        fontWeight="600"
-        fill={hasBattery ? "#065F46" : "#9CA3AF"}
-      >
-        {hasBattery ? "Speicher aktiv" : "Kein Speicher"}
-      </text>
-    </svg>
+        {/* status line */}
+        <line
+          x1={barX}
+          x2={vb.w - barX}
+          y1={vb.h - 40}
+          y2={vb.h - 40}
+          stroke="var(--rule)"
+          strokeWidth="1"
+        />
+        <text
+          x={vb.w - barX}
+          y={vb.h - 18}
+          textAnchor="end"
+          fontSize="13"
+          fill={hasBattery ? "var(--accent-solar)" : "var(--faint-ink)"}
+          fontWeight="500"
+        >
+          {hasBattery ? "Speicher aktiv" : "Kein Speicher"}
+        </text>
+      </svg>
+    </div>
   );
 }

@@ -1,9 +1,7 @@
 "use client";
 
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import type { CalculationResult } from "@/lib/types";
-import { Card, CardContent } from "@/components/ui/card";
-import { Sun, Zap, Home, Clock, PiggyBank } from "lucide-react";
 
 interface Props {
   result: CalculationResult;
@@ -11,70 +9,73 @@ interface Props {
 
 export function ResultSummary({ result }: Props) {
   const t = useTranslations("results.summary");
+  const locale = useLocale();
 
-  const cards = [
-    {
-      icon: Sun,
-      label: t("annualYield"),
-      value: result.yield.annualYield.toLocaleString("de-DE"),
-      unit: "kWh",
-      color: "text-amber-500",
-      bg: "bg-amber-50",
-    },
-    {
-      icon: Zap,
-      label: t("selfConsumption"),
-      value: Math.round(result.selfConsumption.selfConsumptionRatio * 100),
-      unit: "%",
-      color: "text-green-500",
-      bg: "bg-green-50",
-    },
-    {
-      icon: Home,
-      label: t("autarky"),
-      value: Math.round(result.selfConsumption.autarkyRate * 100),
-      unit: "%",
-      color: "text-blue-500",
-      bg: "bg-blue-50",
-    },
-    {
-      icon: Clock,
-      label: t("payback"),
-      value: result.economics.paybackYears,
-      unit: t("years"),
-      color: "text-purple-500",
-      bg: "bg-purple-50",
-    },
-    {
-      icon: PiggyBank,
-      label: t("annualSavings"),
-      value: result.economics.annualSavings.toLocaleString("de-DE"),
-      unit: "\u20AC",
-      color: "text-emerald-500",
-      bg: "bg-emerald-50",
-    },
-  ];
+  const payback = result.economics.paybackYears;
+  const npv = result.economics.npv;
+  const annualYield = result.yield.annualYield;
+  const annualSavings = result.economics.annualSavings;
+  const selfCons = Math.round(result.selfConsumption.selfConsumptionRatio * 100);
+  const autarky = Math.round(result.selfConsumption.autarkyRate * 100);
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-      {cards.map((card) => (
-        <Card key={card.label} className="border-0 shadow-md">
-          <CardContent className="p-4 text-center">
-            <div
-              className={`mx-auto mb-2 flex h-10 w-10 items-center justify-center rounded-full ${card.bg}`}
-            >
-              <card.icon className={`h-5 w-5 ${card.color}`} />
-            </div>
-            <p className="text-xs text-gray-500 mb-1">{card.label}</p>
-            <p className="text-2xl font-bold text-gray-900">
-              {card.value}
-              <span className="text-sm font-normal text-gray-500 ml-1">
-                {card.unit}
-              </span>
-            </p>
-          </CardContent>
-        </Card>
-      ))}
+    <section className="border-t border-b border-rule-strong py-5 md:py-7">
+      <div className="grid md:grid-cols-12 gap-5 md:gap-10 items-end">
+        <div className="md:col-span-7">
+          <div className="text-[12px] text-muted-ink mb-1.5">
+            Kapitalwert nach 25 Jahren
+          </div>
+          <div className="flex items-baseline gap-3 flex-wrap">
+            <span className={`font-num text-[44px] md:text-[64px] leading-[0.95] tracking-tight ${npv >= 0 ? "text-ink" : "text-solar"}`}>
+              {npv >= 0 ? "+" : ""}
+              {npv.toLocaleString(locale)}
+            </span>
+            <span className="font-num text-[15px] text-muted-ink">€ NPV</span>
+          </div>
+          <p className="mt-2 text-[12px] text-muted-ink max-w-[60ch] leading-relaxed">
+            Diskontrate 3 %, Strompreissteigerung 3 % p. a., Modul-Degradation 0,5 % p. a.
+          </p>
+        </div>
+
+        <div className="md:col-span-5">
+          <dl className="grid grid-cols-2 gap-y-5 gap-x-6 md:border-l border-rule-strong md:pl-8">
+            <StatCell
+              label={t("payback")}
+              value={payback.toString()}
+              unit={t("years")}
+            />
+            <StatCell
+              label={t("annualSavings")}
+              value={annualSavings.toLocaleString(locale)}
+              unit="€ / a"
+            />
+            <StatCell
+              label={t("annualYield")}
+              value={annualYield.toLocaleString(locale)}
+              unit="kWh / a"
+            />
+            <StatCell
+              label={t("autarky")}
+              value={autarky.toString()}
+              unit={`% · ${selfCons}% EV`}
+            />
+          </dl>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function StatCell({ label, value, unit }: { label: string; value: string; unit: string }) {
+  return (
+    <div>
+      <dt className="text-[11.5px] text-muted-ink mb-0.5">{label}</dt>
+      <dd className="font-num text-[20px] md:text-[22px] text-ink leading-none">
+        {value}
+        <span className="font-mono-ui text-[11px] text-faint-ink ml-1.5">
+          {unit}
+        </span>
+      </dd>
     </div>
   );
 }

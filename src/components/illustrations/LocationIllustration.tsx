@@ -1,130 +1,198 @@
 "use client";
 
+import { useTranslations } from "next-intl";
+
 interface Props {
   lat: number;
 }
 
 export function LocationIllustration({ lat }: Props) {
-  // Sun height based on latitude (higher lat = lower sun)
-  const sunY = 30 + (lat - 45) * 2;
-  const radiationIntensity = Math.max(0.4, 1 - Math.abs(lat - 48) * 0.03);
+  const t = useTranslations("configurator.step1");
+
+  const vb = { w: 360, h: 300 };
+  const padX = 36;
+  const plotW = vb.w - padX * 2;
+
+  // Latitude in DE runs ~47.3 (Lindau) to ~55.0 (Sylt).
+  // Irradiance (yearly, kWh/m²) in DE runs ~1200 (south) to ~950 (far north).
+  const minLat = 47;
+  const maxLat = 55.5;
+  const norm = Math.max(0, Math.min(1, (lat - minLat) / (maxLat - minLat)));
+  const irrad = Math.round(1200 - norm * 250);
+
+  // axis positions
+  const axisY = 210;
+  const latX = padX + (1 - norm) * plotW * 0.9 + plotW * 0.05;
+
+  const ticks = [47, 49, 51, 53, 55];
 
   return (
-    <svg viewBox="0 0 300 250" className="w-full max-w-[300px]">
-      {/* Sky gradient */}
-      <defs>
-        <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#87CEEB" />
-          <stop offset="100%" stopColor="#E0F2FE" />
-        </linearGradient>
-        <radialGradient id="sunGlow" cx="0.5" cy="0.5" r="0.5">
-          <stop
-            offset="0%"
-            stopColor="#FCD34D"
-            stopOpacity={radiationIntensity}
-          />
-          <stop offset="100%" stopColor="#FCD34D" stopOpacity="0" />
-        </radialGradient>
-      </defs>
-
-      {/* Sky */}
-      <rect width="300" height="180" fill="url(#sky)" rx="16" />
-
-      {/* Sun with rays */}
-      <circle cx="200" cy={sunY} r="40" fill="url(#sunGlow)" />
-      <circle cx="200" cy={sunY} r="18" fill="#F59E0B">
-        <animate
-          attributeName="r"
-          values="18;20;18"
-          dur="3s"
-          repeatCount="indefinite"
-        />
-      </circle>
-      {/* Sun rays */}
-      {[0, 45, 90, 135, 180, 225, 270, 315].map((angle) => (
-        <line
-          key={angle}
-          x1={200 + 24 * Math.cos((angle * Math.PI) / 180)}
-          y1={sunY + 24 * Math.sin((angle * Math.PI) / 180)}
-          x2={200 + 32 * Math.cos((angle * Math.PI) / 180)}
-          y2={sunY + 32 * Math.sin((angle * Math.PI) / 180)}
-          stroke="#F59E0B"
-          strokeWidth="2"
-          strokeLinecap="round"
-          opacity="0.7"
-        >
-          <animate
-            attributeName="opacity"
-            values="0.7;1;0.7"
-            dur="2s"
-            begin={`${angle / 360}s`}
-            repeatCount="indefinite"
-          />
-        </line>
-      ))}
-
-      {/* Germany outline (simplified) */}
-      <path
-        d="M100,50 L120,45 L130,55 L135,48 L145,52 L140,65 L148,72 L142,85 L150,95 L145,105 L135,110 L128,120 L115,125 L105,118 L95,122 L90,115 L85,105 L88,90 L80,80 L85,70 L90,60 Z"
-        fill="none"
-        stroke="#1E40AF"
-        strokeWidth="2"
-        opacity="0.5"
-      />
-
-      {/* Location pin */}
-      <g transform={`translate(${110 + (lat - 48) * -2}, ${85 + (lat - 48) * -3})`}>
-        <path
-          d="M0,-15 C-8,-15 -12,-8 -12,-3 C-12,6 0,15 0,15 C0,15 12,6 12,-3 C12,-8 8,-15 0,-15Z"
-          fill="#EF4444"
-          stroke="white"
-          strokeWidth="2"
-        >
-          <animate
-            attributeName="transform"
-            values="translate(0,0);translate(0,-3);translate(0,0)"
-            dur="2s"
-            repeatCount="indefinite"
-          />
-        </path>
-        <circle cx="0" cy="-4" r="4" fill="white" />
-      </g>
-
-      {/* Radiation bars */}
-      <g opacity={radiationIntensity}>
-        {[0, 1, 2, 3, 4].map((i) => (
-          <rect
-            key={i}
-            x={30 + i * 14}
-            y={160}
-            width="10"
-            height={20 + i * 12}
-            fill={`hsl(${40 - i * 5}, 90%, ${55 + i * 3}%)`}
-            rx="2"
-            transform={`translate(0, ${-20 - i * 12})`}
-          />
-        ))}
-      </g>
-
-      {/* Labels */}
-      <text x="25" y="175" fontSize="8" fill="#6B7280">
-        kWh/m²
-      </text>
-      <text x="30" y="195" fontSize="10" fill="#374151" fontWeight="600">
-        800–1.200 kWh/m²/Jahr
-      </text>
-
-      {/* Ground */}
-      <rect y="180" width="300" height="70" fill="#E5E7EB" rx="0" />
-      <text
-        x="150"
-        y="220"
-        textAnchor="middle"
-        fontSize="12"
-        fill="#6B7280"
+    <div className="w-full">
+      <svg
+        viewBox={`0 0 ${vb.w} ${vb.h}`}
+        className="w-full h-auto block"
+        role="img"
+        aria-label="Location schematic"
       >
-        DACH-Region
-      </text>
-    </svg>
+        {/* irradiance bar — south (high) to north (low) */}
+        <defs>
+          <linearGradient id="radGrad" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stopColor="var(--accent-solar)" stopOpacity="0.9" />
+            <stop offset="100%" stopColor="var(--accent-solar)" stopOpacity="0.15" />
+          </linearGradient>
+        </defs>
+
+        {/* header labels */}
+        <text
+          x={padX}
+          y="44"
+          className="font-mono-ui"
+          fontSize="10"
+          fill="var(--faint-ink)"
+        >
+          S · südlich
+        </text>
+        <text
+          x={vb.w - padX}
+          y="44"
+          textAnchor="end"
+          className="font-mono-ui"
+          fontSize="10"
+          fill="var(--faint-ink)"
+        >
+          N · nördlich
+        </text>
+
+        {/* radiation bar (left = higher, right = lower) */}
+        <rect
+          x={padX}
+          y="60"
+          width={plotW}
+          height="36"
+          fill="url(#radGrad)"
+          stroke="var(--ink)"
+          strokeWidth="1"
+        />
+
+        {/* irradiance ticks */}
+        <text
+          x={padX + 4}
+          y="113"
+          className="font-mono-ui"
+          fontSize="10"
+          fill="var(--ink)"
+        >
+          1200
+        </text>
+        <text
+          x={vb.w - padX - 4}
+          y="113"
+          textAnchor="end"
+          className="font-mono-ui"
+          fontSize="10"
+          fill="var(--ink)"
+        >
+          950
+        </text>
+        <text
+          x={vb.w / 2}
+          y="113"
+          textAnchor="middle"
+          className="font-mono-ui"
+          fontSize="9"
+          fill="var(--faint-ink)"
+        >
+          kWh / m² · Jahr
+        </text>
+
+        {/* latitude scale */}
+        <line
+          x1={padX}
+          x2={vb.w - padX}
+          y1={axisY}
+          y2={axisY}
+          stroke="var(--ink)"
+          strokeWidth="1"
+        />
+        {ticks.map((lt) => {
+          const n = (lt - minLat) / (maxLat - minLat);
+          const x = padX + (1 - n) * plotW * 0.9 + plotW * 0.05;
+          return (
+            <g key={lt}>
+              <line
+                x1={x}
+                x2={x}
+                y1={axisY}
+                y2={axisY + 5}
+                stroke="var(--ink)"
+                strokeWidth="1"
+              />
+              <text
+                x={x}
+                y={axisY + 18}
+                textAnchor="middle"
+                className="font-mono-ui"
+                fontSize="9"
+                fill="var(--faint-ink)"
+              >
+                {lt}°
+              </text>
+            </g>
+          );
+        })}
+
+        {/* current latitude marker */}
+        <g>
+          <line
+            x1={latX}
+            x2={latX}
+            y1="96"
+            y2={axisY - 3}
+            stroke="var(--ink)"
+            strokeWidth="1"
+            strokeDasharray="2 2"
+          />
+          <polygon
+            points={`${latX - 4},${axisY - 3} ${latX + 4},${axisY - 3} ${latX},${axisY + 3}`}
+            fill="var(--ink)"
+          />
+          <text
+            x={latX}
+            y="88"
+            textAnchor="middle"
+            className="font-mono-ui"
+            fontSize="11"
+            fill="var(--ink)"
+            fontWeight="500"
+          >
+            {lat.toFixed(2)}° N
+          </text>
+        </g>
+
+        {/* footer dl */}
+        <text
+          x={padX}
+          y="270"
+          fontSize="11"
+          fill="var(--muted-ink)"
+        >
+          Erwartete Einstrahlung
+        </text>
+        <text
+          x={vb.w - padX}
+          y="270"
+          textAnchor="end"
+          className="font-num"
+          fontSize="14"
+          fill="var(--ink)"
+          fontWeight="500"
+        >
+          ≈ {irrad} kWh/m²·a
+        </text>
+      </svg>
+      <p className="mt-3 text-[12px] text-muted-ink leading-relaxed">
+        {t("lat")} &amp; {t("lon")} werden per PVGIS auf dein genaues Strahlungsprofil aufgelöst.
+      </p>
+    </div>
   );
 }

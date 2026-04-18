@@ -57,6 +57,93 @@
       }
     }
   },
+  "landing": {
+    "eyebrow": "Unabh\u00e4ngiger Photovoltaik-Rechner",
+    "headline": "Rechnet sich dein Dach.",
+    "headlineAccent": "Oder nicht.",
+    "lede": "Bevor du den Installateursvertrag unterschreibst: eine nachvollziehbare Zweitmeinung, basierend auf PVGIS-Satellitendaten, dem HTW-Berlin-Modell und aktuellen EEG-Vergütungen. L\u00e4uft in deinem Browser. Keine Anmeldung, keine Datenabgabe.",
+    "primaryCta": "Berechnung starten",
+    "secondaryCta": "Methodik ansehen",
+    "heroChart": {
+      "label": "Beispielrechnung",
+      "subLabel": "Kumulierte Ersparnis \u00fcber 25 Jahre",
+      "scenario": "EFH · 8,4 kWp · S\u00fcd 30° · M\u00fcnchen · ohne Speicher",
+      "breakEven": "Break-even nach 11,4 Jahren",
+      "finalLabel": "Kapitalwert Jahr 25",
+      "source": "Quelle: OpenSolarCheck · PVGIS · HTW Berlin · Fraunhofer ISE"
+    },
+    "ledger": {
+      "methodology": "Methodik",
+      "sources": "4 Datenquellen",
+      "sourcesList": "PVGIS · HTW · Fraunhofer · BDEW"
+    },
+    "privacy": {
+      "title": "Was wir nicht sammeln",
+      "items": {
+        "cookies": {
+          "value": "0",
+          "label": "Cookies"
+        },
+        "tracker": {
+          "value": "0",
+          "label": "Tracker von Dritten"
+        },
+        "signup": {
+          "value": "0",
+          "label": "Anmeldungen"
+        },
+        "local": {
+          "value": "100\u2009%",
+          "label": "im Browser berechnet"
+        }
+      },
+      "caption": "Deine Eingaben bleiben im Session-Storage deines Browsers. Nichts verl\u00e4sst dein Ger\u00e4t — au\u00dfer der Abruf der PVGIS-Strahlungsdaten von der EU-Kommission."
+    },
+    "how": {
+      "title": "Wie die Rechnung entsteht",
+      "intro": "Drei etablierte Modelle, aufeinander angewendet. Keine Heuristik, keine Schätzer aus dem Bauch.",
+      "steps": {
+        "01": {
+          "label": "Strahlung",
+          "title": "PVGIS-Satellitendaten",
+          "body": "Das Photovoltaic Geographical Information System des EU Joint Research Centre liefert stand\u00f6rtliche Einstrahlungsdaten f\u00fcr deine Postleitzahl — inkl. Dachneigung und Ausrichtung."
+        },
+        "02": {
+          "label": "Eigenverbrauch",
+          "title": "HTW-Berlin-Modell",
+          "body": "Die Methode nach Quaschning/Weniger auf Basis des BDEW H0 Standardlastprofils. Ber\u00fccksichtigt Speichereffizienz und Haushaltsverbrauch \u00fcber das Jahr."
+        },
+        "03": {
+          "label": "Wirtschaftlichkeit",
+          "title": "25-Jahres-NPV",
+          "body": "Investitionskosten nach Fraunhofer ISE, EEG-Einspeisevergütung, Strompreissteigerung 3 % p. a., Modul-Degradation 0,5 % p. a., Diskontrate 3 %."
+        }
+      }
+    },
+    "forWhom": {
+      "title": "F\u00fcr wen ist das gedacht",
+      "rows": {
+        "homeowner": {
+          "who": "Eigent\u00fcmer vor dem Installateur-Termin",
+          "use": "Zweitmeinung zu einem vorliegenden Angebot"
+        },
+        "consultant": {
+          "who": "Energieberater & Installateure",
+          "use": "Seri\u00f6se Kurzanalyse f\u00fcr Kunden, einbettbar"
+        },
+        "researcher": {
+          "who": "Studierende & Forschende",
+          "use": "Transparente, offene Rechenkette"
+        }
+      }
+    },
+    "faqTitle": "H\u00e4ufige Fragen",
+    "finalCta": {
+      "title": "F\u00fcnf Schritte. Keine Anmeldung.",
+      "subtitle": "Standort, Dach, Anlage, Verbrauch, Speicher. In 2 Minuten siehst du Amortisation, NPV und CO\u2082-Bilanz.",
+      "action": "Rechner \u00f6ffnen"
+    }
+  },
   "faq": {
     "title": "H\u00e4ufige Fragen zu Photovoltaik",
     "items": {

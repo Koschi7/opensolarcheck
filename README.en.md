@@ -13,7 +13,7 @@
 - Self-consumption and self-sufficiency calculation (HTW Berlin model)
 - Financial analysis over 25 years (NPV, ROI, payback period)
 - CO2 savings calculation
-- Interactive roof illustration with tilt and orientation
+- Editorial data-journalism design: 25-year cumulative-savings curve on the landing, technical schematics in the configurator, inverted-pyramid results page with NPV hero, figures, and table
 - PDF export of results
 - Fully client-side – no data leaves your browser
 - German and English (i18n)
@@ -26,7 +26,8 @@
 - Next.js 16 (App Router, Static Export)
 - TypeScript (strict)
 - Tailwind CSS 4 + shadcn/ui
-- Recharts (charts)
+- Inter + IBM Plex Mono (via next/font)
+- Hand-built SVG charts (no Recharts defaults)
 - next-intl (i18n)
 - @react-pdf/renderer (PDF export)
 - satori + resvg (OG image generation)

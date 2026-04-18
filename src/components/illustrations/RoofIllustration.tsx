@@ -10,199 +10,190 @@ interface Props {
 export function RoofIllustration({ tilt, azimuth }: Props) {
   const t = useTranslations("configurator.step2");
 
-  // The tilt drives the visual change: steeper tilt = higher ridge
-  // Range: tilt 0° → flat roof (roofHeight ~8), tilt 60° → steep (roofHeight ~80)
-  const roofHeight = 8 + tilt * 1.2;
-
-  // House dimensions
+  const vb = { w: 360, h: 300 };
+  const eaveY = 210;
   const houseLeft = 70;
-  const houseRight = 230;
-  const houseWidth = houseRight - houseLeft;
-  const houseMid = (houseLeft + houseRight) / 2;
-  const eaveY = 150;
-  const wallHeight = 70;
-
-  // Roof points
-  const ridgeX = houseMid;
+  const houseRight = 290;
+  const ridgeX = 180;
+  const spanHalf = ridgeX - houseLeft;
+  const tiltRad = (tilt * Math.PI) / 180;
+  const roofHeight = Math.tan(tiltRad) * spanHalf;
   const ridgeY = eaveY - roofHeight;
-  const overhangLeft = houseLeft - 15;
-  const overhangRight = houseRight + 15;
 
-  // Azimuth label
-  let azimuthLabel = `${azimuth}°`;
-  if (azimuth === 0) azimuthLabel = t("south");
-  else if (azimuth === 90) azimuthLabel = t("west");
-  else if (azimuth === -90) azimuthLabel = t("east");
-  else if (Math.abs(azimuth) === 180) azimuthLabel = t("north");
+  // annotation arc
+  const arcR = 46;
+  const arcEndX = houseLeft + arcR;
+  const arcStartX = houseLeft + Math.cos(tiltRad) * arcR;
+  const arcStartY = eaveY - Math.sin(tiltRad) * arcR;
 
-  // Solar panels along the right slope (south-facing)
-  const slopeDx = overhangRight - ridgeX;
-  const slopeDy = eaveY - ridgeY;
-  const slopeLen = Math.sqrt(slopeDx * slopeDx + slopeDy * slopeDy);
-  const slopeAngle = Math.atan2(slopeDy, slopeDx) * (180 / Math.PI);
+  // panel rail along south-facing slope (right slope)
+  const slopeLen = Math.sqrt(spanHalf * spanHalf + roofHeight * roofHeight);
+  const slopeDx = (houseRight - ridgeX) / slopeLen;
+  const slopeDy = (eaveY - ridgeY) / slopeLen;
+  const slopeAngle = Math.atan2(eaveY - ridgeY, houseRight - ridgeX) * (180 / Math.PI);
 
-  const panelCount = 5;
-  const panelGap = 3;
-  const panelHeight = Math.min(16, slopeLen / (panelCount + 1) * 0.7);
-  const totalPanelZone = slopeLen * 0.8;
-  const panelWidth = (totalPanelZone - (panelCount - 1) * panelGap) / panelCount;
+  const panelCount = Math.max(2, Math.min(6, 4));
+  const railStart = 0.12;
+  const railEnd = 0.88;
+  const railLen = slopeLen * (railEnd - railStart);
+  const panelGap = 4;
+  const panelW = (railLen - (panelCount - 1) * panelGap) / panelCount;
+  const panelH = Math.max(6, Math.min(14, slopeLen * 0.09));
 
   const panels = Array.from({ length: panelCount }, (_, i) => {
-    const startFraction = 0.1 + (i * (panelWidth + panelGap)) / slopeLen;
-    const cx = ridgeX + slopeDx * (startFraction + panelWidth / (2 * slopeLen));
-    const cy = ridgeY + slopeDy * (startFraction + panelWidth / (2 * slopeLen));
-    return { cx, cy };
+    const frac = railStart + (i * (panelW + panelGap)) / slopeLen + (panelW / 2) / slopeLen;
+    return {
+      cx: ridgeX + slopeDx * frac * slopeLen,
+      cy: ridgeY + slopeDy * frac * slopeLen,
+    };
   });
 
+  let azimuthLabel = `${azimuth >= 0 ? "+" : ""}${azimuth}°`;
+  if (azimuth === 0) azimuthLabel = `0° · ${t("south")}`;
+
   return (
-    <svg viewBox="0 0 300 280" className="w-full max-w-[300px]">
-      <defs>
-        <linearGradient id="roofLeft" x1="1" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#9CA3AF" stopOpacity="0.5" />
-          <stop offset="100%" stopColor="#6B7280" stopOpacity="0.6" />
-        </linearGradient>
-        <linearGradient id="roofRight" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="#F59E0B" stopOpacity="0.7" />
-          <stop offset="100%" stopColor="#D97706" stopOpacity="0.85" />
-        </linearGradient>
-        <linearGradient id="wallGrad2" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#F3F4F6" />
-          <stop offset="100%" stopColor="#D1D5DB" />
-        </linearGradient>
-      </defs>
+    <div className="w-full">
+      <svg
+        viewBox={`0 0 ${vb.w} ${vb.h}`}
+        className="w-full h-auto block"
+        role="img"
+        aria-label="Roof cross-section schematic"
+      >
+        {/* paper grid (subtle) */}
+        <defs>
+          <pattern id="gridPattern" width="24" height="24" patternUnits="userSpaceOnUse">
+            <path
+              d="M 24 0 L 0 0 0 24"
+              fill="none"
+              stroke="var(--rule)"
+              strokeWidth="0.5"
+            />
+          </pattern>
+        </defs>
+        <rect width={vb.w} height={vb.h} fill="url(#gridPattern)" opacity="0.5" />
 
-      {/* Sky gradient hint */}
-      <rect x="0" y="0" width="300" height={eaveY + wallHeight} fill="#EFF6FF" opacity="0.3" />
-
-      {/* Sun - positioned based on azimuth for a hint of direction */}
-      <circle cx={220 + azimuth * 0.3} cy="30" r="18" fill="#FCD34D">
-        <animate attributeName="opacity" values="0.8;1;0.8" dur="3s" repeatCount="indefinite" />
-      </circle>
-
-      {/* Sun rays */}
-      {[0, 15, 30].map((offset) => (
+        {/* ground datum */}
         <line
-          key={offset}
-          x1={220 + azimuth * 0.3 - offset * 0.4}
-          y1="48"
-          x2={ridgeX + 30 + offset}
-          y2={ridgeY + 10 + offset * 0.3}
-          stroke="#FCD34D"
-          strokeWidth="1.5"
-          strokeDasharray="4,4"
-          opacity="0.25"
+          x1="20"
+          x2={vb.w - 20}
+          y1={eaveY + 44}
+          y2={eaveY + 44}
+          stroke="var(--ink)"
+          strokeWidth="1"
+        />
+        <text
+          x="26"
+          y={eaveY + 56}
+          fontSize="10"
+          fill="var(--faint-ink)"
         >
-          <animate attributeName="opacity" values="0.1;0.35;0.1" dur="2.5s" repeatCount="indefinite" />
-        </line>
-      ))}
+          Boden
+        </text>
 
-      {/* House body */}
-      <rect
-        x={houseLeft}
-        y={eaveY}
-        width={houseWidth}
-        height={wallHeight}
-        fill="url(#wallGrad2)"
-        stroke="#9CA3AF"
-        strokeWidth="1"
-      />
+        {/* house walls */}
+        <line x1={houseLeft} y1={eaveY} x2={houseLeft} y2={eaveY + 44} stroke="var(--ink)" strokeWidth="1" />
+        <line x1={houseRight} y1={eaveY} x2={houseRight} y2={eaveY + 44} stroke="var(--ink)" strokeWidth="1" />
+        <line x1={houseLeft} y1={eaveY} x2={houseRight} y2={eaveY} stroke="var(--rule-strong)" strokeWidth="0.75" strokeDasharray="2 3" />
 
-      {/* Door */}
-      <rect x={houseMid - 13} y={eaveY + 25} width={26} height={45} rx="2" fill="#78716C" />
-      <circle cx={houseMid + 7} cy={eaveY + 50} r="2" fill="#A8A29E" />
+        {/* roof lines */}
+        <line x1={houseLeft} y1={eaveY} x2={ridgeX} y2={ridgeY} stroke="var(--ink)" strokeWidth="1.25" />
+        <line x1={ridgeX} y1={ridgeY} x2={houseRight} y2={eaveY} stroke="var(--ink)" strokeWidth="1.25" />
 
-      {/* Windows */}
-      <rect x={houseLeft + 15} y={eaveY + 15} width={25} height={22} rx="2" fill="#BFDBFE" stroke="#9CA3AF" strokeWidth="0.5" />
-      <line x1={houseLeft + 27.5} y1={eaveY + 15} x2={houseLeft + 27.5} y2={eaveY + 37} stroke="#9CA3AF" strokeWidth="0.4" />
-      <rect x={houseRight - 40} y={eaveY + 15} width={25} height={22} rx="2" fill="#BFDBFE" stroke="#9CA3AF" strokeWidth="0.5" />
-      <line x1={houseRight - 27.5} y1={eaveY + 15} x2={houseRight - 27.5} y2={eaveY + 37} stroke="#9CA3AF" strokeWidth="0.4" />
+        {/* ridge dot */}
+        <circle cx={ridgeX} cy={ridgeY} r="2" fill="var(--ink)" />
 
-      {/* Left roof slope (shade side) */}
-      <polygon
-        points={`${overhangLeft},${eaveY} ${ridgeX},${ridgeY} ${ridgeX},${eaveY}`}
-        fill="url(#roofLeft)"
-        stroke="#6B7280"
-        strokeWidth="1"
-      />
+        {/* tilt angle arc + label */}
+        <path
+          d={`M ${arcEndX} ${eaveY} A ${arcR} ${arcR} 0 0 0 ${arcStartX} ${arcStartY}`}
+          fill="none"
+          stroke="var(--accent-solar)"
+          strokeWidth="1.25"
+        />
+        <text
+          x={houseLeft + arcR + 8}
+          y={eaveY - arcR * Math.sin(tiltRad) / 2 + 2}
+          className="font-mono-ui"
+          fontSize="11"
+          fill="var(--accent-solar)"
+          fontWeight="500"
+        >
+          {tilt}°
+        </text>
 
-      {/* Right roof slope (panel side) */}
-      <polygon
-        points={`${ridgeX},${ridgeY} ${overhangRight},${eaveY} ${ridgeX},${eaveY}`}
-        fill="url(#roofRight)"
-        stroke="#B45309"
-        strokeWidth="1.5"
-      />
+        {/* eave line extension for tilt reference */}
+        <line
+          x1={houseLeft - 10}
+          x2={houseLeft + arcR + 18}
+          y1={eaveY}
+          y2={eaveY}
+          stroke="var(--rule-strong)"
+          strokeWidth="0.5"
+          strokeDasharray="2 2"
+        />
 
-      {/* Solar panels */}
-      {panels.map((p, i) => (
-        <g key={i} transform={`rotate(${slopeAngle}, ${p.cx}, ${p.cy})`}>
-          <rect
-            x={p.cx - panelWidth / 2}
-            y={p.cy - panelHeight / 2}
-            width={panelWidth}
-            height={panelHeight}
-            fill="#1E3A5F"
-            stroke="#60A5FA"
-            strokeWidth="0.5"
-            rx="1"
-          />
-          {/* Grid lines */}
-          <line
-            x1={p.cx}
-            y1={p.cy - panelHeight / 2}
-            x2={p.cx}
-            y2={p.cy + panelHeight / 2}
-            stroke="#60A5FA"
-            strokeWidth="0.3"
-          />
-          <line
-            x1={p.cx - panelWidth / 2}
-            y1={p.cy}
-            x2={p.cx + panelWidth / 2}
-            y2={p.cy}
-            stroke="#60A5FA"
-            strokeWidth="0.3"
-          />
+        {/* solar panels on right slope */}
+        {panels.map((p, i) => (
+          <g key={i} transform={`rotate(${slopeAngle}, ${p.cx}, ${p.cy})`}>
+            <rect
+              x={p.cx - panelW / 2}
+              y={p.cy - panelH / 2}
+              width={panelW}
+              height={panelH}
+              fill="var(--accent-solar)"
+              fillOpacity="0.85"
+              stroke="var(--ink)"
+              strokeWidth="0.5"
+            />
+            <line
+              x1={p.cx}
+              y1={p.cy - panelH / 2}
+              x2={p.cx}
+              y2={p.cy + panelH / 2}
+              stroke="var(--paper)"
+              strokeWidth="0.5"
+              opacity="0.7"
+            />
+          </g>
+        ))}
+
+        {/* sun indicator — position reflects azimuth (very schematic, just a hint) */}
+        <g transform={`translate(${vb.w - 60 + azimuth * 0.2}, 40)`}>
+          <circle cx="0" cy="0" r="14" fill="none" stroke="var(--accent-solar)" strokeWidth="1" />
+          <circle cx="0" cy="0" r="4" fill="var(--accent-solar)" />
+          {[0, 60, 120, 180, 240, 300].map((a) => {
+            const rad = (a * Math.PI) / 180;
+            return (
+              <line
+                key={a}
+                x1={Math.cos(rad) * 7}
+                y1={Math.sin(rad) * 7}
+                x2={Math.cos(rad) * 11}
+                y2={Math.sin(rad) * 11}
+                stroke="var(--accent-solar)"
+                strokeWidth="1"
+              />
+            );
+          })}
         </g>
-      ))}
 
-      {/* Tilt angle annotation arc */}
-      {tilt > 0 && (
-        <g>
-          <line
-            x1={ridgeX}
-            y1={eaveY}
-            x2={overhangRight + 8}
-            y2={eaveY}
-            stroke="#9CA3AF"
-            strokeWidth="0.5"
-            strokeDasharray="3,3"
-          />
-          <path
-            d={`M ${ridgeX + 35},${eaveY} A 35 35 0 0 0 ${ridgeX + 35 * Math.cos((tilt * Math.PI) / 180)},${eaveY - 35 * Math.sin((tilt * Math.PI) / 180)}`}
-            fill="none"
-            stroke="#F59E0B"
-            strokeWidth="1.5"
-          />
-          <text
-            x={ridgeX + 42}
-            y={eaveY - 8}
-            fontSize="10"
-            fill="#D97706"
-            fontWeight="bold"
-          >
-            {tilt}°
-          </text>
-        </g>
-      )}
+        {/* dimension callout */}
+        <text
+          x={vb.w - 20}
+          y={eaveY + 56}
+          textAnchor="end"
+          fontSize="10"
+          fill="var(--faint-ink)"
+        >
+          Azimut {azimuthLabel}
+        </text>
+      </svg>
 
-      {/* Ground */}
-      <rect y={eaveY + wallHeight} width="300" height={280 - eaveY - wallHeight} fill="#86EFAC" opacity="0.3" />
-
-      {/* Info label */}
-      <text x="150" y="265" textAnchor="middle" fontSize="11" fill="#6B7280">
-        {t("tilt")}: {tilt}° | {t("azimuth")}: {azimuthLabel}
-      </text>
-    </svg>
+      <dl className="mt-3 grid grid-cols-2 gap-x-4 gap-y-1 text-[12px]">
+        <dt className="text-muted-ink">{t("tilt")}</dt>
+        <dd className="font-num text-ink tabular text-right">{tilt}°</dd>
+        <dt className="text-muted-ink">{t("azimuth")}</dt>
+        <dd className="font-num text-ink tabular text-right">{azimuthLabel}</dd>
+      </dl>
+    </div>
   );
 }
