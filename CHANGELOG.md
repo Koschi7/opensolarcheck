@@ -4,6 +4,27 @@ Alle nennenswerten Änderungen an diesem Projekt werden hier dokumentiert.
 
 Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 
+## [1.2.0] - 2026-04-19
+
+### Korrigiert
+
+- Amortisationsrechnung gab stillschweigend 25 Jahre zurück, wenn sich die Anlage innerhalb der Lebensdauer nicht amortisiert. Rechner, Ergebnisseite, PDF-Export und Finanzdiagramm zeigen jetzt klar "in 25 Jahren nicht erreicht".
+- Einspeisevergütung für Anlagen > 40 kWp wurde falsch berechnet. Neues Drei-Stufen-Modell (bis 10 / 40 / 100 kWp) entsprechend EEG-Systematik.
+
+### Geändert
+
+- Durchgehende Sie-Form in allen deutschen Texten (Landing, Konfigurator, Ergebnisseite, FAQ, PDF) für konsistente Ansprache.
+- PDF-Export neu gestaltet im redaktionellen Stil der Web-Oberfläche: Zeitungskopf, Haar-Linien, Courier-Zahlen, Solar-Orange ausschließlich für Amortisationszeit.
+- Vollständige englische i18n-Abdeckung: Konfigurator, Ergebnisseite, Charts und CO₂-Kachel rendern auf `/en` nun durchgängig englisch.
+- Ergebnisseite zeigt Eingabe-Echo mit übersetzten Beschattungs-/Modultyp-Labels, keine hartcodierten deutschen Texte mehr.
+- Stärkerer Text-Kontrast: `--muted-ink` und `--faint-ink` dunkler für bessere Lesbarkeit (WCAG AA).
+
+### Hinzugefügt
+
+- Organization-JSON-LD-Block neben WebApplication und FAQPage für bessere SEO-Sichtbarkeit.
+- Neue Übersetzungsschlüssel für Ergebnisseite (Eingaben, Hinweis, NPV, Zahlungsfluss) und Konfigurator (Amortisations-Randfälle, Schnellwahl-Hinweise, Batterie-Metriken).
+- Haushalts-Preset für 5 Personen (5.500 kWh/Jahr) im Verbrauchsschritt.
+
 ## [1.1.0] - 2026-04-18
 
 ### Geändert

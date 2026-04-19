@@ -88,7 +88,7 @@ export function Step3System({ system, roofArea, onUpdate }: Props) {
           />
           <div className="flex justify-between text-[11px] text-faint-ink mt-2">
             <span>1</span>
-            <span>max. {Math.max(maxModules, 1)}</span>
+            <span>{t("maxSuffix")} {Math.max(maxModules, 1)}</span>
           </div>
         </Field>
 

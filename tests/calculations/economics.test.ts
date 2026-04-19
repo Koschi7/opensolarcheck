@@ -21,8 +21,18 @@ describe("economics", () => {
   it("should have reasonable payback period (8-15 years)", () => {
     const result = calculateEconomics(baseParams);
 
-    expect(result.paybackYears).toBeGreaterThan(5);
-    expect(result.paybackYears).toBeLessThan(20);
+    expect(result.paybackYears).not.toBeNull();
+    expect(result.paybackYears as number).toBeGreaterThan(5);
+    expect(result.paybackYears as number).toBeLessThan(20);
+  });
+
+  it("should return null payback when system never pays back", () => {
+    const result = calculateEconomics({
+      ...baseParams,
+      annualYield_kWh: 0,
+    });
+
+    expect(result.paybackYears).toBeNull();
   });
 
   it("should have positive ROI over 25 years", () => {

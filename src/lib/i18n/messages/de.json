@@ -1,11 +1,11 @@
 {
   "meta": {
     "title": "PV-Rechner kostenlos | Solaranlage Kosten & Ertrag berechnen – OpenSolarCheck",
-    "description": "Kostenloser Photovoltaik-Rechner: Berechne Ertrag, Kosten und Amortisation deiner Solaranlage – ohne Anmeldung, ohne Datenabgabe. Sofort Ergebnis im Browser.",
+    "description": "Kostenloser Photovoltaik-Rechner: Berechnen Sie Ertrag, Kosten und Amortisation Ihrer Solaranlage – ohne Anmeldung, ohne Datenweitergabe. Sofort Ergebnis im Browser.",
     "pages": {
       "configurator": {
         "title": "PV-Konfigurator – Solaranlage online berechnen | OpenSolarCheck",
-        "description": "Konfiguriere deine Photovoltaik-Anlage Schritt für Schritt: Standort, Dachfläche, Module, Speicher. Sofort Ertrag und Kosten sehen – kostenlos und ohne Anmeldung."
+        "description": "Konfigurieren Sie Ihre Photovoltaik-Anlage Schritt für Schritt: Standort, Dachfläche, Module, Speicher. Sofort Ertrag und Kosten sehen – kostenlos und ohne Anmeldung."
       },
       "methodology": {
         "title": "Berechnungsmethodik – So berechnet OpenSolarCheck den PV-Ertrag",
@@ -20,8 +20,8 @@
         "description": "Impressum gem\u00e4\u00df \u00a7 5 DDG f\u00fcr OpenSolarCheck – den kostenlosen Open-Source PV-Rechner."
       },
       "results": {
-        "title": "PV-Analyse – Deine Ergebnisse | OpenSolarCheck",
-        "description": "Dein pers\u00f6nliches PV-Ergebnis: Jahresertrag, Eigenverbrauch, Amortisation, CO2-Einsparung und Wirtschaftlichkeitsanalyse."
+        "title": "PV-Analyse – Ihre Ergebnisse | OpenSolarCheck",
+        "description": "Ihr pers\u00f6nliches PV-Ergebnis: Jahresertrag, Eigenverbrauch, Amortisation, CO2-Einsparung und Wirtschaftlichkeitsanalyse."
       }
     }
   },
@@ -33,19 +33,19 @@
     "imprint": "Impressum"
   },
   "hero": {
-    "title": "Dein unabh\u00e4ngiger PV-Rechner",
-    "subtitle": "Berechne Ertrag, Kosten und Amortisation deiner Solaranlage \u2013 kostenlos, ohne Anmeldung, ohne Datenabgabe.",
+    "title": "Ihr unabh\u00e4ngiger PV-Rechner",
+    "subtitle": "Berechnen Sie Ertrag, Kosten und Amortisation Ihrer Solaranlage \u2013 kostenlos, ohne Anmeldung, ohne Datenweitergabe.",
     "cta": "Jetzt berechnen",
     "features": {
       "free": "100% kostenlos",
-      "noData": "Keine Datenabgabe",
+      "noData": "Keine Datenweitergabe",
       "openSource": "Open Source",
       "clientSide": "L\u00e4uft im Browser"
     },
     "highlights": {
       "yield": {
         "title": "PV-Ertrag berechnen",
-        "description": "Basierend auf PVGIS-Satellitendaten der EU \u2013 f\u00fcr deinen exakten Standort in Deutschland"
+        "description": "Basierend auf PVGIS-Satellitendaten der EU \u2013 f\u00fcr Ihren exakten Standort in Deutschland"
       },
       "economics": {
         "title": "Kosten & Amortisation",
@@ -53,15 +53,15 @@
       },
       "co2": {
         "title": "CO\u2082-Einsparung",
-        "description": "Berechnung der Umweltwirkung deiner Photovoltaik-Anlage"
+        "description": "Berechnung der Umweltwirkung Ihrer Photovoltaik-Anlage"
       }
     }
   },
   "landing": {
     "eyebrow": "Unabh\u00e4ngiger Photovoltaik-Rechner",
-    "headline": "Rechnet sich dein Dach.",
+    "headline": "Rechnet sich Ihr Dach.",
     "headlineAccent": "Oder nicht.",
-    "lede": "Bevor du den Installateursvertrag unterschreibst: eine nachvollziehbare Zweitmeinung, basierend auf PVGIS-Satellitendaten, dem HTW-Berlin-Modell und aktuellen EEG-Vergütungen. L\u00e4uft in deinem Browser. Keine Anmeldung, keine Datenabgabe.",
+    "lede": "Bevor Sie den Installateursvertrag unterschreiben: eine nachvollziehbare Zweitmeinung, basierend auf PVGIS-Satellitendaten, dem HTW-Berlin-Modell und aktuellen EEG-Vergütungen. L\u00e4uft in Ihrem Browser. Keine Anmeldung, keine Datenweitergabe.",
     "primaryCta": "Berechnung starten",
     "secondaryCta": "Methodik ansehen",
     "heroChart": {
@@ -97,16 +97,16 @@
           "label": "im Browser berechnet"
         }
       },
-      "caption": "Deine Eingaben bleiben im Session-Storage deines Browsers. Nichts verl\u00e4sst dein Ger\u00e4t — au\u00dfer der Abruf der PVGIS-Strahlungsdaten von der EU-Kommission."
+      "caption": "Ihre Eingaben bleiben im Session-Storage Ihres Browsers. Nichts verl\u00e4sst Ihr Ger\u00e4t — ausgenommen der Abruf der PVGIS-Strahlungsdaten von der EU-Kommission."
     },
     "how": {
       "title": "Wie die Rechnung entsteht",
-      "intro": "Drei etablierte Modelle, aufeinander angewendet. Keine Heuristik, keine Schätzer aus dem Bauch.",
+      "intro": "Drei etablierte Modelle, nacheinander angewendet. Keine Heuristik, keine Schätzungen aus dem Bauch.",
       "steps": {
         "01": {
           "label": "Strahlung",
           "title": "PVGIS-Satellitendaten",
-          "body": "Das Photovoltaic Geographical Information System des EU Joint Research Centre liefert stand\u00f6rtliche Einstrahlungsdaten f\u00fcr deine Postleitzahl — inkl. Dachneigung und Ausrichtung."
+          "body": "Das Photovoltaic Geographical Information System des EU Joint Research Centre liefert standortgenaue Einstrahlungsdaten f\u00fcr Ihre Postleitzahl — inklusive Dachneigung und Ausrichtung."
         },
         "02": {
           "label": "Eigenverbrauch",
@@ -140,7 +140,7 @@
     "faqTitle": "H\u00e4ufige Fragen",
     "finalCta": {
       "title": "F\u00fcnf Schritte. Keine Anmeldung.",
-      "subtitle": "Standort, Dach, Anlage, Verbrauch, Speicher. In 2 Minuten siehst du Amortisation, NPV und CO\u2082-Bilanz.",
+      "subtitle": "Standort, Dach, Anlage, Verbrauch, Speicher. In zwei Minuten sehen Sie Amortisation, Kapitalwert und CO\u2082-Bilanz.",
       "action": "Rechner \u00f6ffnen"
     }
   },
@@ -149,7 +149,7 @@
     "items": {
       "cost": {
         "question": "Was kostet eine Photovoltaik-Anlage?",
-        "answer": "Eine typische PV-Anlage f\u00fcr ein Einfamilienhaus (5\u201310 kWp) kostet zwischen 7.000 und 20.000 \u20ac inkl. Montage und Wechselrichter. Mit Batteriespeicher kommen 5.000\u201315.000 \u20ac hinzu. Nutze unseren Rechner f\u00fcr eine genauere Sch\u00e4tzung basierend auf deiner Dachfl\u00e4che."
+        "answer": "Eine typische PV-Anlage f\u00fcr ein Einfamilienhaus (5\u201310 kWp) kostet zwischen 7.000 und 20.000 \u20ac inklusive Montage und Wechselrichter. Mit Batteriespeicher kommen 5.000\u201315.000 \u20ac hinzu. Nutzen Sie unseren Rechner f\u00fcr eine genauere Sch\u00e4tzung basierend auf Ihrer Dachfl\u00e4che."
       },
       "worthIt": {
         "question": "Lohnt sich eine Solaranlage?",
@@ -161,7 +161,7 @@
       },
       "noRegistration": {
         "question": "Warum brauche ich keine Anmeldung?",
-        "answer": "OpenSolarCheck berechnet alles direkt in deinem Browser. Deine Daten verlassen nie deinen Computer \u2013 es gibt keinen Server, der sie speichert. Deshalb brauchen wir weder E-Mail noch Telefonnummer."
+        "answer": "OpenSolarCheck berechnet alles direkt in Ihrem Browser. Ihre Daten verlassen nie Ihren Computer \u2013 es gibt keinen Server, der sie speichert. Deshalb brauchen wir weder E-Mail noch Telefonnummer."
       },
       "accuracy": {
         "question": "Wie genau ist der Rechner?",
@@ -179,9 +179,13 @@
     "calculating": "Berechnung läuft…",
     "step1": {
       "title": "Standort",
-      "description": "Wo soll die PV-Anlage installiert werden?",
+      "description": "Wo soll Ihre PV-Anlage installiert werden?",
       "postalCode": "Postleitzahl",
       "postalCodePlaceholder": "z.B. 80331",
+      "postalCodeHint": "PLZ genügt — Koordinaten werden automatisch ermittelt.",
+      "fetch": "Abrufen →",
+      "manualOpen": "+ Koordinaten manuell eingeben",
+      "manualClose": "— Manuelle Eingabe schließen",
       "city": "Ort",
       "lat": "Breitengrad",
       "lon": "Längengrad",
@@ -208,6 +212,7 @@
       "areaUnit": "m²",
       "areaHelp": "Grundfläche × Korrekturfaktor nach Neigung",
       "shading": "Verschattung",
+      "shadingHint": "Reduktion durch Bäume, Nachbargebäude, Kamine",
       "shadingNone": "Keine",
       "shadingLow": "Gering",
       "shadingMedium": "Mittel",
@@ -215,7 +220,9 @@
       "south": "S",
       "north": "N",
       "east": "O",
-      "west": "W"
+      "west": "W",
+      "southEastShort": "SO",
+      "southWestShort": "SW"
     },
     "step3": {
       "title": "PV-Anlage",
@@ -232,7 +239,8 @@
       "modulePower": "Modulleistung",
       "modulePowerUnit": "Wp",
       "moduleCount": "Anzahl Module",
-      "moduleCountInfo": "Basierend auf Ihrer Dachfläche von {area} m² passen max. {max} Module",
+      "moduleCountInfo": "Auf Ihre Dachfläche von {area} m² passen maximal {max} Module",
+      "maxSuffix": "max.",
       "peakPower": "Anlagenleistung",
       "peakPowerUnit": "kWp"
     },
@@ -241,25 +249,41 @@
       "description": "Wie viel Strom verbrauchen Sie?",
       "annualConsumption": "Jährlicher Stromverbrauch",
       "annualConsumptionUnit": "kWh/Jahr",
+      "unitKwhA": "kWh / a",
       "quickSelect": "Schnellauswahl",
+      "quickSelectHint": "Basis nach BDEW H0-Profil.",
       "persons1": "1 Person (~1.500 kWh)",
       "persons2": "2 Personen (~2.500 kWh)",
       "persons3": "3 Personen (~3.500 kWh)",
-      "persons4": "4+ Personen (~4.500 kWh)",
+      "persons4": "4 Personen (~4.500 kWh)",
+      "persons5": "5+ Personen (~5.500 kWh)",
       "heatPump": "Wärmepumpe vorhanden?",
-      "heatPumpInfo": "Addiert ca. 3.000–5.000 kWh",
+      "heatPumpInfo": "Zusätzlich ca. 3.000–5.000 kWh",
       "ev": "E-Auto vorhanden?",
-      "evInfo": "Addiert ca. 2.000–3.000 kWh",
-      "totalConsumption": "Gesamtverbrauch"
+      "evInfo": "Zusätzlich ca. 2.000–3.000 kWh",
+      "totalConsumption": "Gesamtverbrauch",
+      "toggleOn": "aktiv",
+      "toggleOff": "aus"
     },
     "step5": {
       "title": "Batteriespeicher",
       "description": "Möchten Sie einen Batteriespeicher nutzen?",
       "hasBattery": "Speicher gewünscht?",
+      "hasBatteryHint": "Typ. Mehr-Eigenverbrauch mit Speicher: +20–35 %.",
+      "noBatteryTitle": "Kein Speicher",
+      "noBatteryDesc": "Einspeisung zum EEG-Tarif",
+      "withBatteryTitle": "Mit Speicher",
+      "withBatteryDesc": "Mehr Eigenverbrauch, höhere Autarkie",
       "capacity": "Speicherkapazität",
       "capacityUnit": "kWh",
-      "recommendation": "Empfehlung: ca. 1 kWh pro kWp",
-      "recommendedCapacity": "Empfohlene Kapazität"
+      "recommendation": "Faustregel: ca. 1 kWh Speicher pro kWp Anlagenleistung",
+      "recommendedCapacity": "Empfohlene Kapazität",
+      "recommendedSuffix": "empfohlen",
+      "metrics": {
+        "capacity": "Kapazität",
+        "pvPower": "PV-Leistung",
+        "ratio": "Verhältnis"
+      }
     },
     "disclaimer": "Diese Berechnung liefert Richtwerte. Sie ersetzt keine professionelle Planung."
   },
@@ -267,6 +291,40 @@
     "title": "Ihre PV-Analyse",
     "subtitle": "Ergebnisse basierend auf Ihren Eingaben und PVGIS-Daten",
     "loading": "Berechnung läuft...",
+    "empty": "Keine Ergebnisse vorhanden.",
+    "notice": "Hinweis",
+    "paybackNever": "in 25 Jahren nicht erreicht",
+    "npvCaption": "Kapitalwert nach 25 Jahren",
+    "npvLabel": "€ Kapitalwert",
+    "npvSubtext": "Diskontrate 3 %, Strompreissteigerung 3 % p. a., Modul-Degradation 0,5 % p. a.",
+    "inputs": {
+      "title": "Ihre Eingaben",
+      "edit": "ändern →",
+      "location": "Standort",
+      "roof": "Dach",
+      "system": "Anlage",
+      "consumption": "Verbrauch",
+      "battery": "Speicher",
+      "heatPumpTag": "+ Wärmepumpe",
+      "evTag": "+ E-Auto",
+      "householdOnly": "Haushalt",
+      "azimuthLabel": "Azimut",
+      "shadingLabel": "Verschattung",
+      "batteryActive": "Batteriespeicher aktiv",
+      "batteryOff": "Ohne Speicher",
+      "noBatteryValue": "—"
+    },
+    "shading": {
+      "none": "keine",
+      "low": "gering",
+      "medium": "mittel",
+      "high": "stark"
+    },
+    "moduleType": {
+      "monocrystalline": "Monokristallin",
+      "polycrystalline": "Polykristallin",
+      "thinfilm": "Dünnschicht"
+    },
     "summary": {
       "annualYield": "Jährlicher Ertrag",
       "selfConsumption": "Eigenverbrauch",
@@ -287,17 +345,29 @@
       "financial": "Wirtschaftlichkeit über 25 Jahre",
       "cumulativeSavings": "Kumulative Ersparnisse",
       "breakEven": "Break-Even",
+      "breakEvenMarker": "▾ Break-even · Jahr {year}",
       "pvYieldLabel": "PV-Ertrag",
       "consumptionLabel": "Verbrauch",
       "yearsAxis": "Jahre",
-      "yearLabel": "Jahr {label}"
+      "yearLabel": "Jahr {label}",
+      "sumYield": "Σ Ertrag",
+      "sumConsumption": "Σ Verbrauch",
+      "modelDescription": "Modell: Investition → jährl. Einsparung + Einspeisung − Wartung, diskontiert.",
+      "selfConsumptionFooter": "Eigenverbrauchsquote (HTW Berlin / Quaschning) · BDEW H0-Lastprofil",
+      "autarkyBadge": "% Autarkie",
+      "selfConsumptionBadge": "% EV"
     },
     "co2": {
       "title": "CO2-Einsparung",
       "annual": "Jährliche Einsparung",
       "lifetime": "Über Lebensdauer",
       "flights": "Entspricht {count} Flügen München–Berlin",
-      "trees": "Entspricht {count} gepflanzten Bäumen"
+      "trees": "Entspricht {count} gepflanzten Bäumen",
+      "annualUnit": "kg CO₂ · pro Jahr",
+      "lifetimeUnit": "t CO₂ · 25 Jahre",
+      "source": "Quelle: UBA",
+      "flightsLabel": "≈ Flüge München–Berlin",
+      "treesLabel": "≈ gepflanzte Bäume"
     },
     "economics": {
       "title": "Wirtschaftlichkeit",

@@ -2,6 +2,12 @@
 
 import { useLocale, useTranslations } from "next-intl";
 
+const SITE_URL = "https://opensolarcheck.de";
+
+function safeJson(data: unknown): string {
+  return JSON.stringify(data).replace(/</g, "\\u003c");
+}
+
 export function JsonLd() {
   const locale = useLocale();
   const t = useTranslations("faq");
@@ -12,10 +18,10 @@ export function JsonLd() {
     "@context": "https://schema.org",
     "@type": "WebApplication",
     name: "OpenSolarCheck",
-    url: `https://opensolarcheck.de/${locale}`,
+    url: `${SITE_URL}/${locale}`,
     description:
       locale === "de"
-        ? "Kostenloser Photovoltaik-Rechner: Berechne Ertrag, Kosten und Amortisation deiner Solaranlage – ohne Anmeldung."
+        ? "Kostenloser Photovoltaik-Rechner: Berechnen Sie Ertrag, Kosten und Amortisation Ihrer Solaranlage – ohne Anmeldung."
         : "Free photovoltaic calculator: Calculate yield, costs, and payback period for your solar system – no registration.",
     applicationCategory: "UtilityApplication",
     operatingSystem: "All",
@@ -27,6 +33,15 @@ export function JsonLd() {
     inLanguage: locale === "de" ? "de-DE" : "en-US",
     isAccessibleForFree: true,
     browserRequirements: "Requires JavaScript",
+  };
+
+  const organization = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "OpenSolarCheck",
+    url: SITE_URL,
+    logo: `${SITE_URL}/favicon.svg`,
+    sameAs: ["https://github.com/opensolarcheck/open-source-pv-rechner"],
   };
 
   const faqPage = {
@@ -46,11 +61,15 @@ export function JsonLd() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(webApplication) }}
+        dangerouslySetInnerHTML={{ __html: safeJson(webApplication) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqPage) }}
+        dangerouslySetInnerHTML={{ __html: safeJson(organization) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: safeJson(faqPage) }}
       />
     </>
   );

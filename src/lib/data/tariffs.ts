@@ -9,12 +9,16 @@ export const FEED_IN_TARIFFS = {
   partial: {
     upTo10kWp: 0.055, // €/kWh (5,50 ct/kWh)
     from10to40kWp: 0.0448, // €/kWh (4,48 ct/kWh)
+    from40to100kWp: 0.0366, // €/kWh (3,66 ct/kWh)
   },
   /** Volleinspeisung */
   full: {
     upTo10kWp: 0.1035, // €/kWh (10,35 ct/kWh)
     from10to40kWp: 0.0886, // €/kWh (8,86 ct/kWh)
+    from40to100kWp: 0.0722, // €/kWh (7,22 ct/kWh)
   },
+  /** Ab dieser Anlagengröße greift die verpflichtende Direktvermarktung */
+  directMarketingThreshold_kWp: 100,
   validFrom: "2026-02-01",
   validUntil: "2026-07-31",
   nextDegression: "2026-08-01",
@@ -33,16 +37,24 @@ export const INVESTMENT_COSTS = {
   batteryPerKWh: { min: 600, max: 1000, default: 800 }, // €/kWh
 } as const;
 
-/** Berechnet gewichtete Einspeisevergütung basierend auf Anlagengröße */
+/** Berechnet gewichtete Einspeisevergütung (Teileinspeisung) basierend auf Anlagengröße */
 export function getFeedInTariff(peakPower_kWp: number): number {
-  if (peakPower_kWp <= 10) {
-    return FEED_IN_TARIFFS.partial.upTo10kWp;
+  const p = Math.max(0, peakPower_kWp);
+  const { upTo10kWp, from10to40kWp, from40to100kWp } = FEED_IN_TARIFFS.partial;
+  if (p === 0) return upTo10kWp;
+  if (p <= 10) return upTo10kWp;
+  if (p <= 40) {
+    const share10 = 10 / p;
+    return share10 * upTo10kWp + (1 - share10) * from10to40kWp;
   }
-  // Anteilig: erste 10 kWp zum höheren, Rest zum niedrigeren Satz
-  const share10 = 10 / peakPower_kWp;
-  const shareRest = 1 - share10;
+  // Ab 100 kWp greift die Direktvermarktung; wir kappen die Mischvergütung bei 100 kWp.
+  const size = Math.min(p, FEED_IN_TARIFFS.directMarketingThreshold_kWp);
+  const share10 = 10 / size;
+  const share40 = 30 / size; // 10..40 kWp
+  const shareRest = Math.max(0, (size - 40) / size);
   return (
-    share10 * FEED_IN_TARIFFS.partial.upTo10kWp +
-    shareRest * FEED_IN_TARIFFS.partial.from10to40kWp
+    share10 * upTo10kWp +
+    share40 * from10to40kWp +
+    shareRest * from40to100kWp
   );
 }

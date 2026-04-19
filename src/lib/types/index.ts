@@ -106,7 +106,8 @@ export interface SelfConsumptionResult {
 export interface EconomicResult {
   totalInvestment: number;
   annualSavings: number; // im ersten Jahr
-  paybackYears: number;
+  /** null = Anlage amortisiert sich innerhalb der Lebensdauer nicht */
+  paybackYears: number | null;
   totalSavings25Years: number;
   npv: number;
   roi: number; // in %

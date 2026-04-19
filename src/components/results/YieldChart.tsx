@@ -165,7 +165,7 @@ export function YieldChart({ result, totalConsumption }: Props) {
           fontSize="10"
           fill="var(--faint-ink)"
         >
-          Σ YIELD {totalYield.toLocaleString(locale)} kWh
+          {t("sumYield")} {totalYield.toLocaleString(locale)} kWh
         </text>
         <text
           x={pad.left + plotW}
@@ -175,7 +175,7 @@ export function YieldChart({ result, totalConsumption }: Props) {
           fontSize="10"
           fill="var(--faint-ink)"
         >
-          Σ CONSUMPTION {totalCons.toLocaleString(locale)} kWh
+          {t("sumConsumption")} {totalCons.toLocaleString(locale)} kWh
         </text>
       </svg>
     </div>

@@ -44,7 +44,7 @@ export function Step1Location({ location, onUpdate }: Props) {
   return (
     <div className="grid md:grid-cols-12 gap-8 md:gap-12">
       <div className="md:col-span-7 space-y-7">
-        <Field label={t("postalCode")} hint="PLZ genügt — Koordinaten werden automatisch ermittelt.">
+        <Field label={t("postalCode")} hint={t("postalCodeHint")}>
           <div className="flex items-baseline gap-3 border-b border-rule-strong pb-2">
             <Input
               id="postalCode"
@@ -69,7 +69,7 @@ export function Step1Location({ location, onUpdate }: Props) {
               }
               className="text-[13px] text-ink hover:text-solar disabled:text-faint-ink disabled:cursor-not-allowed"
             >
-              {searching ? "…" : "Abrufen →"}
+              {searching ? "…" : t("fetch")}
             </button>
           </div>
           <div className="mt-2 text-[12px] text-faint-ink min-h-[14px]">
@@ -103,7 +103,7 @@ export function Step1Location({ location, onUpdate }: Props) {
           onClick={() => setShowManual(!showManual)}
           className="text-[12.5px] text-muted-ink hover:text-ink border-b border-rule pb-0.5"
         >
-          {showManual ? "— Manuelle Eingabe schließen" : "+ Koordinaten manuell eingeben"}
+          {showManual ? t("manualClose") : t("manualOpen")}
         </button>
 
         {showManual && (

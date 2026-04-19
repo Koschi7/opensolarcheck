@@ -27,7 +27,7 @@ export function Step5Battery({ battery, peakPower, onUpdate }: Props) {
   return (
     <div className="grid md:grid-cols-12 gap-8 md:gap-12">
       <div className="md:col-span-7 space-y-7">
-        <Field label={t("hasBattery")} hint="Typ. Mehr-Eigenverbrauch mit Speicher: +20–35 %.">
+        <Field label={t("hasBattery")} hint={t("hasBatteryHint")}>
           <div className="grid grid-cols-2 border border-rule">
             <button
               type="button"
@@ -40,10 +40,10 @@ export function Step5Battery({ battery, peakPower, onUpdate }: Props) {
               aria-pressed={!battery.hasBattery}
             >
               <div className="font-display text-[18px] tracking-tight">
-                Kein Speicher
+                {t("noBatteryTitle")}
               </div>
               <div className={`text-[12px] mt-1 ${!battery.hasBattery ? "text-paper/70" : "text-muted-ink"}`}>
-                Einspeisung zum EEG-Tarif
+                {t("noBatteryDesc")}
               </div>
             </button>
             <button
@@ -57,10 +57,10 @@ export function Step5Battery({ battery, peakPower, onUpdate }: Props) {
               aria-pressed={battery.hasBattery}
             >
               <div className="font-display text-[18px] tracking-tight">
-                Mit Speicher
+                {t("withBatteryTitle")}
               </div>
               <div className={`text-[12px] mt-1 ${battery.hasBattery ? "text-paper/70" : "text-muted-ink"}`}>
-                Mehr Eigenverbrauch, höhere Autarkie
+                {t("withBatteryDesc")}
               </div>
             </button>
           </div>
@@ -84,7 +84,7 @@ export function Step5Battery({ battery, peakPower, onUpdate }: Props) {
             <div className="flex justify-between text-[11px] text-faint-ink mt-2">
               <span>5 kWh</span>
               <span className="text-solar">
-                ▾ {recommendedCapacity} empfohlen
+                ▾ {recommendedCapacity} {t("recommendedSuffix")}
               </span>
               <span>20 kWh</span>
             </div>
@@ -93,10 +93,10 @@ export function Step5Battery({ battery, peakPower, onUpdate }: Props) {
 
         {battery.hasBattery && (
           <div className="grid grid-cols-3 gap-6 pt-4 border-t border-rule">
-            <Metric label="Kapazität" value={battery.capacity.toFixed(1)} unit="kWh" />
-            <Metric label="PV-Leistung" value={peakPower.toFixed(1)} unit="kWp" />
+            <Metric label={t("metrics.capacity")} value={battery.capacity.toFixed(1)} unit="kWh" />
+            <Metric label={t("metrics.pvPower")} value={peakPower.toFixed(1)} unit="kWp" />
             <Metric
-              label="Verhältnis"
+              label={t("metrics.ratio")}
               value={(battery.capacity / Math.max(peakPower, 0.1)).toFixed(2)}
               unit="kWh/kWp"
             />

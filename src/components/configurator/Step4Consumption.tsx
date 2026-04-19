@@ -26,13 +26,14 @@ export function Step4Consumption({
     { key: "2", label: t("persons2") },
     { key: "3", label: t("persons3") },
     { key: "4", label: t("persons4") },
+    { key: "5", label: t("persons5") },
   ];
 
   return (
     <div className="grid md:grid-cols-12 gap-8 md:gap-12">
       <div className="md:col-span-7 space-y-7">
-        <Field label={t("quickSelect")} hint="Basis nach BDEW H0-Profil.">
-          <div className="grid grid-cols-2 md:grid-cols-4 border border-rule">
+        <Field label={t("quickSelect")} hint={t("quickSelectHint")}>
+          <div className="grid grid-cols-2 md:grid-cols-5 border border-rule">
             {quickOptions.map((opt, i) => {
               const isSelected =
                 consumption.annualConsumption ===
@@ -47,9 +48,11 @@ export function Step4Consumption({
                       annualConsumption: CONSUMPTION_BY_PERSONS[opt.key],
                     })
                   }
-                  className={`px-3 py-4 text-left transition-colors ${
-                    i > 0 ? "border-l border-rule" : ""
-                  } ${i >= 2 ? "border-t border-rule md:border-t-0" : ""} ${
+                  className={`px-3 py-4 text-left transition-colors border-rule ${
+                    i % 2 !== 0 ? "border-l md:border-l" : ""
+                  } ${i >= 2 ? "border-t md:border-t-0" : ""} ${
+                    i > 0 ? "md:border-l" : ""
+                  } ${
                     isSelected
                       ? "bg-ink text-paper"
                       : "bg-paper text-ink hover:bg-secondary/30"
@@ -86,7 +89,7 @@ export function Step4Consumption({
               className="flex-1 border-0 bg-transparent text-[26px] font-display tabular px-0 focus-visible:ring-0"
             />
             <span className="text-[13px] text-faint-ink">
-              kWh / a
+              {t("unitKwhA")}
             </span>
           </div>
         </Field>
@@ -97,6 +100,8 @@ export function Step4Consumption({
             hint={t("heatPumpInfo")}
             checked={consumption.hasHeatPump}
             onChange={(v) => onUpdate({ hasHeatPump: v })}
+            onLabel={t("toggleOn")}
+            offLabel={t("toggleOff")}
             id="heatPump"
           />
           <ToggleRow
@@ -104,6 +109,8 @@ export function Step4Consumption({
             hint={t("evInfo")}
             checked={consumption.hasEV}
             onChange={(v) => onUpdate({ hasEV: v })}
+            onLabel={t("toggleOn")}
+            offLabel={t("toggleOff")}
             id="ev"
           />
         </div>
@@ -116,7 +123,7 @@ export function Step4Consumption({
             <div className="font-num text-[28px] md:text-[32px] tabular text-ink leading-none">
               {totalConsumption.toLocaleString(locale)}
               <span className="text-[12px] text-faint-ink ml-2">
-                kWh / a
+                {t("unitKwhA")}
               </span>
             </div>
           </div>
@@ -141,12 +148,16 @@ function ToggleRow({
   hint,
   checked,
   onChange,
+  onLabel,
+  offLabel,
   id,
 }: {
   label: string;
   hint: string;
   checked: boolean;
   onChange: (v: boolean) => void;
+  onLabel: string;
+  offLabel: string;
   id: string;
 }) {
   return (
@@ -169,7 +180,7 @@ function ToggleRow({
       </div>
       <div className="flex items-center gap-3 shrink-0">
         <span className={`text-[12px] ${checked ? "text-solar" : "text-faint-ink"}`}>
-          {checked ? "aktiv" : "aus"}
+          {checked ? onLabel : offLabel}
         </span>
         <div
           className={`relative h-5 w-10 border transition-colors ${

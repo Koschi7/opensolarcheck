@@ -50,7 +50,7 @@ export function FinancialChart({ result }: Props) {
 
   const xTicks = [0, 5, 10, 15, 20, 25];
   const payback = result.economics.paybackYears;
-  const finalValue = data[data.length - 1].value;
+  const finalValue = data[data.length - 1]?.value ?? 0;
 
   return (
     <section>
@@ -63,7 +63,7 @@ export function FinancialChart({ result }: Props) {
             {t("breakEven")}
           </span>
           <span className="font-num text-[18px] text-ink">
-            {payback}
+            {payback === null ? "—" : payback}
             <span className="font-mono-ui text-[11px] text-faint-ink ml-1">{t("yearsAxis")}</span>
           </span>
         </div>
@@ -147,7 +147,7 @@ export function FinancialChart({ result }: Props) {
           </text>
 
           {/* break-even vertical */}
-          {payback > 0 && payback < 26 && (
+          {payback !== null && payback > 0 && payback < 26 && (
             <>
               <line
                 x1={xScale(payback)}
@@ -172,7 +172,7 @@ export function FinancialChart({ result }: Props) {
                 fill="var(--accent-solar)"
                 fontWeight="500"
               >
-                ▾ Break-even · Jahr {payback}
+                {t("breakEvenMarker", { year: payback })}
               </text>
             </>
           )}
@@ -210,7 +210,7 @@ export function FinancialChart({ result }: Props) {
 
         <div className="mt-5 pt-4 border-t border-rule flex items-baseline justify-between font-mono-ui text-[10.5px] text-faint-ink">
           <span>
-            Modell: Investition → jährl. Einsparung + Einspeisung − Wartung, diskontiert.
+            {t("modelDescription")}
           </span>
           <span>
             t₀ = −{result.economics.totalInvestment.toLocaleString(locale)} €

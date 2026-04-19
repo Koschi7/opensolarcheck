@@ -179,9 +179,13 @@
     "calculating": "Calculating…",
     "step1": {
       "title": "Location",
-      "description": "Where should the PV system be installed?",
+      "description": "Where should your PV system be installed?",
       "postalCode": "Postal code",
       "postalCodePlaceholder": "e.g. 80331",
+      "postalCodeHint": "Postal code is enough — coordinates are fetched automatically.",
+      "fetch": "Fetch →",
+      "manualOpen": "+ Enter coordinates manually",
+      "manualClose": "— Close manual entry",
       "city": "City",
       "lat": "Latitude",
       "lon": "Longitude",
@@ -208,6 +212,7 @@
       "areaUnit": "m²",
       "areaHelp": "Base area × correction factor by tilt",
       "shading": "Shading",
+      "shadingHint": "Reduction from trees, neighbouring buildings, chimneys",
       "shadingNone": "None",
       "shadingLow": "Low",
       "shadingMedium": "Medium",
@@ -215,7 +220,9 @@
       "south": "S",
       "north": "N",
       "east": "E",
-      "west": "W"
+      "west": "W",
+      "southEastShort": "SE",
+      "southWestShort": "SW"
     },
     "step3": {
       "title": "PV System",
@@ -232,7 +239,8 @@
       "modulePower": "Module power",
       "modulePowerUnit": "Wp",
       "moduleCount": "Number of modules",
-      "moduleCountInfo": "Based on your roof area of {area} m², max. {max} modules fit",
+      "moduleCountInfo": "Based on your roof area of {area} m², up to {max} modules fit",
+      "maxSuffix": "max.",
       "peakPower": "System power",
       "peakPowerUnit": "kWp"
     },
@@ -241,25 +249,41 @@
       "description": "How much electricity do you consume?",
       "annualConsumption": "Annual electricity consumption",
       "annualConsumptionUnit": "kWh/year",
+      "unitKwhA": "kWh / yr",
       "quickSelect": "Quick select",
+      "quickSelectHint": "Based on the BDEW H0 standard load profile.",
       "persons1": "1 person (~1,500 kWh)",
       "persons2": "2 persons (~2,500 kWh)",
       "persons3": "3 persons (~3,500 kWh)",
-      "persons4": "4+ persons (~4,500 kWh)",
+      "persons4": "4 persons (~4,500 kWh)",
+      "persons5": "5+ persons (~5,500 kWh)",
       "heatPump": "Heat pump?",
       "heatPumpInfo": "Adds approx. 3,000–5,000 kWh",
       "ev": "Electric vehicle?",
       "evInfo": "Adds approx. 2,000–3,000 kWh",
-      "totalConsumption": "Total consumption"
+      "totalConsumption": "Total consumption",
+      "toggleOn": "on",
+      "toggleOff": "off"
     },
     "step5": {
       "title": "Battery storage",
       "description": "Would you like to add battery storage?",
       "hasBattery": "Battery storage desired?",
+      "hasBatteryHint": "Typical extra self-consumption with storage: +20–35%.",
+      "noBatteryTitle": "No storage",
+      "noBatteryDesc": "Surplus fed into the grid at the EEG tariff",
+      "withBatteryTitle": "With storage",
+      "withBatteryDesc": "More self-consumption, higher self-sufficiency",
       "capacity": "Storage capacity",
       "capacityUnit": "kWh",
-      "recommendation": "Recommendation: approx. 1 kWh per kWp",
-      "recommendedCapacity": "Recommended capacity"
+      "recommendation": "Rule of thumb: about 1 kWh of storage per kWp of system power",
+      "recommendedCapacity": "Recommended capacity",
+      "recommendedSuffix": "recommended",
+      "metrics": {
+        "capacity": "Capacity",
+        "pvPower": "PV power",
+        "ratio": "Ratio"
+      }
     },
     "disclaimer": "This calculation provides estimates. It does not replace professional planning."
   },
@@ -267,6 +291,40 @@
     "title": "Your PV Analysis",
     "subtitle": "Results based on your inputs and PVGIS data",
     "loading": "Calculating...",
+    "empty": "No results available.",
+    "notice": "Note",
+    "paybackNever": "not reached within 25 years",
+    "npvCaption": "Net present value after 25 years",
+    "npvLabel": "€ NPV",
+    "npvSubtext": "Discount rate 3%, electricity price growth 3%/yr, module degradation 0.5%/yr.",
+    "inputs": {
+      "title": "Your inputs",
+      "edit": "edit →",
+      "location": "Location",
+      "roof": "Roof",
+      "system": "System",
+      "consumption": "Consumption",
+      "battery": "Storage",
+      "heatPumpTag": "+ heat pump",
+      "evTag": "+ EV",
+      "householdOnly": "Household",
+      "azimuthLabel": "Azimuth",
+      "shadingLabel": "Shading",
+      "batteryActive": "Battery storage active",
+      "batteryOff": "No storage",
+      "noBatteryValue": "—"
+    },
+    "shading": {
+      "none": "none",
+      "low": "low",
+      "medium": "medium",
+      "high": "heavy"
+    },
+    "moduleType": {
+      "monocrystalline": "Monocrystalline",
+      "polycrystalline": "Polycrystalline",
+      "thinfilm": "Thin-film"
+    },
     "summary": {
       "annualYield": "Annual yield",
       "selfConsumption": "Self-consumption",
@@ -287,17 +345,29 @@
       "financial": "Financial analysis over 25 years",
       "cumulativeSavings": "Cumulative savings",
       "breakEven": "Break-even",
+      "breakEvenMarker": "▾ Break-even · year {year}",
       "pvYieldLabel": "PV yield",
       "consumptionLabel": "Consumption",
       "yearsAxis": "Years",
-      "yearLabel": "Year {label}"
+      "yearLabel": "Year {label}",
+      "sumYield": "Σ yield",
+      "sumConsumption": "Σ consumption",
+      "modelDescription": "Model: investment → yearly savings + feed-in − maintenance, discounted.",
+      "selfConsumptionFooter": "Self-consumption ratio (HTW Berlin / Quaschning) · BDEW H0 load profile",
+      "autarkyBadge": "% self-sufficiency",
+      "selfConsumptionBadge": "% SC"
     },
     "co2": {
       "title": "CO2 savings",
       "annual": "Annual savings",
       "lifetime": "Over lifetime",
       "flights": "Equivalent to {count} flights Munich–Berlin",
-      "trees": "Equivalent to {count} planted trees"
+      "trees": "Equivalent to {count} planted trees",
+      "annualUnit": "kg CO₂ · per year",
+      "lifetimeUnit": "t CO₂ · 25 years",
+      "source": "Source: UBA",
+      "flightsLabel": "≈ flights Munich–Berlin",
+      "treesLabel": "≈ planted trees"
     },
     "economics": {
       "title": "Financial analysis",

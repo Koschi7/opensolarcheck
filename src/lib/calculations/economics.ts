@@ -49,8 +49,7 @@ export function calculateEconomics(params: EconomicParams): EconomicResult {
 
   const yearlyData: YearlyEconomicData[] = [];
   let cumulativeSavings = -totalInvestment;
-  let paybackYears = systemLifetime; // Default falls nie erreicht
-  let paybackFound = false;
+  let paybackYears: number | null = null;
   let npv = -totalInvestment;
 
   for (let t = 1; t <= systemLifetime; t++) {
@@ -70,12 +69,11 @@ export function calculateEconomics(params: EconomicParams): EconomicResult {
     cumulativeSavings += savings;
     npv += savings / Math.pow(1 + discountRate, t);
 
-    if (!paybackFound && cumulativeSavings >= 0) {
-      // Lineare Interpolation für genaueren Break-Even
+    if (paybackYears === null && cumulativeSavings >= 0) {
       const prevCumulative = cumulativeSavings - savings;
+      // Linear interpolation only when savings are positive; otherwise report integer year
       paybackYears =
-        t - 1 + Math.abs(prevCumulative) / savings;
-      paybackFound = true;
+        savings > 0 ? t - 1 + Math.abs(prevCumulative) / savings : t;
     }
 
     yearlyData.push({
@@ -90,11 +88,12 @@ export function calculateEconomics(params: EconomicParams): EconomicResult {
 
   const totalSavings = cumulativeSavings + totalInvestment;
   const roi = totalInvestment > 0 ? (totalSavings / totalInvestment - 1) * 100 : 0;
+  const firstYear = yearlyData[0];
 
   return {
     totalInvestment: Math.round(totalInvestment),
-    annualSavings: yearlyData.length > 0 ? yearlyData[0].savings : 0,
-    paybackYears: Math.round(paybackYears * 10) / 10,
+    annualSavings: firstYear ? firstYear.savings : 0,
+    paybackYears: paybackYears === null ? null : Math.round(paybackYears * 10) / 10,
     totalSavings25Years: Math.round(totalSavings),
     npv: Math.round(npv),
     roi: Math.round(roi * 10) / 10,

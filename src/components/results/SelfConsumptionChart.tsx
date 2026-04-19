@@ -36,7 +36,7 @@ export function SelfConsumptionChart({ result }: Props) {
             {t("pvYieldLabel")} · {totalPV.toLocaleString(locale)} kWh
           </span>
           <span className="font-mono-ui text-[11px] text-ink tabular">
-            {selfRatio}% EV
+            {selfRatio}{t("selfConsumptionBadge")}
           </span>
         </div>
         <FlowBar
@@ -64,7 +64,7 @@ export function SelfConsumptionChart({ result }: Props) {
             {t("consumptionLabel")} · {totalLoad.toLocaleString(locale)} kWh
           </span>
           <span className="font-mono-ui text-[11px] text-ink tabular">
-            {autarky}% Autarkie
+            {autarky}{t("autarkyBadge")}
           </span>
         </div>
         <FlowBar
@@ -85,7 +85,7 @@ export function SelfConsumptionChart({ result }: Props) {
       </div>
 
       <div className="mt-5 pt-4 border-t border-rule font-mono-ui text-[10.5px] text-faint-ink">
-        Eigenverbrauchsquote (HTW Berlin / Quaschning) · BDEW H0-Lastprofil
+        {t("selfConsumptionFooter")}
       </div>
     </div>
   );
@@ -100,8 +100,17 @@ interface Segment {
 
 function FlowBar({ segments, total }: { segments: Segment[]; total: number }) {
   const locale = useLocale();
-  let offset = 0;
   const vb = { w: 600, h: 72 };
+
+  const positioned = segments.reduce<
+    { seg: Segment; x: number; w: number; offset: number }[]
+  >((acc, seg) => {
+    const prevOffset = acc.length > 0 ? acc[acc.length - 1].offset + acc[acc.length - 1].seg.value : 0;
+    const w = (vb.w * seg.value) / Math.max(total, 1);
+    const x = (vb.w * prevOffset) / Math.max(total, 1);
+    acc.push({ seg, x, w, offset: prevOffset });
+    return acc;
+  }, []);
 
   return (
     <div>
@@ -126,10 +135,7 @@ function FlowBar({ segments, total }: { segments: Segment[]; total: number }) {
           </pattern>
         </defs>
 
-        {segments.map((seg) => {
-          const w = (vb.w * seg.value) / Math.max(total, 1);
-          const x = (vb.w * offset) / Math.max(total, 1);
-          offset += seg.value;
+        {positioned.map(({ seg, x, w }) => {
           return (
             <g key={seg.label}>
               <rect

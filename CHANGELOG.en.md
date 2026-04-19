@@ -4,6 +4,27 @@ All notable changes to this project are documented here.
 
 Format based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [1.2.0] - 2026-04-19
+
+### Fixed
+
+- Payback calculation silently returned 25 years when the system never amortized within its lifetime. Calculator, results page, PDF export, and financial chart now explicitly show "not reached within 25 years".
+- Feed-in tariff for systems > 40 kWp was computed incorrectly. New three-tier weighted model (up to 10 / 40 / 100 kWp) matching EEG structure.
+
+### Changed
+
+- Unified formal "Sie" form across all German copy (landing, configurator, results, FAQ, PDF) for consistent tone.
+- PDF export redesigned to match the web editorial aesthetic: masthead, hairline rules, monospaced figures, solar orange reserved for the payback period.
+- Full English i18n coverage: configurator, results page, charts, and CO₂ card now render fully in English on `/en`.
+- Results page shows input echo with translated shading/module-type labels — no hardcoded German strings remain.
+- Higher text contrast: `--muted-ink` and `--faint-ink` darkened for WCAG AA legibility.
+
+### Added
+
+- Organization JSON-LD block alongside WebApplication and FAQPage for better SEO surface.
+- New translation keys for the results page (inputs, notice, NPV, cash flow) and configurator (payback edge cases, quick-select hints, battery metrics).
+- Household preset for 5 people (5,500 kWh/year) in the consumption step.
+
 ## [1.1.0] - 2026-04-18
 
 ### Changed

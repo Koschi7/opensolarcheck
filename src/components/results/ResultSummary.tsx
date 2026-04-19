@@ -9,6 +9,7 @@ interface Props {
 
 export function ResultSummary({ result }: Props) {
   const t = useTranslations("results.summary");
+  const tEcon = useTranslations("results");
   const locale = useLocale();
 
   const payback = result.economics.paybackYears;
@@ -17,23 +18,25 @@ export function ResultSummary({ result }: Props) {
   const annualSavings = result.economics.annualSavings;
   const selfCons = Math.round(result.selfConsumption.selfConsumptionRatio * 100);
   const autarky = Math.round(result.selfConsumption.autarkyRate * 100);
+  const paybackValue = payback === null ? "—" : payback.toString();
+  const paybackUnit = payback === null ? tEcon("paybackNever") : t("years");
 
   return (
     <section className="border-t border-b border-rule-strong py-5 md:py-7">
       <div className="grid md:grid-cols-12 gap-5 md:gap-10 items-end">
         <div className="md:col-span-7">
           <div className="text-[12px] text-muted-ink mb-1.5">
-            Kapitalwert nach 25 Jahren
+            {tEcon("npvCaption")}
           </div>
           <div className="flex items-baseline gap-3 flex-wrap">
             <span className={`font-num text-[44px] md:text-[64px] leading-[0.95] tracking-tight ${npv >= 0 ? "text-ink" : "text-solar"}`}>
               {npv >= 0 ? "+" : ""}
               {npv.toLocaleString(locale)}
             </span>
-            <span className="font-num text-[15px] text-muted-ink">€ NPV</span>
+            <span className="font-num text-[15px] text-muted-ink">{tEcon("npvLabel")}</span>
           </div>
           <p className="mt-2 text-[12px] text-muted-ink max-w-[60ch] leading-relaxed">
-            Diskontrate 3 %, Strompreissteigerung 3 % p. a., Modul-Degradation 0,5 % p. a.
+            {tEcon("npvSubtext")}
           </p>
         </div>
 
@@ -41,8 +44,8 @@ export function ResultSummary({ result }: Props) {
           <dl className="grid grid-cols-2 gap-y-5 gap-x-6 md:border-l border-rule-strong md:pl-8">
             <StatCell
               label={t("payback")}
-              value={payback.toString()}
-              unit={t("years")}
+              value={paybackValue}
+              unit={paybackUnit}
             />
             <StatCell
               label={t("annualSavings")}

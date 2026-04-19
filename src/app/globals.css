@@ -66,13 +66,14 @@
 :root {
   --paper: oklch(1 0 0);
   --ink: oklch(0.18 0 0);
-  --muted-ink: oklch(0.42 0 0);
-  --faint-ink: oklch(0.62 0 0);
+  --muted-ink: oklch(0.38 0 0);
+  --faint-ink: oklch(0.50 0 0);
   --rule: oklch(0.9 0 0);
   --rule-strong: oklch(0.78 0 0);
 
   --accent-solar: oklch(0.65 0.19 40);
   --accent-solar-soft: oklch(0.92 0.06 55);
+  --accent-success: oklch(0.52 0.12 165);
 
   --data-grid: oklch(0.65 0.19 40);
   --data-grid-consumption: oklch(0.38 0.02 250);

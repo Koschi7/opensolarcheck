@@ -18,7 +18,7 @@ export function CO2Card({ co2 }: Props) {
           {t("title")}
         </h3>
         <span className="text-[11px] text-faint-ink">
-          Quelle: UBA
+          {t("source")}
         </span>
       </div>
 
@@ -31,7 +31,7 @@ export function CO2Card({ co2 }: Props) {
             {co2.annualSavings_kg.toLocaleString(locale)}
           </div>
           <div className="text-[11px] text-faint-ink mt-1.5">
-            kg CO₂ · pro Jahr
+            {t("annualUnit")}
           </div>
         </div>
         <div>
@@ -42,14 +42,14 @@ export function CO2Card({ co2 }: Props) {
             {co2.lifetimeSavings_tons}
           </div>
           <div className="text-[11px] text-faint-ink mt-1.5">
-            t CO₂ · 25 Jahre
+            {t("lifetimeUnit")}
           </div>
         </div>
       </div>
 
       <div className="pt-3 border-t border-rule">
-        <EquivRow label="≈ Flüge München–Berlin" value={co2.equivalentFlights.toString()} />
-        <EquivRow label="≈ gepflanzte Bäume" value={co2.equivalentTrees.toString()} />
+        <EquivRow label={t("flightsLabel")} value={co2.equivalentFlights.toString()} />
+        <EquivRow label={t("treesLabel")} value={co2.equivalentTrees.toString()} />
       </div>
     </section>
   );

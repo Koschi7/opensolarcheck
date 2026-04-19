@@ -24,9 +24,9 @@ export function Step2Roof({ roof, onUpdate }: Props) {
 
   const azimuthPresets = [
     { label: t("azimuthEast"), short: t("east"), value: -90 },
-    { label: t("azimuthSouthEast"), short: "SO", value: -45 },
+    { label: t("azimuthSouthEast"), short: t("southEastShort"), value: -45 },
     { label: t("azimuthSouth"), short: t("south"), value: 0 },
-    { label: t("azimuthSouthWest"), short: "SW", value: 45 },
+    { label: t("azimuthSouthWest"), short: t("southWestShort"), value: 45 },
     { label: t("azimuthWest"), short: t("west"), value: 90 },
   ];
 
@@ -114,7 +114,7 @@ export function Step2Roof({ roof, onUpdate }: Props) {
           </div>
         </Field>
 
-        <Field label={t("shading")} hint="Reduktion durch Bäume, Nachbargebäude, Kamine">
+        <Field label={t("shading")} hint={t("shadingHint")}>
           <Select
             value={roof.shading}
             onValueChange={(v) =>

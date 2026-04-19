@@ -9,118 +9,196 @@ import {
 import type { CalculationResult } from "@/lib/types";
 import { getMonthlyConsumption } from "@/lib/data/loadProfiles";
 
+const INK = "#1a1a1a";
+const MUTED = "#545454";
+const FAINT = "#808080";
+const RULE = "#d9d9d9";
+const RULE_STRONG = "#b5b5b5";
+const SOLAR = "#c7580f";
+const PAPER = "#ffffff";
+
 const styles = StyleSheet.create({
   page: {
-    padding: 40,
-    fontSize: 10,
+    padding: 48,
+    fontSize: 9.5,
     fontFamily: "Helvetica",
+    color: INK,
+    backgroundColor: PAPER,
     display: "flex",
     flexDirection: "column",
   },
-  header: {
-    marginBottom: 20,
-    textAlign: "center",
+  masthead: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "flex-end",
+    paddingBottom: 8,
+    borderBottomWidth: 1,
+    borderBottomColor: INK,
+    marginBottom: 24,
+  },
+  mastheadLeft: {
+    flexDirection: "column",
+  },
+  wordmark: {
+    fontSize: 11,
+    fontFamily: "Helvetica-Bold",
+    letterSpacing: 1.4,
+    color: INK,
+  },
+  issueMeta: {
+    fontSize: 8,
+    letterSpacing: 0.8,
+    color: FAINT,
+    marginTop: 3,
+    fontFamily: "Courier",
+  },
+  mastheadRight: {
+    fontSize: 8,
+    letterSpacing: 0.8,
+    color: FAINT,
+    fontFamily: "Courier",
+    textAlign: "right",
   },
   title: {
-    fontSize: 24,
-    fontWeight: "bold",
-    color: "#1E40AF",
+    fontSize: 26,
+    fontFamily: "Helvetica-Bold",
+    color: INK,
+    marginBottom: 4,
+    letterSpacing: -0.4,
   },
   subtitle: {
-    fontSize: 12,
-    color: "#6B7280",
-    marginTop: 4,
+    fontSize: 10.5,
+    color: MUTED,
+    marginBottom: 18,
   },
-  date: {
-    fontSize: 9,
-    color: "#9CA3AF",
-    marginTop: 8,
+  figureBlock: {
+    borderTopWidth: 1,
+    borderTopColor: INK,
+    borderBottomWidth: 1,
+    borderBottomColor: RULE,
+    paddingTop: 10,
+    paddingBottom: 14,
+    marginBottom: 20,
+  },
+  figureCaption: {
+    fontSize: 7.5,
+    letterSpacing: 1.2,
+    color: FAINT,
+    fontFamily: "Courier",
+    marginBottom: 6,
+  },
+  figureValue: {
+    fontSize: 38,
+    fontFamily: "Helvetica-Bold",
+    color: INK,
+    letterSpacing: -0.8,
+  },
+  figureUnit: {
+    fontSize: 10,
+    color: MUTED,
+    marginTop: 4,
+    fontFamily: "Courier",
   },
   section: {
-    marginBottom: 16,
+    marginBottom: 18,
   },
   sectionTitle: {
-    fontSize: 14,
-    fontWeight: "bold",
-    color: "#1E40AF",
-    marginBottom: 8,
-    borderBottomWidth: 1,
-    borderBottomColor: "#E5E7EB",
+    fontSize: 8,
+    fontFamily: "Helvetica-Bold",
+    color: INK,
+    letterSpacing: 1.4,
+    marginBottom: 6,
     paddingBottom: 4,
+    borderBottomWidth: 1,
+    borderBottomColor: INK,
   },
   row: {
     flexDirection: "row",
     justifyContent: "space-between",
-    paddingVertical: 3,
+    paddingVertical: 4.5,
     borderBottomWidth: 0.5,
-    borderBottomColor: "#F3F4F6",
+    borderBottomColor: RULE,
   },
   label: {
-    color: "#374151",
+    color: MUTED,
+    fontSize: 9.5,
   },
   value: {
-    fontWeight: "bold",
-    color: "#111827",
+    color: INK,
+    fontFamily: "Courier",
+    fontSize: 9.5,
   },
-  highlight: {
-    backgroundColor: "#FEF3C7",
-    padding: 12,
-    borderRadius: 8,
-    marginBottom: 16,
-    textAlign: "center",
-  },
-  highlightValue: {
-    fontSize: 20,
-    fontWeight: "bold",
-    color: "#D97706",
-  },
-  highlightLabel: {
-    fontSize: 10,
-    color: "#92400E",
-    marginTop: 4,
+  valueAccent: {
+    color: SOLAR,
+    fontFamily: "Courier",
+    fontSize: 9.5,
   },
   table: {
-    marginTop: 8,
+    marginTop: 4,
   },
   tableHeader: {
     flexDirection: "row",
-    backgroundColor: "#F3F4F6",
-    paddingVertical: 4,
-    paddingHorizontal: 6,
-    fontWeight: "bold",
+    paddingVertical: 5,
+    borderTopWidth: 1,
+    borderTopColor: INK,
+    borderBottomWidth: 0.5,
+    borderBottomColor: RULE_STRONG,
+  },
+  tableHeaderCell: {
+    flex: 1,
+    fontSize: 7.5,
+    fontFamily: "Helvetica-Bold",
+    letterSpacing: 0.8,
+    color: INK,
   },
   tableRow: {
     flexDirection: "row",
-    paddingVertical: 3,
-    paddingHorizontal: 6,
+    paddingVertical: 4,
     borderBottomWidth: 0.5,
-    borderBottomColor: "#E5E7EB",
+    borderBottomColor: RULE,
   },
   tableCell: {
     flex: 1,
     fontSize: 8,
+    fontFamily: "Courier",
+    color: INK,
+  },
+  tableCellLabel: {
+    flex: 1,
+    fontSize: 8,
+    color: MUTED,
   },
   disclaimer: {
-    marginTop: 20,
-    padding: 10,
-    backgroundColor: "#FEF2F2",
-    borderRadius: 4,
-    borderWidth: 1,
-    borderColor: "#FECACA",
+    marginTop: 18,
+    paddingTop: 10,
+    borderTopWidth: 0.5,
+    borderTopColor: RULE_STRONG,
   },
   disclaimerText: {
-    fontSize: 8,
-    color: "#991B1B",
+    fontSize: 7.5,
+    color: MUTED,
+    lineHeight: 1.5,
   },
   footer: {
     marginTop: "auto",
-    paddingTop: 15,
-    textAlign: "center",
-    fontSize: 8,
-    color: "#9CA3AF",
+    paddingTop: 12,
+    borderTopWidth: 0.5,
+    borderTopColor: RULE,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    fontSize: 7,
+    fontFamily: "Courier",
+    letterSpacing: 0.6,
+    color: FAINT,
   },
   pageContent: {
     flex: 1,
+  },
+  accentRule: {
+    height: 2,
+    backgroundColor: SOLAR,
+    width: 36,
+    marginBottom: 10,
   },
 });
 
@@ -159,6 +237,7 @@ const PDF_LABELS = {
     savingsCol: "Ersparnis (€)",
     cumulativeCol: "Kumuliert (€)",
     priceCol: "Strompreis (€/kWh)",
+    paybackNever: "in 25 Jahren nicht erreicht",
   },
   en: {
     subtitle: "Your PV Analysis",
@@ -194,6 +273,7 @@ const PDF_LABELS = {
     savingsCol: "Savings (€)",
     cumulativeCol: "Cumulative (€)",
     priceCol: "Electricity price (€/kWh)",
+    paybackNever: "not reached within 25 years",
   },
 } as const;
 
@@ -203,7 +283,7 @@ function getMonthNames(locale: string): string[] {
   );
 }
 
-function PDFReport({ result, locale }: { result: CalculationResult; locale: string }) {
+export function PDFReport({ result, locale }: { result: CalculationResult; locale: string }) {
   const l = PDF_LABELS[locale as keyof typeof PDF_LABELS] ?? PDF_LABELS.de;
   const months = getMonthNames(locale);
   const fmt = (n: number) => n.toLocaleString(locale);
@@ -219,32 +299,43 @@ function PDFReport({ result, locale }: { result: CalculationResult; locale: stri
 
   const monthlyConsumption = getMonthlyConsumption(totalConsumption);
 
+  const createdOn = new Date().toLocaleDateString(locale);
+  const issueLabel = locale === "de" ? "AUSGABE" : "ISSUE";
+  const pageLabel = locale === "de" ? "SEITE" : "PAGE";
+
   return (
     <Document>
       {/* Page 1: Summary */}
       <Page size="A4" style={styles.page}>
         <View style={styles.pageContent}>
-          <View style={styles.header}>
-            <Text style={styles.title}>OpenSolarCheck</Text>
-            <Text style={styles.subtitle}>{l.subtitle}</Text>
-            <Text style={styles.date}>
-              {l.createdAt} {new Date().toLocaleDateString(locale)}
-            </Text>
+          <View style={styles.masthead}>
+            <View style={styles.mastheadLeft}>
+              <Text style={styles.wordmark}>OPENSOLARCHECK</Text>
+              <Text style={styles.issueMeta}>
+                {issueLabel} · {createdOn.toUpperCase()}
+              </Text>
+            </View>
+            <Text style={styles.mastheadRight}>{pageLabel} 01 / 02</Text>
           </View>
 
-          {/* Highlight */}
-          <View style={styles.highlight}>
-            <Text style={styles.highlightValue}>
-              {fmt(result.yield.annualYield)} {l.annualYieldUnit}
+          <View style={styles.accentRule} />
+          <Text style={styles.title}>{l.subtitle}</Text>
+          <Text style={styles.subtitle}>
+            {result.input.location.city || `${result.input.location.lat}°, ${result.input.location.lon}°`}
+            {" · "}
+            {result.input.system.peakPower} kWp
+          </Text>
+
+          <View style={styles.figureBlock}>
+            <Text style={styles.figureCaption}>{l.expectedYield.toUpperCase()}</Text>
+            <Text style={styles.figureValue}>
+              {fmt(result.yield.annualYield)}
             </Text>
-            <Text style={styles.highlightLabel}>
-              {l.expectedYield}
-            </Text>
+            <Text style={styles.figureUnit}>{l.annualYieldUnit}</Text>
           </View>
 
-          {/* Input Summary */}
           <View style={styles.section}>
-            <Text style={styles.sectionTitle}>{l.inputs}</Text>
+            <Text style={styles.sectionTitle}>{l.inputs.toUpperCase()}</Text>
             <View style={styles.row}>
               <Text style={styles.label}>{l.location}</Text>
               <Text style={styles.value}>
@@ -260,7 +351,7 @@ function PDFReport({ result, locale }: { result: CalculationResult; locale: stri
             <View style={styles.row}>
               <Text style={styles.label}>{l.systemPower}</Text>
               <Text style={styles.value}>
-                {result.input.system.peakPower} kWp ({result.input.system.moduleCount} {l.modules})
+                {result.input.system.peakPower} kWp · {result.input.system.moduleCount} {l.modules}
               </Text>
             </View>
             <View style={styles.row}>
@@ -279,9 +370,8 @@ function PDFReport({ result, locale }: { result: CalculationResult; locale: stri
             )}
           </View>
 
-          {/* Key Results */}
           <View style={styles.section}>
-            <Text style={styles.sectionTitle}>{l.results}</Text>
+            <Text style={styles.sectionTitle}>{l.results.toUpperCase()}</Text>
             <View style={styles.row}>
               <Text style={styles.label}>{l.annualYield}</Text>
               <Text style={styles.value}>
@@ -291,19 +381,21 @@ function PDFReport({ result, locale }: { result: CalculationResult; locale: stri
             <View style={styles.row}>
               <Text style={styles.label}>{l.selfConsumptionRatio}</Text>
               <Text style={styles.value}>
-                {Math.round(result.selfConsumption.selfConsumptionRatio * 100)}%
+                {Math.round(result.selfConsumption.selfConsumptionRatio * 100)} %
               </Text>
             </View>
             <View style={styles.row}>
               <Text style={styles.label}>{l.autarkyRate}</Text>
               <Text style={styles.value}>
-                {Math.round(result.selfConsumption.autarkyRate * 100)}%
+                {Math.round(result.selfConsumption.autarkyRate * 100)} %
               </Text>
             </View>
             <View style={styles.row}>
               <Text style={styles.label}>{l.paybackTime}</Text>
-              <Text style={styles.value}>
-                {result.economics.paybackYears} {l.years}
+              <Text style={styles.valueAccent}>
+                {result.economics.paybackYears === null
+                  ? l.paybackNever
+                  : `${result.economics.paybackYears} ${l.years}`}
               </Text>
             </View>
             <View style={styles.row}>
@@ -331,24 +423,36 @@ function PDFReport({ result, locale }: { result: CalculationResult; locale: stri
           </View>
         </View>
 
-        <Text style={styles.footer}>{l.footer}</Text>
+        <View style={styles.footer}>
+          <Text>{l.footer}</Text>
+          <Text>{pageLabel} 01</Text>
+        </View>
       </Page>
 
       {/* Page 2: Monthly yields + Financial Table */}
       <Page size="A4" style={styles.page}>
         <View style={styles.pageContent}>
-          {/* Monthly Yield Table */}
+          <View style={styles.masthead}>
+            <View style={styles.mastheadLeft}>
+              <Text style={styles.wordmark}>OPENSOLARCHECK</Text>
+              <Text style={styles.issueMeta}>
+                {issueLabel} · {createdOn.toUpperCase()}
+              </Text>
+            </View>
+            <Text style={styles.mastheadRight}>{pageLabel} 02 / 02</Text>
+          </View>
+
           <View style={styles.section}>
-            <Text style={styles.sectionTitle}>{l.monthlyYields}</Text>
+            <Text style={styles.sectionTitle}>{l.monthlyYields.toUpperCase()}</Text>
             <View style={styles.table}>
               <View style={styles.tableHeader}>
-                <Text style={styles.tableCell}>{l.month}</Text>
-                <Text style={styles.tableCell}>{l.pvYield}</Text>
-                <Text style={styles.tableCell}>{l.consumption}</Text>
+                <Text style={styles.tableHeaderCell}>{l.month}</Text>
+                <Text style={styles.tableHeaderCell}>{l.pvYield}</Text>
+                <Text style={styles.tableHeaderCell}>{l.consumption}</Text>
               </View>
               {months.map((month, i) => (
                 <View key={month} style={styles.tableRow}>
-                  <Text style={styles.tableCell}>{month}</Text>
+                  <Text style={styles.tableCellLabel}>{month}</Text>
                   <Text style={styles.tableCell}>
                     {fmt(result.yield.monthlyYield[i] ?? 0)}
                   </Text>
@@ -361,18 +465,18 @@ function PDFReport({ result, locale }: { result: CalculationResult; locale: stri
           </View>
 
           <View style={styles.section}>
-            <Text style={styles.sectionTitle}>{l.financialTitle}</Text>
+            <Text style={styles.sectionTitle}>{l.financialTitle.toUpperCase()}</Text>
             <View style={styles.table}>
               <View style={styles.tableHeader}>
-                <Text style={styles.tableCell}>{l.year}</Text>
-                <Text style={styles.tableCell}>{l.yieldCol}</Text>
-                <Text style={styles.tableCell}>{l.savingsCol}</Text>
-                <Text style={styles.tableCell}>{l.cumulativeCol}</Text>
-                <Text style={styles.tableCell}>{l.priceCol}</Text>
+                <Text style={styles.tableHeaderCell}>{l.year}</Text>
+                <Text style={styles.tableHeaderCell}>{l.yieldCol}</Text>
+                <Text style={styles.tableHeaderCell}>{l.savingsCol}</Text>
+                <Text style={styles.tableHeaderCell}>{l.cumulativeCol}</Text>
+                <Text style={styles.tableHeaderCell}>{l.priceCol}</Text>
               </View>
               {result.economics.yearlyData.map((d) => (
                 <View key={d.year} style={styles.tableRow}>
-                  <Text style={styles.tableCell}>{d.year}</Text>
+                  <Text style={styles.tableCellLabel}>{d.year}</Text>
                   <Text style={styles.tableCell}>
                     {fmt(d.yield)}
                   </Text>
@@ -391,7 +495,10 @@ function PDFReport({ result, locale }: { result: CalculationResult; locale: stri
           </View>
         </View>
 
-        <Text style={styles.footer}>{l.footer}</Text>
+        <View style={styles.footer}>
+          <Text>{l.footer}</Text>
+          <Text>{pageLabel} 02</Text>
+        </View>
       </Page>
     </Document>
   );

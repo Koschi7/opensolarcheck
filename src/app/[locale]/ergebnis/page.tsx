@@ -96,7 +96,7 @@ export default function ErgebnisPage() {
     return (
       <div className="max-w-[760px] mx-auto px-6 py-24 text-center">
         <p className="font-mono-ui text-[13px] text-muted-ink mb-6">
-          Keine Ergebnisse vorhanden.
+          {t("empty")}
         </p>
         <Link href="/konfigurator" className="btn-primary">
           ← {t("newCalculation")}
@@ -107,15 +107,15 @@ export default function ErgebnisPage() {
 
   const input = result.input;
   const shadingLabel: Record<string, string> = {
-    none: "keine",
-    low: "gering",
-    medium: "mittel",
-    high: "stark",
+    none: t("shading.none"),
+    low: t("shading.low"),
+    medium: t("shading.medium"),
+    high: t("shading.high"),
   };
   const moduleLabel: Record<string, string> = {
-    monocrystalline: "Monokristallin",
-    polycrystalline: "Polykristallin",
-    thinfilm: "Dünnschicht",
+    monocrystalline: t("moduleType.monocrystalline"),
+    polycrystalline: t("moduleType.polycrystalline"),
+    thinfilm: t("moduleType.thinfilm"),
   };
 
   const investMin = Math.round(
@@ -182,7 +182,10 @@ export default function ErgebnisPage() {
               <TableRow
                 label={tEcon("investment")}
                 value={`~ ${result.economics.totalInvestment.toLocaleString(locale)} €`}
-                hint={`Spanne: ${investMin.toLocaleString(locale)} – ${investMax.toLocaleString(locale)} €`}
+                hint={tEcon("investmentRange", {
+                  min: investMin.toLocaleString(locale),
+                  max: investMax.toLocaleString(locale),
+                })}
               />
               <TableRow
                 label={tEcon("npv")}
@@ -200,7 +203,11 @@ export default function ErgebnisPage() {
               />
               <TableRow
                 label={t("summary.payback")}
-                value={`${result.economics.paybackYears} ${t("summary.years")}`}
+                value={
+                  result.economics.paybackYears === null
+                    ? t("paybackNever")
+                    : `${result.economics.paybackYears} ${t("summary.years")}`
+                }
               />
             </dl>
           </div>
@@ -214,49 +221,49 @@ export default function ErgebnisPage() {
         <section className="border border-rule p-6 md:p-7 bg-paper">
           <div className="flex items-baseline justify-between mb-4 pb-3 border-b border-rule">
             <h3 className="font-display text-[18px] md:text-[20px] tracking-tight text-ink">
-              Deine Eingaben
+              {t("inputs.title")}
             </h3>
             <Link
               href="/konfigurator"
               className="text-[12px] text-muted-ink hover:text-ink"
             >
-              ändern →
+              {t("inputs.edit")}
             </Link>
           </div>
           <dl className="space-y-0">
             <InputRow
-              label="Standort"
+              label={t("inputs.location")}
               value={`${input.location.city || input.location.postalCode}`}
               sub={`${input.location.lat.toFixed(3)}°N · ${input.location.lon.toFixed(3)}°E`}
             />
             <InputRow
-              label="Dach"
+              label={t("inputs.roof")}
               value={`${input.roof.area} m² · ${input.roof.tilt}°`}
-              sub={`Azimut ${input.roof.azimuth >= 0 ? "+" : ""}${input.roof.azimuth}° · Verschattung ${shadingLabel[input.roof.shading] ?? input.roof.shading}`}
+              sub={`${t("inputs.azimuthLabel")} ${input.roof.azimuth >= 0 ? "+" : ""}${input.roof.azimuth}° · ${t("inputs.shadingLabel")} ${shadingLabel[input.roof.shading] ?? input.roof.shading}`}
             />
             <InputRow
-              label="Anlage"
+              label={t("inputs.system")}
               value={`${input.system.peakPower.toFixed(1)} kWp`}
               sub={`${input.system.moduleCount} × ${input.system.modulePower} Wp · ${moduleLabel[input.system.moduleType] ?? input.system.moduleType}`}
             />
             <InputRow
-              label="Verbrauch"
+              label={t("inputs.consumption")}
               value={`${totalConsumption.toLocaleString(locale)} kWh / a`}
               sub={[
-                input.consumption.hasHeatPump ? "+ Wärmepumpe" : null,
-                input.consumption.hasEV ? "+ E-Auto" : null,
+                input.consumption.hasHeatPump ? t("inputs.heatPumpTag") : null,
+                input.consumption.hasEV ? t("inputs.evTag") : null,
               ]
                 .filter(Boolean)
-                .join(" · ") || "Haushalt"}
+                .join(" · ") || t("inputs.householdOnly")}
             />
             <InputRow
-              label="Speicher"
+              label={t("inputs.battery")}
               value={
                 input.battery.hasBattery
                   ? `${input.battery.capacity} kWh`
-                  : "—"
+                  : t("inputs.noBatteryValue")
               }
-              sub={input.battery.hasBattery ? "Batteriespeicher aktiv" : "Ohne Speicher"}
+              sub={input.battery.hasBattery ? t("inputs.batteryActive") : t("inputs.batteryOff")}
             />
           </dl>
         </section>
@@ -266,7 +273,7 @@ export default function ErgebnisPage() {
       <section className="mt-10 md:mt-12 border-t border-b border-rule py-5">
         <div className="grid md:grid-cols-12 gap-6">
           <div className="md:col-span-3 small-caps text-[11px] text-muted-ink">
-            Hinweis
+            {t("notice")}
           </div>
           <p className="md:col-span-9 text-[13px] text-muted-ink leading-relaxed">
             {t("disclaimer")}

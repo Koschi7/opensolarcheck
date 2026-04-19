@@ -73,4 +73,5 @@ export const CONSUMPTION_BY_PERSONS: Record<string, number> = {
   "2": 2500,
   "3": 3500,
   "4": 4500,
+  "5": 5500,
 };
