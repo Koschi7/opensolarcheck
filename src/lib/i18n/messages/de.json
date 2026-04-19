@@ -285,7 +285,8 @@
         "ratio": "Verhältnis"
       }
     },
-    "disclaimer": "Diese Berechnung liefert Richtwerte. Sie ersetzt keine professionelle Planung."
+    "noticeLabel": "Hinweis zum Tool",
+    "disclaimer": "Dies ist ein unabhängiger Open-Source-Rechner — keine verbindliche Planung. Die Ergebnisse liefern Richtwerte auf Basis Ihrer Eingaben und öffentlicher Daten (PVGIS, HTW Berlin). Lokale Verschattung, Dachstatik, Netzanschluss und Förderprogramme werden nicht geprüft. Für die endgültige Entscheidung ziehen Sie bitte eine Fachkraft hinzu."
   },
   "results": {
     "title": "Ihre PV-Analyse",

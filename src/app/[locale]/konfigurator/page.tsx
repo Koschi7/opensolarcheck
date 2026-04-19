@@ -136,6 +136,17 @@ export default function KonfiguratorPage() {
             <p className="text-[14px] md:text-[15px] text-muted-ink max-w-[64ch] mb-5 md:mb-6">
               {currentDescription}
             </p>
+            <aside
+              role="note"
+              className="border-t border-b border-rule py-3 mb-6 md:mb-8 grid md:grid-cols-12 gap-3 md:gap-6"
+            >
+              <div className="md:col-span-3 small-caps text-[10.5px] text-muted-ink">
+                {t("noticeLabel")}
+              </div>
+              <p className="md:col-span-9 text-[12.5px] text-muted-ink leading-relaxed">
+                {t("disclaimer")}
+              </p>
+            </aside>
             {renderStep()}
           </>
         )}

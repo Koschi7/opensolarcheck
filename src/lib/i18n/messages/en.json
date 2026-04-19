@@ -285,7 +285,8 @@
         "ratio": "Ratio"
       }
     },
-    "disclaimer": "This calculation provides estimates. It does not replace professional planning."
+    "noticeLabel": "About this tool",
+    "disclaimer": "This is an independent open-source calculator — not a binding quote. Results are rough estimates based on your inputs and public data (PVGIS, HTW Berlin). Local shading, roof statics, grid connection, and subsidies are not assessed. Consult a qualified installer before making a final decision."
   },
   "results": {
     "title": "Your PV Analysis",
