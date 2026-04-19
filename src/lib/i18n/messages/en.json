@@ -59,8 +59,8 @@
   },
   "landing": {
     "eyebrow": "Independent solar calculator",
-    "headline": "Your roof pencils out.",
-    "headlineAccent": "Or it doesn't.",
+    "headline": "Does your roof pencil out?",
+    "headlineAccent": "Or not?",
     "lede": "Before you sign the installer's quote: a transparent second opinion, based on PVGIS satellite data, the HTW Berlin self-consumption model, and current feed-in tariffs. Runs in your browser. No signup, no data collection.",
     "primaryCta": "Start calculation",
     "secondaryCta": "See methodology",
